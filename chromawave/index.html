@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — Chromawave</title>
+  <meta name="description" content="Privacy Policy for the Chromawave browser extension." />
+  <style>
+    :root {
+      --navy: #132238;
+      --navy-soft: #20344f;
+      --gold: #c6923b;
+      --paper: #fffdf9;
+      --canvas: #ece8e1;
+      --text: #252a31;
+      --muted: #68707b;
+      --rule: #d8d1c7;
+      --note: #f3eee5;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.78;
+    }
+
+    .masthead {
+      background: var(--navy);
+      color: var(--white);
+      border-bottom: 5px solid var(--gold);
+    }
+
+    .masthead-inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 64px 0 58px;
+    }
+
+    .product {
+      margin: 0 0 14px;
+      color: #e5c891;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+    }
+
+    .subtitle {
+      max-width: 780px;
+      margin: 22px 0 0;
+      color: #d8e0e9;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.04rem;
+      line-height: 1.65;
+    }
+
+    .effective {
+      margin: 22px 0 0;
+      color: #aebbc9;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 42px;
+      width: min(1120px, calc(100% - 40px));
+      margin: 42px auto 70px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 24px;
+      padding: 24px;
+      background: var(--navy-soft);
+      color: var(--white);
+      border-radius: 6px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .toc h2 {
+      margin: 0 0 15px;
+      color: #e5c891;
+      font-size: 0.86rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .toc a {
+      display: block;
+      padding: 8px 0;
+      color: #dce5ef;
+      text-decoration: none;
+      font-size: 0.91rem;
+      line-height: 1.35;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .toc a:last-child { border-bottom: 0; }
+    .toc a:hover { color: #ffffff; }
+
+    article {
+      padding: 48px 54px;
+      background: var(--paper);
+      border: 1px solid #d4cec4;
+      box-shadow: 0 18px 45px rgba(35, 37, 40, 0.09);
+    }
+
+    .opening {
+      margin: 0 0 36px;
+      padding: 22px 24px;
+      background: var(--note);
+      border-left: 4px solid var(--gold);
+      font-family: Arial, Helvetica, sans-serif;
+      color: #3d444d;
+      line-height: 1.65;
+    }
+
+    section { scroll-margin-top: 28px; }
+
+    section + section {
+      margin-top: 42px;
+      padding-top: 34px;
+      border-top: 1px solid var(--rule);
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: 1.58rem;
+      font-weight: 600;
+      line-height: 1.28;
+    }
+
+    p { margin: 0; }
+
+    p + p,
+    ul + p {
+      margin-top: 14px;
+    }
+
+    ul {
+      margin: 14px 0 0;
+      padding-left: 1.35rem;
+    }
+
+    li + li { margin-top: 9px; }
+
+    a {
+      color: #8b5f19;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .permission {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border: 1px solid var(--rule);
+      background: #ffffff;
+    }
+
+    .permission + .permission { margin-top: 12px; }
+
+    .permission h3 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1rem;
+    }
+
+    .permission p { font-size: 0.98rem; }
+
+    footer {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto 46px;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.88rem;
+      text-align: right;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .toc { position: static; }
+      .toc a {
+        display: inline-block;
+        margin-right: 16px;
+        border-bottom: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .masthead-inner,
+      .layout,
+      footer {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .masthead-inner { padding: 44px 4px 40px; }
+      article { padding: 32px 22px; }
+
+      .layout {
+        margin-top: 24px;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <p class="product">Chromawave Browser Extension</p>
+      <h1>Privacy Policy</h1>
+      <p class="subtitle">
+        This policy explains how Chromawave handles information when users animate selected
+        text with a rainbow wave, smooth color cycling, and subtle letter movement.
+      </p>
+      <p class="effective">Effective date: July 13, 2026</p>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Policy contents">
+      <h2>Contents</h2>
+      <a href="#scope">Purpose and scope</a>
+      <a href="#operation">How Chromawave operates</a>
+      <a href="#selection">Selected text handling</a>
+      <a href="#collection">Information collection</a>
+      <a href="#permissions">Browser permissions</a>
+      <a href="#remote-code">Remote code</a>
+      <a href="#sharing">Sharing and disclosure</a>
+      <a href="#tracking">Advertising and tracking</a>
+      <a href="#security">Security and retention</a>
+      <a href="#changes">Policy changes</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <article>
+      <p class="opening">
+        Chromawave is a local visual-animation tool. It does not require an account, does not
+        build browsing profiles, and does not send selected text or webpage activity to a
+        developer-operated server.
+      </p>
+
+      <section id="scope">
+        <h2>1. Purpose and Scope</h2>
+        <p>
+          This Privacy Policy applies to the Chromawave browser extension and describes how
+          information is handled when users activate the extension through the toolbar popup
+          or the browser's right-click context menu.
+        </p>
+        <p>
+          Chromawave transforms text selected by the user into a colorful animated wave. The
+          effect cycles through rainbow colors and applies gentle movement to individual letters
+          so the selected content becomes visually expressive without altering the underlying
+          meaning of the page.
+        </p>
+        <p>
+          The extension is not intended to provide advertising, analytics, account management,
+          cloud storage, content indexing, or cross-site personalization.
+        </p>
+      </section>
+
+      <section id="operation">
+        <h2>2. How Chromawave Operates</h2>
+        <p>
+          Chromawave becomes active only after the user performs a deliberate action. A user may
+          select text and choose the Chromawave command from the context menu, or use the toolbar
+          popup to apply the effect on the current tab.
+        </p>
+        <p>
+          Once activated, the extension inserts the visual code needed to animate the selected
+          characters. The animation is rendered locally in the browser and is limited to the
+          active page where the user initiated the feature.
+        </p>
+        <p>
+          Refreshing the page, navigating away, closing the tab, disabling the extension, or
+          removing the effect ends the current animation. Chromawave does not create a permanent
+          copy of the webpage or maintain a history of previously animated text.
+        </p>
+      </section>
+
+      <section id="selection">
+        <h2>3. Handling of Selected Text</h2>
+        <p>
+          When the user selects text and activates Chromawave, the extension accesses that
+          selection only to identify which visible characters should receive the rainbow wave
+          animation.
+        </p>
+        <p>
+          The selected content is processed solely for the immediate visual function requested
+          by the user. Chromawave does not transmit selected text to the developer, upload it to
+          an external server, analyze it for advertising, or combine it with content from other
+          websites.
+        </p>
+        <p>
+          Chromawave does not intentionally retain the selected text after the animation is no
+          longer active. No searchable archive, selection history, or user-content database is
+          created by the extension.
+        </p>
+      </section>
+
+      <section id="collection">
+        <h2>4. Information Chromawave Does Not Collect</h2>
+        <p>
+          Chromawave does not collect personal information and does not require registration,
+          login credentials, payment details, or a user profile.
+        </p>
+        <p>The extension does not collect or maintain records of:</p>
+        <ul>
+          <li>Names, email addresses, telephone numbers, or account credentials;</li>
+          <li>Browsing history, visited URLs, bookmarks, search activity, or open tabs;</li>
+          <li>Selected text, webpage content, form entries, passwords, or private messages;</li>
+          <li>IP addresses, device identifiers, precise location, or demographic information;</li>
+          <li>Advertising identifiers, behavioral profiles, telemetry, or usage analytics.</li>
+        </ul>
+        <p>
+          Because these categories of data are not collected, the developer does not maintain
+          a personal-data database associated with Chromawave.
+        </p>
+      </section>
+
+      <section id="permissions">
+        <h2>5. Browser Permissions and Their Use</h2>
+        <p>
+          Chromawave requests only the permissions needed to provide its visible, user-initiated
+          text-animation feature.
+        </p>
+
+        <div class="permission">
+          <h3>contextMenus</h3>
+          <p>
+            This permission allows Chromawave to add a command to the browser's right-click menu.
+            The command gives users a direct way to apply the animation to selected text. Opening
+            the context menu alone does not cause the extension to run or collect information.
+          </p>
+        </div>
+
+        <div class="permission">
+          <h3>activeTab</h3>
+          <p>
+            This permission gives Chromawave temporary access to the currently active tab after
+            the user invokes the extension. It is used only to apply the rainbow wave effect to
+            the page the user is viewing.
+          </p>
+        </div>
+
+        <div class="permission">
+          <h3>scripting</h3>
+          <p>
+            This permission allows Chromawave to inject and execute the code that cycles colors
+            and shifts letters within the selected text. It is not used to silently monitor
+            browsing behavior, scrape websites, or intercept credentials.
+          </p>
+        </div>
+      </section>
+
+      <section id="remote-code">
+        <h2>6. Remote Code and External Processing</h2>
+        <p>
+          Chromawave does not use remote code. The executable code required for the extension's
+          animation is included in the installed extension package.
+        </p>
+        <p>
+          The extension does not download additional executable logic at runtime and does not
+          depend on third-party processing services to render the rainbow wave effect.
+        </p>
+      </section>
+
+      <section id="sharing">
+        <h2>7. Data Sharing, Sale, and Disclosure</h2>
+        <p>
+          Chromawave does not sell, rent, license, trade, or disclose personal information. It
+          does not share user data with advertisers, analytics companies, data brokers, social
+          networks, or marketing platforms.
+        </p>
+        <p>
+          Because Chromawave does not collect personal information, there is ordinarily no user
+          data available for disclosure. The browser, the current website, and the extension
+          marketplace remain separate services governed by their own privacy terms.
+        </p>
+      </section>
+
+      <section id="tracking">
+        <h2>8. Advertising, Analytics, and Cross-Site Tracking</h2>
+        <p>
+          Chromawave does not display advertising and does not include advertising SDKs,
+          tracking pixels, third-party cookies, fingerprinting scripts, session replay tools,
+          or behavioral analytics.
+        </p>
+        <p>
+          The extension does not follow users across websites, create interest profiles, or
+          combine activity from different domains. Its operation is limited to the active tab
+          where the user explicitly triggers the feature.
+        </p>
+      </section>
+
+      <section id="security">
+        <h2>9. Security and Data Retention</h2>
+        <p>
+          Chromawave minimizes privacy risk by avoiding the collection and transmission of
+          personal information. The extension performs its animation locally in the browser and
+          does not create a developer-controlled archive of selections or browsing activity.
+        </p>
+        <p>
+          No software system can remove every possible security risk. However, Chromawave follows
+          a limited-purpose design by using only permissions connected to its visible function
+          and by avoiding persistent storage of selected webpage content.
+        </p>
+      </section>
+
+      <section id="changes">
+        <h2>10. Changes to This Privacy Policy</h2>
+        <p>
+          This Privacy Policy may be updated if Chromawave's features, permissions, or information
+          practices change. Any revised version will include an updated effective date and will
+          describe the extension's current behavior.
+        </p>
+        <p>
+          If a future version introduces data collection, external processing, or additional
+          permissions, this policy will be revised accordingly before those practices are
+          represented as part of Chromawave.
+        </p>
+      </section>
+
+      <section id="contact">
+        <h2>11. Contact</h2>
+        <p>
+          Questions, privacy inquiries, or requests for clarification may be sent to the support
+          address listed on Chromawave's official browser-extension store page.
+        </p>
+      </section>
+    </article>
+  </div>
+
+  <footer>
+    © 2026 Chromawave
+  </footer>
+</body>
+</html>
