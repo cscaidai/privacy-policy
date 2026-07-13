@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Privacy policies for browser extensions."
+  >
+
+  <title>Privacy Policies</title>
+
+  <style>
+    :root {
+      --background: #ffffff;
+      --text: #111111;
+      --muted: #747474;
+      --line: #dcdcdc;
+      --accent: #2457d6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      color: var(--text);
+      background: var(--background);
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 72px 0 40px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 60px;
+      align-items: end;
+
+      padding-bottom: 48px;
+      border-bottom: 2px solid var(--text);
+    }
+
+    .kicker {
+      margin: 0 0 18px;
+
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0;
+
+      font-size: clamp(54px, 8vw, 108px);
+      line-height: 0.88;
+      letter-spacing: -0.07em;
+      font-weight: 800;
+    }
+
+    .intro {
+      max-width: 520px;
+      margin: 0 0 6px auto;
+
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .directory {
+      margin-top: 24px;
+    }
+
+    .policy-row {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 28px;
+      align-items: center;
+
+      min-height: 122px;
+      padding: 24px 4px;
+
+      color: var(--text);
+      text-decoration: none;
+
+      border-bottom: 1px solid var(--line);
+
+      transition:
+        padding-left 160ms ease,
+        color 160ms ease;
+    }
+
+    .policy-row:first-child {
+      border-top: 1px solid var(--line);
+    }
+
+    .policy-row:hover {
+      padding-left: 14px;
+      color: var(--accent);
+    }
+
+    .number {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .name {
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .action {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      color: inherit;
+    }
+
+    .arrow {
+      font-size: 20px;
+      transition: transform 160ms ease;
+    }
+
+    .policy-row:hover .arrow {
+      transform: translateX(6px);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+
+      padding-top: 28px;
+
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 28px, 1180px);
+        padding-top: 36px;
+      }
+
+      header {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-bottom: 34px;
+      }
+
+      .intro {
+        margin: 0;
+      }
+
+      .policy-row {
+        grid-template-columns: 48px 1fr;
+        gap: 14px;
+        min-height: 104px;
+      }
+
+      .action {
+        grid-column: 2;
+        margin-top: -8px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header>
+      <div>
+        <p class="kicker">Privacy Directory</p>
+        <h1>Policies</h1>
+      </div>
+
+      <p class="intro">
+        Select an extension below to read its privacy policy
+        and review how it handles permissions and user data.
+      </p>
+    </header>
+
+    <section class="directory" aria-label="Available privacy policies">
+      <a class="policy-row" href="./glowstage/">
+        <span class="number">01</span>
+        <span class="name">GlowStage</span>
+
+        <span class="action">
+          View policy
+          <span class="arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+
+      <a class="policy-row" href="./tone-ripple/">
+        <span class="number">02</span>
+        <span class="name">Tone Ripple</span>
+
+        <span class="action">
+          View policy
+          <span class="arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+
+      <a class="policy-row" href="./spotflare/">
+        <span class="number">03</span>
+        <span class="name">Spotflare</span>
+
+        <span class="action">
+          View policy
+          <span class="arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+
+      <a class="policy-row" href="./chromawave/">
+        <span class="number">04</span>
+        <span class="name">Chromawave</span>
+
+        <span class="action">
+          View policy
+          <span class="arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+    </section>
+
+    <footer>
+      <span>Browser extension privacy policies</span>
+      <span>All product URLs use lowercase paths</span>
+    </footer>
+  </main>
+</body>
+</html>
