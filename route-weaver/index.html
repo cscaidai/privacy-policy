@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Privacy Policy - Route Weaver</title>
+
+  <meta
+    name="description"
+    content="Privacy Policy for Route Weaver, a browser extension for creating pulsing colored routes by dragging and connecting nodes on a muted earth-tone map."
+  >
+
+  <style>
+    :root {
+      --bg: #eee8dc;
+      --paper: #f9f6ef;
+      --ink: #2d3029;
+      --muted: #707267;
+      --line: #d7cfbf;
+      --earth: #7d725f;
+      --earth-dark: #554d40;
+      --route: #d76a42;
+      --route-soft: #f4d8ca;
+      --green: #6f8366;
+      --green-soft: #dde7d8;
+      --blue: #607e8b;
+      --blue-soft: #dbe6e9;
+      --shadow: 0 16px 50px rgba(72, 62, 47, 0.11);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        "Trebuchet MS",
+        Arial,
+        Helvetica,
+        sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(111, 131, 102, 0.12), transparent 26%),
+        radial-gradient(circle at 90% 8%, rgba(215, 106, 66, 0.10), transparent 28%),
+        var(--bg);
+      line-height: 1.75;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1320px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 68px 0 36px;
+    }
+
+    .hero-box {
+      position: relative;
+      overflow: hidden;
+      min-height: 370px;
+      padding: 48px;
+      border-radius: 32px;
+      background: var(--earth-dark);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-box::before,
+    .hero-box::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.12);
+    }
+
+    .hero-box::before {
+      width: 360px;
+      height: 360px;
+      right: -100px;
+      top: -120px;
+    }
+
+    .hero-box::after {
+      width: 230px;
+      height: 230px;
+      right: 110px;
+      bottom: -150px;
+    }
+
+    .route-decoration {
+      position: absolute;
+      right: 50px;
+      top: 84px;
+      width: 360px;
+      height: 210px;
+      opacity: 0.9;
+    }
+
+    .route-path {
+      position: absolute;
+      width: 310px;
+      height: 150px;
+      border: 4px solid var(--route);
+      border-color: var(--route) transparent var(--route) transparent;
+      border-radius: 50%;
+      transform: rotate(-12deg);
+      left: 10px;
+      top: 25px;
+    }
+
+    .route-node {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      border: 5px solid var(--route);
+      box-shadow: 0 0 0 6px rgba(215,106,66,0.18);
+    }
+
+    .node-a {
+      left: 10px;
+      top: 92px;
+    }
+
+    .node-b {
+      left: 147px;
+      top: 15px;
+    }
+
+    .node-c {
+      right: 18px;
+      bottom: 22px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 22px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: #e5dfd4;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--route);
+      box-shadow: 0 0 14px var(--route);
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 680px;
+      font-size: clamp(46px, 7vw, 84px);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 26px 0 0;
+      color: #d5cec0;
+      font-size: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .hero-meta span {
+      padding: 8px 11px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.07);
+      color: #e7e1d8;
+      font-size: 12px;
+    }
+
+    .quick-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 20px 0 34px;
+    }
+
+    .summary-card {
+      min-height: 140px;
+      padding: 22px;
+      border-radius: 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    .summary-card:nth-child(2) {
+      background: var(--green-soft);
+    }
+
+    .summary-card:nth-child(3) {
+      background: var(--route-soft);
+    }
+
+    .summary-card:nth-child(4) {
+      background: var(--blue-soft);
+    }
+
+    .summary-card small {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .summary-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .summary-card p {
+      margin: 0;
+      color: #61645c;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+      padding-bottom: 70px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 24px;
+    }
+
+    .sidebar-box {
+      padding: 22px;
+      border-radius: 20px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    .sidebar-title {
+      margin-bottom: 12px;
+      color: var(--earth);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 8px;
+      border-bottom: 1px dashed #d8d0c1;
+      color: #65675f;
+      font-size: 13px;
+    }
+
+    .sidebar a:last-child {
+      border-bottom: 0;
+    }
+
+    .sidebar a:hover {
+      color: var(--route);
+    }
+
+    .dot {
+      flex: 0 0 10px;
+      width: 10px;
+      height: 10px;
+      border: 2px solid var(--route);
+      border-radius: 50%;
+      background: var(--paper);
+    }
+
+    .sidebar-note {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--earth-dark);
+      color: #ded7cb;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .content {
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .content::before {
+      content: "";
+      position: absolute;
+      top: 36px;
+      bottom: 36px;
+      left: 8px;
+      width: 3px;
+      border-radius: 3px;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          var(--route) 0,
+          var(--route) 12px,
+          transparent 12px,
+          transparent 21px
+        );
+    }
+
+    .section {
+      position: relative;
+      margin-bottom: 20px;
+      padding: 29px 31px;
+      border-radius: var(--radius);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 5px 18px rgba(74, 63, 48, 0.04);
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      left: -41px;
+      top: 35px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 4px solid var(--route);
+      box-shadow: 0 0 0 5px var(--bg);
+    }
+
+    .section-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--route);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section h2 {
+      margin: 0 0 15px;
+      font-size: 24px;
+      line-height: 1.3;
+      letter-spacing: -0.025em;
+    }
+
+    .section h3 {
+      margin: 24px 0 8px;
+      font-size: 17px;
+    }
+
+    .section p {
+      margin: 11px 0;
+      color: #60635b;
+      font-size: 15px;
+    }
+
+    .section ul {
+      margin: 13px 0;
+      padding-left: 22px;
+    }
+
+    .section li {
+      margin: 8px 0;
+      color: #60635b;
+      font-size: 15px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .info-box {
+      padding: 17px;
+      border-radius: 14px;
+      background: #f2ede3;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--earth-dark);
+      font-size: 14px;
+    }
+
+    .info-box span {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+
+    .highlight {
+      margin: 18px 0;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: var(--green-soft);
+      border-left: 4px solid var(--green);
+    }
+
+    .highlight strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #445b3f;
+    }
+
+    .highlight p {
+      margin: 0;
+      color: #56684f;
+      font-size: 14px;
+    }
+
+    .warning {
+      margin: 18px 0;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: var(--route-soft);
+      border-left: 4px solid var(--route);
+    }
+
+    .warning strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #8f4025;
+    }
+
+    .warning p {
+      margin: 0;
+      color: #785445;
+      font-size: 14px;
+    }
+
+    .footer {
+      margin-bottom: 35px;
+      padding: 27px 30px;
+      border-radius: 20px;
+      background: var(--earth-dark);
+      color: #d4cdbf;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .footer strong {
+      color: #fff;
+    }
+
+    @media (max-width: 1050px) {
+      .route-decoration {
+        opacity: 0.25;
+      }
+
+      .quick-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .sidebar-box {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0 16px;
+      }
+
+      .sidebar-title,
+      .sidebar-note {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100% - 20px, 1320px);
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+
+      .hero-box {
+        padding: 32px 24px;
+        min-height: auto;
+      }
+
+      .route-decoration {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .quick-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar-box {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .content {
+        padding-left: 0;
+      }
+
+      .content::before,
+      .section::before {
+        display: none;
+      }
+
+      .section {
+        padding: 23px 20px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 470px) {
+      .sidebar-box {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <header class="hero">
+
+    <div class="hero-box">
+
+      <div class="route-decoration">
+        <div class="route-path"></div>
+        <div class="route-node node-a"></div>
+        <div class="route-node node-b"></div>
+        <div class="route-node node-c"></div>
+      </div>
+
+      <div class="hero-content">
+
+        <div class="hero-kicker">
+          Extension Privacy Policy
+        </div>
+
+        <h1>
+          Route Weaver
+        </h1>
+
+        <p>
+          Route Weaver is an interactive browser extension that lets users drag
+          and connect nodes on a muted earth-tone map to create animated,
+          pulsing colored routes directly within a toolbar popup.
+        </p>
+
+        <div class="hero-meta">
+          <span>Toolbar popup</span>
+          <span>Interactive route creation</span>
+          <span>Node-based visual tool</span>
+          <span>Updated August 23, 2026</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <section class="quick-summary">
+
+    <div class="summary-card">
+      <small>Primary purpose</small>
+      <strong>Visual Route Creation</strong>
+      <p>
+        Drag nodes, connect points, and create animated route paths.
+      </p>
+    </div>
+
+    <div class="summary-card">
+      <small>Personal data</small>
+      <strong>No Account Required</strong>
+      <p>
+        Core functionality does not require a personal Route Weaver account.
+      </p>
+    </div>
+
+    <div class="summary-card">
+      <small>Graph activity</small>
+      <strong>Functional Only</strong>
+      <p>
+        Node and route information is used to display the map interaction.
+      </p>
+    </div>
+
+    <div class="summary-card">
+      <small>Tracking purpose</small>
+      <strong>No Profiling</strong>
+      <p>
+        Route interactions are not intended for behavioral advertising.
+      </p>
+    </div>
+
+  </section>
+
+
+  <main class="layout">
+
+    <aside class="sidebar">
+
+      <div class="sidebar-box">
+
+        <div class="sidebar-title">
+          Route through this policy
+        </div>
+
+        <a href="#overview"><span class="dot"></span>Overview</a>
+        <a href="#route-data"><span class="dot"></span>Route Data</a>
+        <a href="#processing"><span class="dot"></span>Processing</a>
+        <a href="#personal"><span class="dot"></span>Personal Data</a>
+        <a href="#tracking"><span class="dot"></span>Tracking</a>
+        <a href="#security"><span class="dot"></span>Security</a>
+        <a href="#third-party"><span class="dot"></span>Third Parties</a>
+        <a href="#control"><span class="dot"></span>User Control</a>
+        <a href="#changes"><span class="dot"></span>Changes</a>
+        <a href="#contact"><span class="dot"></span>Contact</a>
+
+        <div class="sidebar-note">
+          Route Weaver is designed around direct interaction with nodes,
+          connections, and visual routes inside its own toolbar popup.
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <article class="content">
+
+      <section class="section" id="overview">
+        <span class="section-tag">Waypoint 01</span>
+
+        <h2>Scope of This Privacy Policy</h2>
+
+        <p>
+          This Privacy Policy explains how information is handled when you
+          install, access, or use the Route Weaver browser extension.
+        </p>
+
+        <p>
+          Route Weaver provides an interactive toolbar popup where users can
+          drag nodes across a muted earth-tone map, connect those nodes, and
+          create pulsing colored routes.
+        </p>
+
+        <p>
+          This policy applies to the extension itself and does not govern
+          independent websites, browser vendors, operating systems, or unrelated
+          third-party services.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 02</span>
+
+        <h2>Single Purpose</h2>
+
+        <p>
+          Route Weaver has a focused single purpose: providing an interactive
+          visual environment for creating routes by positioning and connecting
+          nodes.
+        </p>
+
+        <p>
+          Features reasonably related to this purpose may include:
+        </p>
+
+        <ul>
+          <li>Displaying a muted earth-tone map interface;</li>
+          <li>Creating or positioning nodes;</li>
+          <li>Dragging nodes around the map;</li>
+          <li>Connecting one node to another;</li>
+          <li>Displaying colored routes;</li>
+          <li>Animating pulses along routes;</li>
+          <li>Updating the current route layout; and</li>
+          <li>Resetting or clearing the route design.</li>
+        </ul>
+      </section>
+
+
+      <section class="section" id="route-data">
+        <span class="section-tag">Waypoint 03</span>
+
+        <h2>Route and Node Data</h2>
+
+        <p>
+          Route Weaver processes functional information required to create and
+          display the route layout designed by the user.
+        </p>
+
+        <div class="info-grid">
+
+          <div class="info-box">
+            <strong>Node positions</strong>
+            <span>
+              Used to determine where points appear on the extension's map.
+            </span>
+          </div>
+
+          <div class="info-box">
+            <strong>Connections</strong>
+            <span>
+              Used to determine which nodes are connected by route lines.
+            </span>
+          </div>
+
+          <div class="info-box">
+            <strong>Route colors</strong>
+            <span>
+              Used to display the selected or generated visual route style.
+            </span>
+          </div>
+
+          <div class="info-box">
+            <strong>Pulse state</strong>
+            <span>
+              Used to animate glowing movement along route connections.
+            </span>
+          </div>
+
+        </div>
+
+        <p>
+          These values are application-state information used to operate the
+          visual route interface and are not inherently personally identifying.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 04</span>
+
+        <h2>Node Creation and Positioning</h2>
+
+        <p>
+          When a user creates, selects, or drags a node, Route Weaver may
+          process information such as its position within the extension's map
+          area.
+        </p>
+
+        <p>
+          Node coordinates are used to determine where the visual point should
+          appear and how connected routes should be drawn.
+        </p>
+
+        <p>
+          These coordinates refer to positions within the extension interface
+          and are not intended to represent the user's physical geographic
+          location.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 05</span>
+
+        <h2>Route Connections</h2>
+
+        <p>
+          Route Weaver allows users to connect nodes through drag interactions.
+        </p>
+
+        <p>
+          The extension may temporarily maintain information identifying:
+        </p>
+
+        <ul>
+          <li>The starting node;</li>
+          <li>The ending node;</li>
+          <li>The visual route path;</li>
+          <li>The route color;</li>
+          <li>The connection state; and</li>
+          <li>Related animation parameters.</li>
+        </ul>
+
+        <p>
+          This information is used solely to display and operate the route
+          created by the user.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 06</span>
+
+        <h2>Pulsing Route Animation</h2>
+
+        <p>
+          Route Weaver may animate glowing pulses that move along connections
+          between nodes.
+        </p>
+
+        <p>
+          Animation processing may include temporary values such as pulse
+          position, movement direction, speed, timing, color, and animation
+          progress.
+        </p>
+
+        <p>
+          These values exist for visual rendering purposes and are not intended
+          to identify the user.
+        </p>
+      </section>
+
+
+      <section class="section" id="processing">
+        <span class="section-tag">Waypoint 07</span>
+
+        <h2>Local Processing</h2>
+
+        <div class="highlight">
+          <strong>Designed as a popup visual tool</strong>
+          <p>
+            Route Weaver's primary interaction occurs inside the extension's
+            toolbar popup.
+          </p>
+        </div>
+
+        <p>
+          Processing required for the extension may include:
+        </p>
+
+        <ul>
+          <li>Rendering the muted map background;</li>
+          <li>Creating and positioning nodes;</li>
+          <li>Detecting drag interactions;</li>
+          <li>Drawing connections;</li>
+          <li>Updating route paths;</li>
+          <li>Animating pulses;</li>
+          <li>Maintaining temporary graph state; and</li>
+          <li>Resetting the route layout.</li>
+        </ul>
+
+        <p>
+          Such processing is intended only to deliver the functionality
+          requested by the user.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 08</span>
+
+        <h2>Temporary Interface State</h2>
+
+        <p>
+          While Route Weaver is open, the extension may temporarily maintain
+          information necessary to display the current route design.
+        </p>
+
+        <p>
+          This may include nodes, route connections, pulse animations, visual
+          colors, drag states, and other interface values.
+        </p>
+
+        <p>
+          Temporary state is used only to keep the interactive route display
+          functioning correctly.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 09</span>
+
+        <h2>Browser Storage</h2>
+
+        <p>
+          If Route Weaver uses browser-provided local storage, such storage may
+          be used for functional preferences or route-related settings.
+        </p>
+
+        <p>
+          These could include non-sensitive values such as:
+        </p>
+
+        <ul>
+          <li>Display preferences;</li>
+          <li>Default route colors;</li>
+          <li>Interface options;</li>
+          <li>Animation preferences; or</li>
+          <li>Other configuration related to the visual tool.</li>
+        </ul>
+
+        <p>
+          Local settings are not intended to be used for advertising profiles or
+          cross-site tracking.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 10</span>
+
+        <h2>Website Content</h2>
+
+        <p>
+          Route Weaver's standard toolbar-popup functionality does not require
+          the general contents of webpages visited by the user in order to
+          create routes.
+        </p>
+
+        <p>
+          The extension is not intended to archive, index, or build datasets
+          from unrelated webpage text, images, videos, forms, or documents.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 11</span>
+
+        <h2>Browsing and Search History</h2>
+
+        <p>
+          Route Weaver does not require general browsing history or search
+          engine history to provide its route-creation functionality.
+        </p>
+
+        <p>
+          Websites visited by the user and searches performed on unrelated
+          services are not necessary for creating node connections or pulsing
+          route animations.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 12</span>
+
+        <h2>Web Forms and Keystrokes</h2>
+
+        <p>
+          Route Weaver is not designed to collect information entered into
+          forms on unrelated websites.
+        </p>
+
+        <p>
+          This includes login forms, checkout forms, contact forms, payment
+          forms, search fields, and other unrelated page inputs.
+        </p>
+
+        <p>
+          The extension is also not intended to operate as a keystroke logging
+          tool.
+        </p>
+      </section>
+
+
+      <section class="section" id="personal">
+        <span class="section-tag">Waypoint 13</span>
+
+        <h2>Personal Information</h2>
+
+        <p>
+          Route Weaver does not require users to create a dedicated Route
+          Weaver account in order to use its standard node and route features.
+        </p>
+
+        <p>
+          The extension does not require information such as:
+        </p>
+
+        <ul>
+          <li>Full name;</li>
+          <li>Email address;</li>
+          <li>Phone number;</li>
+          <li>Home address;</li>
+          <li>Government identification number;</li>
+          <li>Payment card information;</li>
+          <li>Banking credentials;</li>
+          <li>Passwords; or</li>
+          <li>Authentication secrets.</li>
+        </ul>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 14</span>
+
+        <h2>Sensitive Personal Information</h2>
+
+        <p>
+          Route Weaver does not require sensitive personal information to
+          provide its visual route functionality.
+        </p>
+
+        <p>
+          Health information, biometric data, authentication credentials,
+          financial information, government identifiers, political information,
+          and other sensitive categories of data are unrelated to the
+          extension's stated purpose.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 15</span>
+
+        <h2>Geographic Location</h2>
+
+        <div class="warning">
+          <strong>Map coordinates are visual interface positions</strong>
+          <p>
+            Nodes displayed on Route Weaver's muted map do not necessarily
+            correspond to the user's real-world location.
+          </p>
+        </div>
+
+        <p>
+          Route Weaver does not require precise device geolocation in order to
+          let users drag and connect nodes within the extension.
+        </p>
+
+        <p>
+          The map interface is intended as a visual design surface rather than
+          a mechanism for tracking the user's physical movement.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 16</span>
+
+        <h2>Camera, Microphone, and Device Files</h2>
+
+        <p>
+          Route Weaver does not require camera input, microphone input, or
+          unrelated personal files stored on the user's device to provide its
+          standard route-creation features.
+        </p>
+
+        <p>
+          The route visuals are generated within the extension interface.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 17</span>
+
+        <h2>Private Communications</h2>
+
+        <p>
+          Route Weaver does not require access to private emails, chat messages,
+          direct messages, or other personal communications in order to create
+          route designs.
+        </p>
+      </section>
+
+
+      <section class="section" id="tracking">
+        <span class="section-tag">Waypoint 18</span>
+
+        <h2>Advertising and Profiling</h2>
+
+        <p>
+          Route Weaver is not intended to use node arrangements, route colors,
+          connection patterns, or pulse interactions for targeted advertising.
+        </p>
+
+        <p>
+          The extension is not designed to analyze visual route designs in order
+          to create behavioral or demographic profiles of individual users.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 19</span>
+
+        <h2>Sale of Personal Information</h2>
+
+        <p>
+          Route Weaver does not operate as a data brokerage service and does not
+          intend to sell personal information to advertisers, marketing
+          organizations, or data brokers.
+        </p>
+
+        <p>
+          Information used to operate the route interface is intended to support
+          the extension's disclosed functionality.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 20</span>
+
+        <h2>Cross-Site Tracking</h2>
+
+        <p>
+          Route Weaver is not designed to track individual users across
+          unrelated websites.
+        </p>
+
+        <p>
+          Cross-site monitoring is unnecessary for a route-building tool that
+          operates within its own toolbar popup.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 21</span>
+
+        <h2>Cookies and Analytics</h2>
+
+        <p>
+          Route Weaver does not require advertising cookies to provide its core
+          route-creation functionality.
+        </p>
+
+        <p>
+          The extension also does not require personally identifiable analytics
+          information to draw nodes and pulsing connections.
+        </p>
+
+        <p>
+          If future versions introduce materially different diagnostic or
+          analytics functionality, this Privacy Policy may be updated to reflect
+          those practices.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 22</span>
+
+        <h2>Data Minimization</h2>
+
+        <p>
+          Route Weaver is designed around the principle that a browser extension
+          should process only information reasonably necessary to provide its
+          disclosed purpose.
+        </p>
+
+        <p>
+          Since the extension's purpose is interactive route visualization,
+          unrelated personal information and browsing activity are not required
+          for normal use.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 23</span>
+
+        <h2>Purpose Limitation</h2>
+
+        <p>
+          Information processed by Route Weaver is intended to be used only to
+          provide, maintain, improve, or secure its route-creation functionality.
+        </p>
+
+        <p>
+          Functional route data is not intended to be repurposed for unrelated
+          advertising, employment screening, credit scoring, insurance
+          decisions, or commercial surveillance.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 24</span>
+
+        <h2>Data Retention</h2>
+
+        <p>
+          Route Weaver is not designed to maintain an unnecessary permanent
+          remote archive of every route layout created through its standard
+          functionality.
+        </p>
+
+        <p>
+          Temporary route data may exist while the extension is open so that
+          nodes, connections, colors, and animations can be displayed.
+        </p>
+
+        <p>
+          Locally stored preferences, if used, may remain until they are
+          changed, cleared, or removed through browser controls.
+        </p>
+      </section>
+
+
+      <section class="section" id="security">
+        <span class="section-tag">Waypoint 25</span>
+
+        <h2>Data Security</h2>
+
+        <p>
+          Route Weaver is designed to minimize unnecessary handling of personal
+          information.
+        </p>
+
+        <p>
+          Limiting data collection and keeping functionality focused on the
+          extension's own route interface helps reduce unnecessary privacy and
+          security exposure.
+        </p>
+
+        <p>
+          However, no browser extension, device, browser, operating system, or
+          electronic environment can be guaranteed to be completely secure.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 26</span>
+
+        <h2>No Continuous Background Monitoring</h2>
+
+        <p>
+          Route Weaver does not need to continuously monitor unrelated webpage
+          activity in order to provide its standard functionality.
+        </p>
+
+        <p>
+          The extension's primary interaction occurs when the user opens and
+          uses the toolbar popup.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 27</span>
+
+        <h2>Automated Processing</h2>
+
+        <p>
+          Route Weaver automatically performs graphical calculations such as
+          positioning nodes, drawing route paths, and animating pulses.
+        </p>
+
+        <p>
+          Such processing is limited to operating the visual interface.
+        </p>
+
+        <p>
+          The extension does not use personal information to make automated
+          decisions concerning credit, employment, housing, insurance, legal
+          rights, or other similarly significant matters.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 28</span>
+
+        <h2>Creative and Entertainment Use</h2>
+
+        <p>
+          Route Weaver is intended as an interactive visual and creative tool.
+        </p>
+
+        <p>
+          Routes created in the extension should not automatically be interpreted
+          as real-world navigation instructions, verified travel routes, or
+          official geographic guidance unless a future feature explicitly states
+          otherwise.
+        </p>
+      </section>
+
+
+      <section class="section" id="third-party">
+        <span class="section-tag">Waypoint 29</span>
+
+        <h2>Third-Party Websites</h2>
+
+        <p>
+          Route Weaver may be installed while users browse third-party websites,
+          but those websites remain independent of the extension.
+        </p>
+
+        <p>
+          This Privacy Policy does not govern the cookies, analytics systems,
+          data processing, or privacy practices of unrelated websites.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 30</span>
+
+        <h2>Browser Platforms and Extension Stores</h2>
+
+        <p>
+          Route Weaver operates within a browser environment supplied by a
+          browser vendor.
+        </p>
+
+        <p>
+          Browser vendors and extension marketplaces may independently process
+          technical information associated with installation, updates, security,
+          crashes, or extension management according to their own policies.
+        </p>
+
+        <p>
+          Route Weaver does not control those independent practices.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 31</span>
+
+        <h2>Chrome Web Store and Similar Marketplaces</h2>
+
+        <p>
+          If Route Weaver is distributed through the Chrome Web Store or another
+          extension marketplace, installation and update processes may be
+          managed by that platform.
+        </p>
+
+        <p>
+          Route Weaver is intended to use browser capabilities only for purposes
+          directly related to its disclosed interactive route functionality.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 32</span>
+
+        <h2>Children's Privacy</h2>
+
+        <p>
+          Route Weaver is a general-purpose creative visual tool and is not
+          specifically designed for the purpose of collecting personal
+          information from children.
+        </p>
+
+        <p>
+          The extension does not require users to create a personal account to
+          use its standard route-design features.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 33</span>
+
+        <h2>International Users</h2>
+
+        <p>
+          Route Weaver may be available to users in multiple countries and
+          regions.
+        </p>
+
+        <p>
+          The extension is designed to minimize unnecessary processing of
+          personal information regardless of the user's location.
+        </p>
+
+        <p>
+          Users remain responsible for using Route Weaver in accordance with
+          laws applicable in their jurisdiction.
+        </p>
+      </section>
+
+
+      <section class="section" id="control">
+        <span class="section-tag">Waypoint 34</span>
+
+        <h2>User Choice and Control</h2>
+
+        <p>
+          Users decide when Route Weaver is opened and how nodes and routes are
+          arranged.
+        </p>
+
+        <p>
+          Users may create nodes, drag points, connect them, modify the route
+          design, close the popup, or stop using the extension at any time.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 35</span>
+
+        <h2>Clearing Local Information</h2>
+
+        <p>
+          If Route Weaver stores functional settings locally, users may be able
+          to clear those settings through their browser's extension management
+          or data controls.
+        </p>
+
+        <p>
+          Clearing extension data may restore locally saved preferences to
+          default values.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 36</span>
+
+        <h2>Removing Route Weaver</h2>
+
+        <p>
+          Route Weaver may be disabled or uninstalled through the browser's
+          extension management interface.
+        </p>
+
+        <p>
+          After removal, the extension will no longer operate in that browser.
+        </p>
+      </section>
+
+
+      <section class="section" id="changes">
+        <span class="section-tag">Waypoint 37</span>
+
+        <h2>Changes to Route Weaver</h2>
+
+        <p>
+          Route Weaver may evolve over time to improve route rendering, node
+          controls, animation quality, map styling, accessibility, performance,
+          or browser compatibility.
+        </p>
+
+        <p>
+          Future features may remain consistent with the extension's interactive
+          visual route purpose.
+        </p>
+
+        <p>
+          If a future version materially changes how personal information is
+          accessed, processed, stored, or shared, this Privacy Policy may be
+          updated accordingly.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 38</span>
+
+        <h2>Changes to This Privacy Policy</h2>
+
+        <p>
+          We may periodically revise this Privacy Policy to reflect changes in
+          Route Weaver, browser marketplace requirements, technical
+          implementation, privacy practices, or applicable laws.
+        </p>
+
+        <p>
+          When this policy is updated, the "Last updated" date displayed on the
+          page will be revised.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Waypoint 39</span>
+
+        <h2>Legal Requirements</h2>
+
+        <p>
+          Information may be disclosed where reasonably necessary to comply with
+          applicable law, regulation, court order, legal process, or a valid
+          governmental request.
+        </p>
+
+        <p>
+          Nothing in this Privacy Policy is intended to prevent compliance with
+          applicable legal obligations.
+        </p>
+      </section>
+
+
+      <section class="section" id="contact">
+        <span class="section-tag">Waypoint 40</span>
+
+        <h2>Contact</h2>
+
+        <p>
+          If you have questions, concerns, or requests regarding this Privacy
+          Policy or Route Weaver's privacy practices, please contact the
+          developer using the contact information provided on the extension's
+          official browser store listing or official website.
+        </p>
+
+        <p>
+          Please do not include passwords, financial credentials,
+          authentication tokens, government identification numbers, or other
+          unnecessary sensitive information in privacy-related communications.
+        </p>
+      </section>
+
+
+      <section class="section">
+        <span class="section-tag">Final Stop</span>
+
+        <h2>Acceptance of This Privacy Policy</h2>
+
+        <p>
+          By installing or using Route Weaver, you acknowledge that you have had
+          an opportunity to review this Privacy Policy.
+        </p>
+
+        <p>
+          If you do not wish to use Route Weaver under the practices described
+          in this policy, you may discontinue use and uninstall the extension
+          from your browser.
+        </p>
+      </section>
+
+    </article>
+
+  </main>
+
+
+  <footer class="footer">
+    <div>
+      <strong>Route Weaver</strong><br>
+      Interactive node-based route creation
+    </div>
+
+    <div>
+      Privacy Policy · Updated August 23, 2026
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
