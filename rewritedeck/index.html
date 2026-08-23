@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tangle Loom Privacy Policy</title>
+
+  <meta
+    name="description"
+    content="Privacy Policy for Tangle Loom, an interactive browser node graph tool for creating nodes, linking connections, and visualizing glowing pulse flows."
+  >
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #11182b;
+      --panel-soft: #171f35;
+      --card: #ffffff;
+      --text: #202533;
+      --muted: #687083;
+      --light: #f5f7fb;
+      --border: #e6e9f0;
+      --accent: #7c5cff;
+      --accent-soft: #eeeaff;
+      --green: #4fd1a5;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(124, 92, 255, 0.22), transparent 32%),
+        radial-gradient(circle at 90% 15%, rgba(79, 209, 165, 0.13), transparent 28%),
+        var(--bg);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-shell {
+      width: min(1440px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 72px 0 46px;
+      color: white;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 370px;
+      gap: 42px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #d9dded;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 18px var(--green);
+    }
+
+    .hero h1 {
+      margin: 22px 0 18px;
+      max-width: 850px;
+      font-size: clamp(44px, 7vw, 82px);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .hero-copy {
+      max-width: 800px;
+      margin: 0;
+      color: #b8bfd2;
+      font-size: 19px;
+      line-height: 1.75;
+    }
+
+    .hero-meta {
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-meta-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-meta-row:last-child {
+      border-bottom: 0;
+    }
+
+    .hero-meta-label {
+      color: #858da4;
+      font-size: 13px;
+    }
+
+    .hero-meta-value {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .policy-area {
+      margin-bottom: 70px;
+      padding: 24px;
+      border-radius: 30px;
+      background: #f2f4f8;
+      box-shadow: var(--shadow);
+    }
+
+    .policy-grid {
+      display: grid;
+      grid-template-columns: 285px minmax(0, 1fr);
+      gap: 26px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 24px;
+    }
+
+    .sidebar-card {
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--panel);
+      color: white;
+    }
+
+    .sidebar-head {
+      padding: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sidebar-head small {
+      display: block;
+      margin-bottom: 8px;
+      color: #7f89a3;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .sidebar-head strong {
+      font-size: 19px;
+    }
+
+    .nav {
+      padding: 12px;
+    }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 12px;
+      border-radius: 11px;
+      color: #b5bdd1;
+      font-size: 14px;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .nav-num {
+      display: grid;
+      place-items: center;
+      flex: 0 0 26px;
+      height: 26px;
+      border-radius: 8px;
+      color: #d8d2ff;
+      background: rgba(124, 92, 255, 0.16);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .sidebar-note {
+      margin: 12px;
+      padding: 18px;
+      border-radius: 14px;
+      background: linear-gradient(
+        145deg,
+        rgba(124, 92, 255, 0.15),
+        rgba(79, 209, 165, 0.08)
+      );
+    }
+
+    .sidebar-note strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+    }
+
+    .sidebar-note p {
+      margin: 0;
+      color: #98a1b9;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .intro-card {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 22px;
+      padding: 36px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #ffffff, #f9f8ff);
+      border: 1px solid var(--border);
+    }
+
+    .intro-card::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -80px;
+      top: -90px;
+      border-radius: 50%;
+      background: rgba(124, 92, 255, 0.09);
+    }
+
+    .intro-card h2 {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 16px;
+      font-size: 30px;
+      letter-spacing: -0.03em;
+    }
+
+    .intro-card p {
+      position: relative;
+      z-index: 1;
+      max-width: 850px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .privacy-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .privacy-chip {
+      padding: 20px;
+      border-radius: 18px;
+      background: var(--panel);
+      color: white;
+    }
+
+    .privacy-chip .icon {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      background: rgba(124, 92, 255, 0.16);
+      color: #c7bdff;
+      font-size: 18px;
+    }
+
+    .privacy-chip strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 15px;
+    }
+
+    .privacy-chip span {
+      color: #919bb3;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .policy-section {
+      scroll-margin-top: 24px;
+      margin-bottom: 16px;
+      padding: 30px 32px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 50px minmax(0, 1fr);
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .section-number {
+      display: grid;
+      place-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+    }
+
+    .policy-section p {
+      margin: 12px 0;
+      color: #596174;
+      font-size: 15.5px;
+      line-height: 1.8;
+    }
+
+    .policy-section ul {
+      margin: 14px 0;
+      padding-left: 22px;
+    }
+
+    .policy-section li {
+      margin: 8px 0;
+      color: #596174;
+      line-height: 1.7;
+    }
+
+    .callout {
+      margin: 20px 0;
+      padding: 18px 20px;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 14px 14px 0;
+      background: #f8f6ff;
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #332a68;
+    }
+
+    .callout p {
+      margin: 0;
+    }
+
+    .data-table {
+      display: grid;
+      gap: 1px;
+      overflow: hidden;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--border);
+    }
+
+    .data-row {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      background: white;
+    }
+
+    .data-row strong,
+    .data-row span {
+      padding: 15px 18px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .data-row strong {
+      color: #353c4b;
+      background: #fafbfc;
+    }
+
+    .data-row span {
+      color: #626b7d;
+    }
+
+    .footer {
+      padding: 24px 0 54px;
+      text-align: center;
+      color: #747e97;
+      font-size: 13px;
+    }
+
+    .footer strong {
+      color: #c3c8d7;
+    }
+
+    @media (max-width: 1040px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-meta {
+        max-width: 600px;
+      }
+
+      .policy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .sidebar-note {
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100% - 20px, 1440px);
+      }
+
+      .hero {
+        padding: 48px 8px 30px;
+      }
+
+      .hero h1 {
+        font-size: 46px;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+      }
+
+      .policy-area {
+        padding: 10px;
+        border-radius: 22px;
+      }
+
+      .nav {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .privacy-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-card,
+      .policy-section {
+        padding: 24px 20px;
+      }
+
+      .section-heading {
+        grid-template-columns: 42px minmax(0, 1fr);
+      }
+
+      .section-number {
+        width: 42px;
+        height: 42px;
+      }
+
+      .data-row {
+        grid-template-columns: 1fr;
+      }
+
+      .data-row strong {
+        padding-bottom: 5px;
+      }
+
+      .data-row span {
+        padding-top: 5px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .nav {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page-shell">
+
+    <header class="hero">
+
+      <div class="hero-grid">
+
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Browser Extension Privacy
+          </div>
+
+          <h1>Tangle Loom<br>Privacy Policy</h1>
+
+          <p class="hero-copy">
+            Tangle Loom is an interactive node graph toy that lets users add
+            nodes, connect them by dragging, watch glowing pulses travel through
+            linked paths, and clear the graph for new visual designs.
+          </p>
+        </div>
+
+        <div class="hero-meta">
+
+          <div class="hero-meta-row">
+            <span class="hero-meta-label">Extension</span>
+            <span class="hero-meta-value">Tangle Loom</span>
+          </div>
+
+          <div class="hero-meta-row">
+            <span class="hero-meta-label">Primary interface</span>
+            <span class="hero-meta-value">Toolbar popup</span>
+          </div>
+
+          <div class="hero-meta-row">
+            <span class="hero-meta-label">Primary purpose</span>
+            <span class="hero-meta-value">Interactive node graphs</span>
+          </div>
+
+          <div class="hero-meta-row">
+            <span class="hero-meta-label">Last updated</span>
+            <span class="hero-meta-value">August 23, 2026</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="policy-area">
+
+      <div class="policy-grid">
+
+        <aside class="sidebar">
+
+          <div class="sidebar-card">
+
+            <div class="sidebar-head">
+              <small>Policy navigation</small>
+              <strong>Jump to a section</strong>
+            </div>
+
+            <nav class="nav">
+              <a href="#overview">
+                <span class="nav-num">01</span>
+                Overview
+              </a>
+
+              <a href="#information">
+                <span class="nav-num">02</span>
+                Information
+              </a>
+
+              <a href="#graph-data">
+                <span class="nav-num">03</span>
+                Graph Data
+              </a>
+
+              <a href="#local-processing">
+                <span class="nav-num">04</span>
+                Local Processing
+              </a>
+
+              <a href="#browsing">
+                <span class="nav-num">05</span>
+                Browsing Data
+              </a>
+
+              <a href="#security">
+                <span class="nav-num">06</span>
+                Security
+              </a>
+
+              <a href="#third-parties">
+                <span class="nav-num">07</span>
+                Third Parties
+              </a>
+
+              <a href="#rights">
+                <span class="nav-num">08</span>
+                User Control
+              </a>
+
+              <a href="#changes">
+                <span class="nav-num">09</span>
+                Changes
+              </a>
+
+              <a href="#contact">
+                <span class="nav-num">10</span>
+                Contact
+              </a>
+            </nav>
+
+            <div class="sidebar-note">
+              <strong>Designed around interaction</strong>
+              <p>
+                Tangle Loom focuses on node creation, connections, pulse
+                animation, and graph reset controls inside its own popup.
+              </p>
+            </div>
+
+          </div>
+
+        </aside>
+
+
+        <article class="content">
+
+          <section class="intro-card">
+
+            <h2>How Tangle Loom handles information</h2>
+
+            <p>
+              Tangle Loom is designed as a compact visual tool rather than a
+              service built around user accounts or personal profiles. The
+              extension processes the information necessary to create nodes,
+              establish links, animate glowing pulses, maintain the current graph
+              state, and clear the graph when requested.
+            </p>
+
+          </section>
+
+
+          <div class="privacy-strip">
+
+            <div class="privacy-chip">
+              <div class="icon">◎</div>
+              <strong>No account required</strong>
+              <span>
+                Core graph functionality does not require a Tangle Loom account.
+              </span>
+            </div>
+
+            <div class="privacy-chip">
+              <div class="icon">↗</div>
+              <strong>Graph-focused processing</strong>
+              <span>
+                Node positions and links are used to render the graph and pulse
+                animations.
+              </span>
+            </div>
+
+            <div class="privacy-chip">
+              <div class="icon">◇</div>
+              <strong>No profiling purpose</strong>
+              <span>
+                Graph interactions are not intended for behavioral advertising
+                or user profiling.
+              </span>
+            </div>
+
+          </div>
+
+
+          <section class="policy-section" id="overview">
+
+            <div class="section-heading">
+              <div class="section-number">01</div>
+              <h2>Overview and Scope</h2>
+            </div>
+
+            <p>
+              This Privacy Policy explains how information is handled when you
+              install, access, or use the Tangle Loom browser extension.
+            </p>
+
+            <p>
+              Tangle Loom provides a popup toolbar interface for building and
+              interacting with node graphs. Users can add nodes by tapping or
+              clicking, connect nodes by dragging between them, observe animated
+              glowing pulses flowing through connections, and reset the graph to
+              begin a new design.
+            </p>
+
+            <p>
+              This Privacy Policy applies to functionality provided directly by
+              Tangle Loom. It does not govern independent websites, browser
+              vendors, operating systems, or unrelated online services.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">02</div>
+              <h2>Single Purpose</h2>
+            </div>
+
+            <p>
+              The primary purpose of Tangle Loom is to provide an interactive
+              visual node graph environment inside the browser extension popup.
+            </p>
+
+            <p>
+              Functionality reasonably associated with this purpose includes:
+            </p>
+
+            <ul>
+              <li>Creating nodes;</li>
+              <li>Positioning nodes within the graph;</li>
+              <li>Connecting nodes by dragging;</li>
+              <li>Displaying connection lines;</li>
+              <li>Animating glowing pulses through those connections;</li>
+              <li>Updating the visual graph after user interaction;</li>
+              <li>Clearing nodes and connections; and</li>
+              <li>Resetting the interface for a new graph.</li>
+            </ul>
+
+          </section>
+
+
+          <section class="policy-section" id="information">
+
+            <div class="section-heading">
+              <div class="section-number">03</div>
+              <h2>Personal Information</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not require personally identifiable information in
+              order to provide its normal graph functionality.
+            </p>
+
+            <p>
+              Users are not required to provide information such as:
+            </p>
+
+            <ul>
+              <li>Full name;</li>
+              <li>Email address;</li>
+              <li>Telephone number;</li>
+              <li>Postal address;</li>
+              <li>Government identification information;</li>
+              <li>Payment card information;</li>
+              <li>Bank account information;</li>
+              <li>Passwords; or</li>
+              <li>Authentication credentials.</li>
+            </ul>
+
+            <div class="callout">
+              <strong>No dedicated account is necessary.</strong>
+              <p>
+                Users can interact with the standard node graph without creating
+                a Tangle Loom profile or signing into a remote account.
+              </p>
+            </div>
+
+          </section>
+
+
+          <section class="policy-section" id="graph-data">
+
+            <div class="section-heading">
+              <div class="section-number">04</div>
+              <h2>Graph Interaction Data</h2>
+            </div>
+
+            <p>
+              Tangle Loom processes functional graph information so that the
+              extension can display the scene created by the user.
+            </p>
+
+            <div class="data-table">
+
+              <div class="data-row">
+                <strong>Node coordinates</strong>
+                <span>
+                  Used to determine where each node appears inside the graph.
+                </span>
+              </div>
+
+              <div class="data-row">
+                <strong>Node count</strong>
+                <span>
+                  Used to maintain the number of currently displayed graph nodes.
+                </span>
+              </div>
+
+              <div class="data-row">
+                <strong>Connections</strong>
+                <span>
+                  Used to determine which nodes are linked together.
+                </span>
+              </div>
+
+              <div class="data-row">
+                <strong>Drag interactions</strong>
+                <span>
+                  Used to create or modify links within the graph.
+                </span>
+              </div>
+
+              <div class="data-row">
+                <strong>Animation state</strong>
+                <span>
+                  Used to display glowing pulses moving through graph
+                  connections.
+                </span>
+              </div>
+
+              <div class="data-row">
+                <strong>Reset state</strong>
+                <span>
+                  Used to remove graph elements when the user requests a reset.
+                </span>
+              </div>
+
+            </div>
+
+            <p>
+              This information is application state used for operating the node
+              graph and is not inherently personal information.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">05</div>
+              <h2>Node Creation</h2>
+            </div>
+
+            <p>
+              When a user taps or clicks to add a node, Tangle Loom processes
+              information necessary to create that visual node at the selected
+              location.
+            </p>
+
+            <p>
+              Node creation may involve storing temporary values such as the
+              node's identifier, visual position, connection status, or current
+              animation state.
+            </p>
+
+            <p>
+              These values exist for the purpose of rendering and maintaining
+              the interactive graph.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">06</div>
+              <h2>Connections Between Nodes</h2>
+            </div>
+
+            <p>
+              Tangle Loom allows users to drag between nodes to create links.
+            </p>
+
+            <p>
+              The extension may temporarily maintain information identifying the
+              starting node, ending node, visual path, and relationship between
+              connected nodes.
+            </p>
+
+            <p>
+              Connection information is used only to draw and operate the graph
+              created by the user.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">07</div>
+              <h2>Glowing Pulse Animation</h2>
+            </div>
+
+            <p>
+              Tangle Loom displays animated pulses that travel through graph
+              connections.
+            </p>
+
+            <p>
+              Animation processing may include information such as:
+            </p>
+
+            <ul>
+              <li>Current pulse position;</li>
+              <li>Animation progress;</li>
+              <li>Connection direction;</li>
+              <li>Timing values;</li>
+              <li>Visual intensity;</li>
+              <li>Active connection paths; and</li>
+              <li>Other rendering values.</li>
+            </ul>
+
+            <p>
+              These values are generated and processed to display the extension's
+              visual effect.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">08</div>
+              <h2>Reset Functionality</h2>
+            </div>
+
+            <p>
+              The reset control allows users to clear all current nodes and
+              connections from the graph.
+            </p>
+
+            <p>
+              When reset is activated, Tangle Loom may remove the current graph
+              state and return the interface to its initial condition.
+            </p>
+
+            <p>
+              Reset operations are functional actions and are not used to collect
+              information about the user.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section" id="local-processing">
+
+            <div class="section-heading">
+              <div class="section-number">09</div>
+              <h2>Local Processing</h2>
+            </div>
+
+            <p>
+              Tangle Loom is designed so that its primary graph interactions and
+              animations can be handled within the browser extension
+              environment.
+            </p>
+
+            <p>
+              Local processing may include:
+            </p>
+
+            <ul>
+              <li>Creating graphical nodes;</li>
+              <li>Calculating node positions;</li>
+              <li>Detecting drag actions;</li>
+              <li>Creating connections;</li>
+              <li>Rendering connection lines;</li>
+              <li>Animating pulses;</li>
+              <li>Updating the graph state; and</li>
+              <li>Clearing the graph.</li>
+            </ul>
+
+            <div class="callout">
+              <strong>Data minimization</strong>
+              <p>
+                Tangle Loom is intended to process only information reasonably
+                necessary to provide its visual node graph functionality.
+              </p>
+            </div>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">10</div>
+              <h2>Temporary Application State</h2>
+            </div>
+
+            <p>
+              While Tangle Loom is open, the extension may temporarily maintain
+              information required to preserve the currently displayed graph.
+            </p>
+
+            <p>
+              This may include active nodes, node positions, link relationships,
+              pulse animation progress, and other interface state.
+            </p>
+
+            <p>
+              Temporary graph state exists to allow the extension to respond
+              correctly to user actions.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">11</div>
+              <h2>Browser Storage</h2>
+            </div>
+
+            <p>
+              If a version of Tangle Loom uses browser-provided local storage,
+              such storage may be used for functional preferences or graph-related
+              configuration.
+            </p>
+
+            <p>
+              Locally stored values, if any, are intended to support the
+              extension's functionality and convenience.
+            </p>
+
+            <p>
+              They are not intended to create advertising profiles, identify
+              users across unrelated websites, or operate as a data brokerage
+              mechanism.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section" id="browsing">
+
+            <div class="section-heading">
+              <div class="section-number">12</div>
+              <h2>Browsing History</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not require a user's general browsing history in
+              order to create nodes, draw connections, or animate pulses.
+            </p>
+
+            <p>
+              The extension's node graph functionality does not depend on
+              maintaining a historical list of websites visited by the user.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">13</div>
+              <h2>Website Content</h2>
+            </div>
+
+            <p>
+              Tangle Loom's standard toolbar popup functionality does not require
+              the general content of unrelated webpages in order to create and
+              display its node graph.
+            </p>
+
+            <p>
+              The extension is not designed to build archives or datasets from
+              unrelated webpage text, images, videos, documents, or other site
+              content.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">14</div>
+              <h2>Search History</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not need users' search engine history in order to
+              provide its visual graph functionality.
+            </p>
+
+            <p>
+              Search queries performed on unrelated websites are not required to
+              determine node positions, graph links, or pulse behavior.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">15</div>
+              <h2>Web Forms and Keystrokes</h2>
+            </div>
+
+            <p>
+              Tangle Loom is not designed to collect data entered into forms on
+              unrelated websites.
+            </p>
+
+            <p>
+              This includes:
+            </p>
+
+            <ul>
+              <li>Login forms;</li>
+              <li>Registration forms;</li>
+              <li>Contact forms;</li>
+              <li>Payment forms;</li>
+              <li>Checkout forms;</li>
+              <li>Search boxes; and</li>
+              <li>Other unrelated webpage inputs.</li>
+            </ul>
+
+            <p>
+              The extension is also not intended to monitor keystrokes entered
+              outside its own interface.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">16</div>
+              <h2>Sensitive Information</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not require sensitive personal information in
+              order to provide its standard functionality.
+            </p>
+
+            <p>
+              The extension does not require information such as:
+            </p>
+
+            <ul>
+              <li>Medical or health information;</li>
+              <li>Biometric identifiers;</li>
+              <li>Government identification numbers;</li>
+              <li>Banking credentials;</li>
+              <li>Credit card information;</li>
+              <li>Authentication secrets;</li>
+              <li>Political or religious information; or</li>
+              <li>Other sensitive personal data.</li>
+            </ul>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">17</div>
+              <h2>Passwords and Authentication Information</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not require passwords, login tokens,
+              authentication codes, private keys, or similar credentials to
+              create or interact with node graphs.
+            </p>
+
+            <p>
+              Credentials associated with unrelated websites are not necessary
+              for the extension's disclosed purpose.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">18</div>
+              <h2>Financial and Location Information</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not require financial information such as payment
+              card numbers or bank account credentials for its core functionality.
+            </p>
+
+            <p>
+              The extension also does not require precise geographic location
+              information in order to create visual node graphs.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">19</div>
+              <h2>Private Communications</h2>
+            </div>
+
+            <p>
+              Private emails, direct messages, chat conversations, and other
+              personal communications are unrelated to the extension's standard
+              node graph functionality.
+            </p>
+
+            <p>
+              Tangle Loom does not require those communications in order to
+              create nodes, links, or visual pulse animations.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">20</div>
+              <h2>Camera and Microphone</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not require camera or microphone input for its
+              normal graph functionality.
+            </p>
+
+            <p>
+              Nodes and visual animations are generated within the extension
+              interface rather than from recorded video, voice, or ambient
+              audio.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">21</div>
+              <h2>Advertising</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not intend to use graph structures, node
+              positions, connection patterns, or animation interactions for
+              targeted advertising.
+            </p>
+
+            <p>
+              The extension is not designed to monitor users across unrelated
+              websites for behavioral advertising or remarketing.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">22</div>
+              <h2>No Sale of Personal Information</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not sell personal information to advertisers,
+              marketing organizations, data brokers, or other third parties.
+            </p>
+
+            <p>
+              The extension's purpose is to provide an interactive visual tool,
+              not to monetize personal information.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">23</div>
+              <h2>No User Profiling</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not intend to analyze graph behavior in order to
+              create behavioral or demographic profiles of individual users.
+            </p>
+
+            <p>
+              Node arrangements and graph designs are not intended to be used to
+              infer sensitive personal characteristics.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">24</div>
+              <h2>No Cross-Site Tracking</h2>
+            </div>
+
+            <p>
+              Tangle Loom is not designed to track individual users across
+              unrelated websites.
+            </p>
+
+            <p>
+              Cross-site monitoring is unnecessary for the extension's
+              toolbar-based node graph functionality.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">25</div>
+              <h2>Cookies and Similar Technologies</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not require advertising cookies to provide its
+              core node graph functionality.
+            </p>
+
+            <p>
+              Independent websites visited by users may use their own cookies or
+              similar technologies. Those practices are controlled by the
+              respective websites and are outside this Privacy Policy.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">26</div>
+              <h2>Analytics</h2>
+            </div>
+
+            <p>
+              Tangle Loom does not require personally identifiable analytics
+              information to operate its basic graph interface.
+            </p>
+
+            <p>
+              If a future version introduces diagnostics or aggregate usage
+              measurement, this Privacy Policy may be updated as appropriate to
+              describe the relevant practices.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section" id="security">
+
+            <div class="section-heading">
+              <div class="section-number">27</div>
+              <h2>Data Retention</h2>
+            </div>
+
+            <p>
+              Tangle Loom is not designed to maintain a permanent remote archive
+              of every graph created by every user as part of its standard
+              functionality.
+            </p>
+
+            <p>
+              Temporary graph information may exist while the extension is open
+              so that nodes, links, and animations can be displayed correctly.
+            </p>
+
+            <p>
+              Any locally stored preferences, if used, may remain until they are
+              changed, cleared, or removed through browser controls.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">28</div>
+              <h2>Data Security</h2>
+            </div>
+
+            <p>
+              Tangle Loom is designed around data minimization and limited
+              functionality.
+            </p>
+
+            <p>
+              Reducing unnecessary collection and transmission of information
+              helps reduce privacy and security exposure.
+            </p>
+
+            <p>
+              However, no browser extension, browser, operating system, device,
+              or electronic environment can be guaranteed to be completely
+              secure.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">29</div>
+              <h2>Purpose Limitation</h2>
+            </div>
+
+            <p>
+              Information processed by Tangle Loom is intended to be used only
+              to provide, maintain, improve, or secure the extension's disclosed
+              graph functionality.
+            </p>
+
+            <p>
+              Graph information is not intended to be repurposed for unrelated
+              credit scoring, employment screening, insurance decisions,
+              advertising profiling, or commercial surveillance.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section" id="third-parties">
+
+            <div class="section-heading">
+              <div class="section-number">30</div>
+              <h2>Third-Party Websites</h2>
+            </div>
+
+            <p>
+              Tangle Loom may be installed while users browse third-party
+              websites, but those websites remain independent from the
+              extension.
+            </p>
+
+            <p>
+              This Privacy Policy does not govern the privacy practices,
+              analytics systems, cookies, or data handling of unrelated
+              websites.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">31</div>
+              <h2>Browser Platforms and Marketplaces</h2>
+            </div>
+
+            <p>
+              Tangle Loom operates inside a browser environment provided by a
+              browser vendor.
+            </p>
+
+            <p>
+              Browser vendors and extension marketplaces may independently
+              process technical information associated with installation,
+              updates, security, crash reporting, or extension management
+              according to their own policies.
+            </p>
+
+            <p>
+              Tangle Loom does not control those independent third-party
+              practices.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">32</div>
+              <h2>Chrome Web Store and Other Extension Stores</h2>
+            </div>
+
+            <p>
+              If Tangle Loom is distributed through the Chrome Web Store or
+              another browser extension marketplace, installation and update
+              processes may be managed by that platform.
+            </p>
+
+            <p>
+              The extension is intended to use browser capabilities only for
+              functionality reasonably related to its disclosed single purpose.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">33</div>
+              <h2>Automated Processing</h2>
+            </div>
+
+            <p>
+              Tangle Loom automatically performs graphical calculations such as
+              node positioning, path rendering, drag detection, and pulse
+              animation.
+            </p>
+
+            <p>
+              This automated processing is limited to operating the visual graph
+              interface.
+            </p>
+
+            <p>
+              Tangle Loom does not use personal information to make automated
+              decisions concerning employment, credit, housing, insurance,
+              legal rights, or similarly significant matters.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">34</div>
+              <h2>Children's Privacy</h2>
+            </div>
+
+            <p>
+              Tangle Loom is a general-purpose creative visual tool and is not
+              specifically designed for the purpose of collecting personal
+              information from children.
+            </p>
+
+            <p>
+              The extension does not require children or other users to submit
+              personal information in order to use its standard node graph
+              features.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">35</div>
+              <h2>International Users</h2>
+            </div>
+
+            <p>
+              Tangle Loom may be available to users in multiple countries and
+              regions.
+            </p>
+
+            <p>
+              The extension is designed to minimize unnecessary handling of
+              personal information regardless of where a user is located.
+            </p>
+
+            <p>
+              Users remain responsible for using the extension in accordance
+              with laws applicable in their jurisdiction.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section" id="rights">
+
+            <div class="section-heading">
+              <div class="section-number">36</div>
+              <h2>User Control</h2>
+            </div>
+
+            <p>
+              Users control when Tangle Loom is opened and how the graph is
+              constructed.
+            </p>
+
+            <p>
+              Users may add nodes, create links, watch pulse animations, clear
+              the graph, close the popup, or stop using the extension at any
+              time.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">37</div>
+              <h2>Clearing Stored Information</h2>
+            </div>
+
+            <p>
+              If Tangle Loom uses browser storage for functional settings,
+              users may be able to remove those settings through their browser's
+              extension management or data controls.
+            </p>
+
+            <p>
+              Clearing extension data may restore locally saved preferences to
+              their default state.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">38</div>
+              <h2>Removing Tangle Loom</h2>
+            </div>
+
+            <p>
+              Users can disable or uninstall Tangle Loom through their browser's
+              extension management interface.
+            </p>
+
+            <p>
+              Once removed, the extension will no longer operate within that
+              browser.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">39</div>
+              <h2>No Unrelated Commercial Use</h2>
+            </div>
+
+            <p>
+              Node layouts, connections, graph reset actions, and pulse
+              animations are not intended to be used to create unrelated
+              marketing databases or commercial behavioral profiles.
+            </p>
+
+            <p>
+              Tangle Loom processes graph interactions only as necessary to
+              deliver its visual functionality.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section" id="changes">
+
+            <div class="section-heading">
+              <div class="section-number">40</div>
+              <h2>Changes to Tangle Loom</h2>
+            </div>
+
+            <p>
+              Tangle Loom may evolve over time to improve graph interaction,
+              animation quality, node controls, visual presentation,
+              accessibility, browser compatibility, or performance.
+            </p>
+
+            <p>
+              Future features may remain related to the extension's core node
+              graph purpose.
+            </p>
+
+            <p>
+              If a future release materially changes how user information is
+              accessed, processed, stored, or shared, this Privacy Policy may be
+              revised accordingly.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">41</div>
+              <h2>Changes to This Privacy Policy</h2>
+            </div>
+
+            <p>
+              We may update this Privacy Policy periodically to reflect changes
+              to the extension, technical implementation, browser marketplace
+              requirements, applicable laws, or privacy practices.
+            </p>
+
+            <p>
+              When the policy changes, the "Last updated" date displayed on this
+              page will be revised.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">42</div>
+              <h2>Legal Requirements</h2>
+            </div>
+
+            <p>
+              Information may be disclosed where reasonably necessary to comply
+              with applicable law, regulation, court order, legal process, or a
+              valid governmental request.
+            </p>
+
+            <p>
+              Nothing in this Privacy Policy is intended to prevent compliance
+              with applicable legal obligations.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section" id="contact">
+
+            <div class="section-heading">
+              <div class="section-number">43</div>
+              <h2>Contact</h2>
+            </div>
+
+            <p>
+              If you have questions, concerns, or requests regarding this
+              Privacy Policy or Tangle Loom's privacy practices, please contact
+              the developer using the contact information provided on the
+              extension's official browser store listing or official website.
+            </p>
+
+            <p>
+              Please do not include passwords, payment credentials,
+              authentication tokens, government identification numbers, or other
+              unnecessary sensitive information in privacy-related
+              communications.
+            </p>
+
+          </section>
+
+
+          <section class="policy-section">
+
+            <div class="section-heading">
+              <div class="section-number">44</div>
+              <h2>Acceptance of This Privacy Policy</h2>
+            </div>
+
+            <p>
+              By installing or using Tangle Loom, you acknowledge that you have
+              had an opportunity to review this Privacy Policy.
+            </p>
+
+            <p>
+              If you do not wish to use Tangle Loom under the practices
+              described in this policy, you may discontinue use and uninstall
+              the extension from your browser.
+            </p>
+
+          </section>
+
+        </article>
+
+      </div>
+
+    </main>
+
+
+    <footer class="footer">
+      <strong>Tangle Loom</strong> · Privacy Policy · © 2026 Tangle Loom
+    </footer>
+
+  </div>
+
+</body>
+</html>
