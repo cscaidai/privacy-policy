@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Privacy Policy | RewriteDeck</title>
+
+  <meta
+    name="description"
+    content="Privacy Policy for RewriteDeck, a browser extension that provides stylistic rewrite options for user-selected text through a context-menu action."
+  >
+
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #667085;
+      --line: #dfe4ea;
+      --paper: #ffffff;
+      --canvas: #f3f5f7;
+      --soft: #f8fafb;
+      --accent: #ff6846;
+      --accent-dark: #be4026;
+      --accent-soft: #fff0eb;
+      --navy: #172435;
+      --success: #17795d;
+      --success-soft: #eaf8f3;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 18px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .topbar-meta {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hero {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 74px 28px 62px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+      gap: 70px;
+      align-items: end;
+    }
+
+    .kicker {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(46px, 7vw, 82px);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-lead {
+      max-width: 760px;
+      margin: 30px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .hero-side {
+      border-left: 3px solid var(--accent);
+      padding-left: 28px;
+    }
+
+    .hero-side strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+
+    .hero-side p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .hero-side .date {
+      display: block;
+      margin-top: 20px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .permission-band {
+      background: var(--navy);
+      color: white;
+    }
+
+    .permission-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 190px repeat(3, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .permission-title {
+      padding: 14px 10px 14px 0;
+    }
+
+    .permission-title small {
+      display: block;
+      margin-bottom: 7px;
+      color: #8493a7;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .permission-title strong {
+      font-size: 18px;
+    }
+
+    .permission {
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.045);
+    }
+
+    .permission code {
+      display: inline-block;
+      margin-bottom: 9px;
+      color: #ffaf9d;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .permission p {
+      margin: 0;
+      color: #aeb8c7;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .layout {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 52px 28px 80px;
+      display: grid;
+      grid-template-columns: 245px minmax(0, 1fr);
+      gap: 54px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 22px;
+    }
+
+    .toc-title {
+      margin-bottom: 16px;
+      color: #89919c;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .toc a {
+      display: block;
+      padding: 9px 0;
+      color: #596271;
+      font-size: 13px;
+      border-bottom: 1px solid #e6eaee;
+    }
+
+    .toc a:hover {
+      color: var(--accent-dark);
+    }
+
+    .toc-note {
+      margin-top: 25px;
+      padding: 16px;
+      border-radius: 13px;
+      background: var(--accent-soft);
+      color: #7e3c2c;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .article {
+      min-width: 0;
+    }
+
+    .summary-panel {
+      margin-bottom: 42px;
+      padding: 32px;
+      border-radius: var(--radius);
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    .summary-panel h2 {
+      margin: 0 0 14px;
+      font-size: 26px;
+      letter-spacing: -0.03em;
+    }
+
+    .summary-panel p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .summary-item {
+      padding: 18px;
+      border-radius: 13px;
+      background: var(--soft);
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .summary-item span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .policy-section {
+      position: relative;
+      padding: 0 0 42px 72px;
+    }
+
+    .policy-section::before {
+      content: "";
+      position: absolute;
+      left: 22px;
+      top: 44px;
+      bottom: 0;
+      width: 1px;
+      background: #d9dee5;
+    }
+
+    .policy-section:last-child::before {
+      display: none;
+    }
+
+    .section-index {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--paper);
+      border: 1px solid #ccd3db;
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 800;
+      z-index: 2;
+    }
+
+    .policy-card {
+      padding: 29px 31px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .policy-card h2 {
+      margin: 0 0 16px;
+      font-size: 23px;
+      line-height: 1.3;
+      letter-spacing: -0.025em;
+    }
+
+    .policy-card h3 {
+      margin: 25px 0 8px;
+      font-size: 17px;
+    }
+
+    .policy-card p {
+      margin: 11px 0;
+      color: #596271;
+      font-size: 15px;
+    }
+
+    .policy-card ul {
+      margin: 14px 0;
+      padding-left: 21px;
+    }
+
+    .policy-card li {
+      margin: 8px 0;
+      color: #596271;
+      font-size: 15px;
+    }
+
+    .notice {
+      margin: 20px 0;
+      padding: 18px 20px;
+      border-radius: 13px;
+      background: var(--success-soft);
+      border-left: 4px solid var(--success);
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #125b46;
+    }
+
+    .notice p {
+      margin: 0;
+      color: #3e695c;
+      font-size: 14px;
+    }
+
+    .warning {
+      margin: 20px 0;
+      padding: 18px 20px;
+      border-radius: 13px;
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+    }
+
+    .warning strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #8a351f;
+    }
+
+    .warning p {
+      margin: 0;
+      color: #7c5145;
+      font-size: 14px;
+    }
+
+    .data-use {
+      margin: 22px 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .data-use-row {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .data-use-row:last-child {
+      border-bottom: 0;
+    }
+
+    .data-use-row strong,
+    .data-use-row span {
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .data-use-row strong {
+      background: #f7f9fa;
+    }
+
+    .data-use-row span {
+      color: var(--muted);
+    }
+
+    .footer {
+      background: var(--navy);
+      color: #aab4c2;
+    }
+
+    .footer-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .footer strong {
+      color: #fff;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .permission-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .permission-title {
+        padding: 0;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        position: static;
+      }
+
+      .toc {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0 18px;
+      }
+
+      .toc-title,
+      .toc-note {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .topbar {
+        padding: 15px 18px;
+      }
+
+      .topbar-meta {
+        display: none;
+      }
+
+      .hero {
+        padding: 50px 18px 42px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .permission-inner {
+        padding: 22px 18px;
+      }
+
+      .layout {
+        padding: 34px 14px 60px;
+      }
+
+      .toc {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .summary-panel,
+      .policy-card {
+        padding: 23px 20px;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .policy-section {
+        padding-left: 0;
+      }
+
+      .policy-section::before,
+      .section-index {
+        display: none;
+      }
+
+      .data-use-row {
+        grid-template-columns: 1fr;
+      }
+
+      .data-use-row strong {
+        padding-bottom: 5px;
+      }
+
+      .data-use-row span {
+        padding-top: 5px;
+      }
+
+      .footer-inner {
+        padding: 30px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .toc {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+  <div class="topbar">
+
+    <div class="brand">
+      <div class="brand-mark">R</div>
+      RewriteDeck
+    </div>
+
+    <div class="topbar-meta">
+      Privacy &amp; Extension Data Practices
+    </div>
+
+  </div>
+
+
+  <div class="hero">
+
+    <div>
+
+      <span class="kicker">
+        Privacy Policy
+      </span>
+
+      <h1>
+        Rewrite text.<br>
+        Keep the user <span>in control.</span>
+      </h1>
+
+      <p class="hero-lead">
+        RewriteDeck provides a page-side palette with multiple stylistic
+        rewrite versions of text intentionally selected by the user.
+        The extension is activated through a right-click context-menu action
+        and applies a chosen rewrite only after user interaction.
+      </p>
+
+    </div>
+
+
+    <div class="hero-side">
+
+      <strong>
+        User-initiated by design
+      </strong>
+
+      <p>
+        RewriteDeck uses limited browser permissions to access selected text on
+        the active tab, display stylistic alternatives, and apply the option
+        chosen by the user.
+      </p>
+
+      <span class="date">
+        Last updated: August 23, 2026
+      </span>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<section class="permission-band">
+
+  <div class="permission-inner">
+
+    <div class="permission-title">
+      <small>Declared access</small>
+      <strong>Browser permissions</strong>
+    </div>
+
+
+    <div class="permission">
+
+      <code>contextMenus</code>
+
+      <p>
+        Adds the right-click command used to deliberately launch RewriteDeck
+        for selected text.
+      </p>
+
+    </div>
+
+
+    <div class="permission">
+
+      <code>activeTab</code>
+
+      <p>
+        Provides temporary access to the currently active tab after the user
+        invokes the extension.
+      </p>
+
+    </div>
+
+
+    <div class="permission">
+
+      <code>scripting</code>
+
+      <p>
+        Allows RewriteDeck to display or apply the chosen stylistic rewrite on
+        the current page after user interaction.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<main class="layout">
+
+  <aside class="toc">
+
+    <div class="toc-title">
+      Contents
+    </div>
+
+    <a href="#summary">Privacy summary</a>
+    <a href="#selected-text">Selected text</a>
+    <a href="#permissions">Permissions</a>
+    <a href="#processing">Processing</a>
+    <a href="#page-content">Website content</a>
+    <a href="#personal-data">Personal data</a>
+    <a href="#tracking">Tracking</a>
+    <a href="#security">Security</a>
+    <a href="#third-parties">Third parties</a>
+    <a href="#control">User control</a>
+    <a href="#changes">Policy changes</a>
+    <a href="#contact">Contact</a>
+
+    <div class="toc-note">
+      RewriteDeck operates around text deliberately selected by the user rather
+      than continuously running on every webpage.
+    </div>
+
+  </aside>
+
+
+  <article class="article">
+
+    <section class="summary-panel" id="summary">
+
+      <h2>
+        Privacy at a glance
+      </h2>
+
+      <p>
+        RewriteDeck is designed to provide stylistic rewrites for text that the
+        user intentionally selects. The extension uses browser access only as
+        necessary to respond to the user's context-menu action, display rewrite
+        choices, and apply the selected result.
+      </p>
+
+
+      <div class="summary-grid">
+
+        <div class="summary-item">
+          <strong>User initiated</strong>
+          <span>
+            RewriteDeck runs after the user deliberately selects its
+            context-menu command.
+          </span>
+        </div>
+
+        <div class="summary-item">
+          <strong>Text-specific access</strong>
+          <span>
+            Selected text is used to generate or present the requested
+            stylistic rewrite options.
+          </span>
+        </div>
+
+        <div class="summary-item">
+          <strong>Purpose limited</strong>
+          <span>
+            Browser permissions are intended only for the disclosed text
+            rewriting functionality.
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">01</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Scope of This Privacy Policy
+        </h2>
+
+        <p>
+          This Privacy Policy describes how information is accessed, processed,
+          and handled when users install or interact with the RewriteDeck
+          browser extension.
+        </p>
+
+        <p>
+          RewriteDeck is a text rewriting utility that displays a page-side
+          palette containing multiple stylistic rewrite versions of text
+          selected by the user.
+        </p>
+
+        <p>
+          Users activate the extension through a right-click context-menu action
+          and can choose a preferred rewrite to apply directly on the current
+          page.
+        </p>
+
+        <p>
+          This Privacy Policy applies to RewriteDeck itself and does not govern
+          unrelated websites, browser vendors, operating systems, or independent
+          third-party services.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">02</div>
+
+      <div class="policy-card">
+
+        <h2>
+          RewriteDeck's Single Purpose
+        </h2>
+
+        <p>
+          RewriteDeck has a focused purpose: helping users quickly rephrase
+          selected text into alternative stylistic versions without requiring
+          them to leave the current page.
+        </p>
+
+        <p>
+          Features reasonably related to this purpose include:
+        </p>
+
+        <ul>
+          <li>Detecting text deliberately selected by the user;</li>
+          <li>Providing a right-click RewriteDeck command;</li>
+          <li>Displaying multiple stylistic rewrite options;</li>
+          <li>Allowing the user to review available versions;</li>
+          <li>Applying a rewrite selected by the user;</li>
+          <li>Replacing or updating the relevant text on the active page; and</li>
+          <li>Displaying the page-side rewrite interface.</li>
+        </ul>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="selected-text">
+
+      <div class="section-index">03</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Selected Text
+        </h2>
+
+        <p>
+          RewriteDeck accesses text only in connection with a deliberate
+          user-initiated rewrite action.
+        </p>
+
+        <p>
+          A typical interaction may involve the user selecting a word,
+          sentence, paragraph, or other text and choosing RewriteDeck from the
+          browser's context menu.
+        </p>
+
+        <p>
+          The selected text is then used as the source material for generating
+          or presenting stylistic rewrite alternatives.
+        </p>
+
+        <div class="notice">
+
+          <strong>
+            Purpose of selected-text processing
+          </strong>
+
+          <p>
+            Selected text is processed for the purpose of providing the rewrite
+            options requested by the user and applying the selected result.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">04</div>
+
+      <div class="policy-card">
+
+        <h2>
+          What Text May Be Processed
+        </h2>
+
+        <p>
+          RewriteDeck does not independently decide which text should be
+          rewritten. The user selects the text that they want the extension to
+          process.
+        </p>
+
+        <p>
+          Depending on the page and user action, selected content could
+          technically contain:
+        </p>
+
+        <ul>
+          <li>Ordinary written sentences;</li>
+          <li>Draft text;</li>
+          <li>Descriptions;</li>
+          <li>Notes;</li>
+          <li>Form text;</li>
+          <li>Editorial content;</li>
+          <li>Public webpage text; or</li>
+          <li>Other text deliberately selected by the user.</li>
+        </ul>
+
+        <div class="warning">
+
+          <strong>
+            Avoid selecting sensitive information
+          </strong>
+
+          <p>
+            Users should not submit passwords, authentication codes, financial
+            credentials, private keys, government identification numbers, or
+            other sensitive information for rewriting unless such processing is
+            appropriate and necessary.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">05</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Rewrite Options
+        </h2>
+
+        <p>
+          RewriteDeck may offer multiple stylistic alternatives for a selected
+          piece of text.
+        </p>
+
+        <p>
+          These alternatives may differ in wording, tone, structure, brevity,
+          clarity, or other stylistic characteristics supported by the
+          extension.
+        </p>
+
+        <p>
+          Rewrite options are presented so that the user can decide which, if
+          any, should be applied.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">06</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Applying a Rewrite
+        </h2>
+
+        <p>
+          RewriteDeck may modify text on the currently active page after the
+          user selects a rewrite option.
+        </p>
+
+        <p>
+          This modification occurs as part of the extension's disclosed
+          functionality and follows a user action.
+        </p>
+
+        <p>
+          The extension does not need to modify unrelated page content merely
+          to provide the selected rewrite.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="permissions">
+
+      <div class="section-index">07</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Browser Permissions
+        </h2>
+
+        <p>
+          RewriteDeck requests browser permissions necessary to provide its
+          context-menu and page-side rewriting functionality.
+        </p>
+
+        <div class="data-use">
+
+          <div class="data-use-row">
+            <strong>contextMenus</strong>
+            <span>
+              Used to create a right-click RewriteDeck option so users can
+              deliberately initiate the extension.
+            </span>
+          </div>
+
+          <div class="data-use-row">
+            <strong>activeTab</strong>
+            <span>
+              Used to obtain temporary access to the active page after the user
+              invokes the extension.
+            </span>
+          </div>
+
+          <div class="data-use-row">
+            <strong>scripting</strong>
+            <span>
+              Used to run code necessary to display or apply the chosen rewrite
+              on the current tab after user interaction.
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">08</div>
+
+      <div class="policy-card">
+
+        <h2>
+          contextMenus Permission
+        </h2>
+
+        <p>
+          RewriteDeck uses the <strong>contextMenus</strong> permission to add a
+          command to the browser's right-click menu.
+        </p>
+
+        <p>
+          This design gives users direct control over when RewriteDeck is
+          activated.
+        </p>
+
+        <p>
+          The extension is not intended to automatically rewrite arbitrary page
+          content without the user invoking the relevant command.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">09</div>
+
+      <div class="policy-card">
+
+        <h2>
+          activeTab Permission
+        </h2>
+
+        <p>
+          RewriteDeck uses the <strong>activeTab</strong> permission to access
+          the currently active browser tab after the user has interacted with
+          the extension.
+        </p>
+
+        <p>
+          This temporary access allows RewriteDeck to work with the selected
+          text and provide the requested rewrite interface.
+        </p>
+
+        <p>
+          The permission is intended to support user-requested functionality
+          rather than continuous access to all browsing activity.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">10</div>
+
+      <div class="policy-card">
+
+        <h2>
+          scripting Permission
+        </h2>
+
+        <p>
+          RewriteDeck uses the <strong>scripting</strong> permission to run the
+          code required to provide the rewrite palette or apply a selected
+          rewrite to the current page.
+        </p>
+
+        <p>
+          Script execution occurs in connection with the extension's declared
+          functionality following user interaction or an appropriate extension
+          trigger.
+        </p>
+
+        <p>
+          The permission is not intended for unrelated monitoring,
+          surveillance, advertising, or data collection.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="processing">
+
+      <div class="section-index">11</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Processing of Rewrite Requests
+        </h2>
+
+        <p>
+          When RewriteDeck receives a user-initiated rewrite request, it may
+          process information necessary to produce and display the available
+          alternatives.
+        </p>
+
+        <p>
+          Relevant functional information may include:
+        </p>
+
+        <ul>
+          <li>The text selected by the user;</li>
+          <li>The location of the selected text on the active page;</li>
+          <li>The requested rewrite action;</li>
+          <li>The generated or available rewrite alternatives;</li>
+          <li>The rewrite selected by the user; and</li>
+          <li>Temporary interface state.</li>
+        </ul>
+
+        <p>
+          Such processing is limited to supporting the rewriting functionality
+          requested by the user.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">12</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Temporary Interface State
+        </h2>
+
+        <p>
+          While RewriteDeck is active, it may temporarily maintain information
+          needed to display the rewrite palette and respond to user actions.
+        </p>
+
+        <p>
+          This may include the currently selected text, available rewrite
+          options, the position of the page-side interface, and the state of
+          the active rewrite session.
+        </p>
+
+        <p>
+          Temporary state is used solely to operate the extension interface.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="page-content">
+
+      <div class="section-index">13</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Website Content
+        </h2>
+
+        <p>
+          RewriteDeck may interact with content on the active webpage because
+          its purpose is to rewrite text selected by the user directly on that
+          page.
+        </p>
+
+        <p>
+          Such interaction is intended to be limited to what is reasonably
+          necessary to identify selected text, display rewrite choices, and
+          apply the user's chosen result.
+        </p>
+
+        <p>
+          RewriteDeck is not designed to create a general archive of every
+          webpage visited by the user.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">14</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Browsing History
+        </h2>
+
+        <p>
+          RewriteDeck does not require a complete browsing history to provide
+          its text rewriting functionality.
+        </p>
+
+        <p>
+          The extension is not designed to build a historical list of websites
+          visited by users for advertising or profiling purposes.
+        </p>
+
+        <p>
+          Access to the current tab is used in connection with a user-initiated
+          rewrite request.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">15</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Search History
+        </h2>
+
+        <p>
+          RewriteDeck does not require general search-engine history in order
+          to provide stylistic rewrites.
+        </p>
+
+        <p>
+          Search queries on unrelated sites are not used to build advertising
+          profiles or determine the rewrite style presented to the user.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">16</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Forms and Editable Fields
+        </h2>
+
+        <p>
+          RewriteDeck may be used on text contained in editable fields when the
+          user deliberately selects that text and invokes the extension.
+        </p>
+
+        <p>
+          The extension is not designed to automatically collect all content
+          entered into forms merely because it is installed.
+        </p>
+
+        <p>
+          Users should exercise additional care before selecting text from:
+        </p>
+
+        <ul>
+          <li>Login forms;</li>
+          <li>Financial forms;</li>
+          <li>Private communications;</li>
+          <li>Medical forms;</li>
+          <li>Account-management pages; or</li>
+          <li>Other fields containing sensitive information.</li>
+        </ul>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">17</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Keystrokes
+        </h2>
+
+        <p>
+          RewriteDeck is not designed to operate as a keystroke logger.
+        </p>
+
+        <p>
+          The extension does not need to continuously record keyboard activity
+          across unrelated websites in order to provide its core functionality.
+        </p>
+
+        <p>
+          Its operation is centered on text deliberately selected by the user.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="personal-data">
+
+      <div class="section-index">18</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Personal Information
+        </h2>
+
+        <p>
+          RewriteDeck does not require users to create a dedicated RewriteDeck
+          account in order to access its standard rewriting functionality.
+        </p>
+
+        <p>
+          Information such as a user's real name, phone number, home address,
+          government identifier, or payment credentials is not required merely
+          to request a stylistic rewrite.
+        </p>
+
+        <p>
+          However, because the user controls what text is selected, selected
+          text could technically contain personal information. Users should
+          avoid selecting sensitive information unless appropriate.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">19</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Sensitive Personal Information
+        </h2>
+
+        <p>
+          RewriteDeck does not require sensitive personal information for its
+          ordinary functionality.
+        </p>
+
+        <p>
+          Users should avoid deliberately submitting information such as:
+        </p>
+
+        <ul>
+          <li>Passwords;</li>
+          <li>Two-factor authentication codes;</li>
+          <li>Private cryptographic keys;</li>
+          <li>Government identification numbers;</li>
+          <li>Payment card numbers;</li>
+          <li>Banking credentials;</li>
+          <li>Confidential medical information; or</li>
+          <li>Other highly sensitive material.</li>
+        </ul>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">20</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Authentication Information
+        </h2>
+
+        <p>
+          RewriteDeck does not require passwords, authentication tokens,
+          private keys, security answers, or login credentials to perform its
+          core rewriting function.
+        </p>
+
+        <p>
+          Such information should not be selected for stylistic rewriting.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">21</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Financial Information
+        </h2>
+
+        <p>
+          RewriteDeck does not need banking information, credit card numbers,
+          payment credentials, or transaction authentication information to
+          provide stylistic rewrite alternatives.
+        </p>
+
+        <p>
+          Users should not intentionally submit financial credentials through a
+          rewrite action.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">22</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Location, Camera, and Microphone
+        </h2>
+
+        <p>
+          RewriteDeck does not require precise geographic location information
+          to provide text rewrites.
+        </p>
+
+        <p>
+          The extension's standard functionality also does not require camera
+          or microphone access.
+        </p>
+
+        <p>
+          RewriteDeck is a text-focused extension and does not need to record
+          video, voice, or ambient sound to perform its disclosed purpose.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">23</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Private Communications
+        </h2>
+
+        <p>
+          RewriteDeck is not designed to automatically read private
+          communications.
+        </p>
+
+        <p>
+          If a user deliberately selects text from an email, message, draft, or
+          other private communication and invokes RewriteDeck, that selected
+          text may be processed as part of the requested rewrite.
+        </p>
+
+        <p>
+          Users should consider the sensitivity and confidentiality of text
+          before choosing to rewrite it.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="tracking">
+
+      <div class="section-index">24</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Advertising
+        </h2>
+
+        <p>
+          RewriteDeck is not intended to use selected text for targeted
+          advertising or behavioral advertising.
+        </p>
+
+        <p>
+          Browser permissions are requested to provide the disclosed rewriting
+          functionality rather than to construct advertising audiences.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">25</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Sale of User Information
+        </h2>
+
+        <p>
+          RewriteDeck does not operate as a service whose purpose is to sell
+          user-selected text or personal information to advertisers or data
+          brokers.
+        </p>
+
+        <p>
+          Information accessed through extension functionality is intended to
+          support the rewrite action requested by the user.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">26</div>
+
+      <div class="policy-card">
+
+        <h2>
+          User Profiling
+        </h2>
+
+        <p>
+          RewriteDeck is not designed to analyze selected text in order to
+          construct unrelated behavioral, demographic, advertising, credit,
+          employment, or insurance profiles.
+        </p>
+
+        <p>
+          Rewrite requests are intended to be processed for text transformation,
+          not unrelated personal profiling.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">27</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Cross-Site Tracking
+        </h2>
+
+        <p>
+          RewriteDeck is not designed to track individual users across unrelated
+          websites.
+        </p>
+
+        <p>
+          The <strong>activeTab</strong> permission provides access associated
+          with the user's current interaction rather than requiring permanent
+          access to all browsing activity.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">28</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Cookies
+        </h2>
+
+        <p>
+          RewriteDeck does not require advertising cookies to provide its core
+          rewriting functionality.
+        </p>
+
+        <p>
+          Websites independently visited by users may use their own cookies,
+          analytics technologies, and tracking systems. Those technologies are
+          controlled by the respective websites.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">29</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Analytics
+        </h2>
+
+        <p>
+          RewriteDeck does not require selected text to be used for behavioral
+          advertising analytics.
+        </p>
+
+        <p>
+          If the extension's technical or diagnostic practices materially change
+          in a future version, this Privacy Policy may be revised to reflect the
+          applicable processing.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">30</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Data Minimization
+        </h2>
+
+        <p>
+          RewriteDeck is designed around the principle that browser access
+          should be limited to what is reasonably necessary to provide the
+          extension's declared purpose.
+        </p>
+
+        <p>
+          This includes using user-initiated context-menu activation and
+          temporary active-tab access rather than requiring unrelated permanent
+          browsing access.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">31</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Purpose Limitation
+        </h2>
+
+        <p>
+          Information accessed by RewriteDeck is intended to be used only for
+          purposes directly related to providing, maintaining, improving, or
+          securing the extension's disclosed text rewriting functionality.
+        </p>
+
+        <p>
+          Browser access is not intended to be repurposed for unrelated
+          surveillance, advertising profiling, credit scoring, data brokerage,
+          or employment screening.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">32</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Data Retention
+        </h2>
+
+        <p>
+          RewriteDeck may maintain information temporarily while a rewrite
+          interaction is active so that the selected text, available options,
+          and interface can function correctly.
+        </p>
+
+        <p>
+          The extension is not intended to maintain an unrelated permanent
+          browsing archive simply because a user has installed RewriteDeck.
+        </p>
+
+        <p>
+          Any future changes to retention practices that materially affect user
+          information should be reflected in an updated version of this policy.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="security">
+
+      <div class="section-index">33</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Data Security
+        </h2>
+
+        <p>
+          RewriteDeck is designed to minimize unnecessary browser access and
+          process only information reasonably related to user-requested rewrite
+          functionality.
+        </p>
+
+        <p>
+          Limiting access and processing helps reduce unnecessary privacy and
+          security exposure.
+        </p>
+
+        <p>
+          However, no browser extension, operating system, browser, device,
+          network, or electronic environment can be guaranteed to be completely
+          secure.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">34</div>
+
+      <div class="policy-card">
+
+        <h2>
+          No Continuous Background Monitoring
+        </h2>
+
+        <p>
+          RewriteDeck does not need to continuously inspect all user activity
+          in order to provide its disclosed functionality.
+        </p>
+
+        <p>
+          The extension is designed around intentional actions such as selecting
+          text and invoking the RewriteDeck context-menu command.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">35</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Automated Processing
+        </h2>
+
+        <p>
+          RewriteDeck may automatically transform selected text into stylistic
+          alternatives.
+        </p>
+
+        <p>
+          This automated processing is limited to text rewriting and related
+          interface operations.
+        </p>
+
+        <p>
+          RewriteDeck does not use such processing to make automated decisions
+          concerning credit, employment, housing, insurance, legal rights, or
+          similarly significant matters.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">36</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Accuracy of Rewrites
+        </h2>
+
+        <p>
+          Stylistic rewrites may alter wording, tone, sentence structure, or
+          emphasis.
+        </p>
+
+        <p>
+          Users should review rewrite options before applying them, particularly
+          when working with legal, technical, financial, professional, academic,
+          medical, or otherwise important content.
+        </p>
+
+        <p>
+          The user remains responsible for determining whether a rewritten
+          version accurately communicates the intended meaning.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="third-parties">
+
+      <div class="section-index">37</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Third-Party Websites
+        </h2>
+
+        <p>
+          RewriteDeck may operate while users are viewing third-party websites,
+          but those websites remain independent from the extension.
+        </p>
+
+        <p>
+          This Privacy Policy does not control or describe the independent
+          privacy practices of websites on which RewriteDeck may be used.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">38</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Browser Platforms
+        </h2>
+
+        <p>
+          RewriteDeck operates within a browser environment provided by a
+          browser vendor.
+        </p>
+
+        <p>
+          Browser vendors may independently process technical information
+          related to installation, updates, extension management, security, or
+          browser operation according to their own privacy policies.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">39</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Chrome Web Store and Extension Marketplaces
+        </h2>
+
+        <p>
+          If RewriteDeck is distributed through the Chrome Web Store or another
+          browser extension marketplace, installation and update processes may
+          be handled by that platform.
+        </p>
+
+        <p>
+          RewriteDeck is intended to use browser permissions only for purposes
+          directly related to its disclosed rewriting functionality.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">40</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Children's Privacy
+        </h2>
+
+        <p>
+          RewriteDeck is a general-purpose writing utility and is not designed
+          specifically for the purpose of collecting personal information from
+          children.
+        </p>
+
+        <p>
+          The extension does not require users to provide personal registration
+          information to access its core rewriting functionality.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">41</div>
+
+      <div class="policy-card">
+
+        <h2>
+          International Users
+        </h2>
+
+        <p>
+          RewriteDeck may be available to users in multiple countries and
+          regions.
+        </p>
+
+        <p>
+          The extension is designed around limited, user-initiated access
+          regardless of where the user is located.
+        </p>
+
+        <p>
+          Users remain responsible for using RewriteDeck in accordance with
+          laws applicable in their jurisdiction.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="control">
+
+      <div class="section-index">42</div>
+
+      <div class="policy-card">
+
+        <h2>
+          User Choice and Control
+        </h2>
+
+        <p>
+          Users decide which text to select and when RewriteDeck should run.
+        </p>
+
+        <p>
+          Users also decide whether to apply any rewrite shown by the
+          extension.
+        </p>
+
+        <p>
+          A user can avoid processing text simply by not invoking the
+          RewriteDeck context-menu command.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">43</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Removing RewriteDeck
+        </h2>
+
+        <p>
+          Users can disable or uninstall RewriteDeck at any time through their
+          browser's extension management interface.
+        </p>
+
+        <p>
+          Once removed, RewriteDeck will no longer be able to perform extension
+          actions within that browser.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">44</div>
+
+      <div class="policy-card">
+
+        <h2>
+          No Unrelated Commercial Use
+        </h2>
+
+        <p>
+          Selected text and rewrite choices are not intended to be used to
+          create unrelated marketing databases or behavioral advertising
+          audiences.
+        </p>
+
+        <p>
+          RewriteDeck's access is intended to support the text transformation
+          requested by the user.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="changes">
+
+      <div class="section-index">45</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Changes to RewriteDeck
+        </h2>
+
+        <p>
+          RewriteDeck may evolve over time to improve rewrite styles, interface
+          design, text handling, compatibility, accessibility, reliability, or
+          performance.
+        </p>
+
+        <p>
+          Future versions may introduce additional features that remain
+          consistent with the extension's primary text rewriting purpose.
+        </p>
+
+        <p>
+          If a future version materially changes how user information is
+          accessed, processed, stored, or shared, this Privacy Policy may be
+          updated accordingly.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">46</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Changes to This Privacy Policy
+        </h2>
+
+        <p>
+          This Privacy Policy may be revised periodically to reflect changes in
+          RewriteDeck's functionality, browser marketplace requirements,
+          technical implementation, privacy practices, or applicable legal
+          requirements.
+        </p>
+
+        <p>
+          When changes are made, the "Last updated" date displayed on this page
+          will be revised.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">47</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Legal Requirements
+        </h2>
+
+        <p>
+          Information may be disclosed where reasonably necessary to comply
+          with applicable law, regulation, court order, legal process, or a
+          valid governmental request.
+        </p>
+
+        <p>
+          Nothing in this Privacy Policy is intended to prevent compliance with
+          applicable legal obligations.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section" id="contact">
+
+      <div class="section-index">48</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Contact
+        </h2>
+
+        <p>
+          If you have questions, concerns, or requests regarding this Privacy
+          Policy or RewriteDeck's privacy practices, please contact the
+          developer using the contact information provided on the extension's
+          official browser store listing or official website.
+        </p>
+
+        <p>
+          Please do not include passwords, authentication tokens, payment
+          credentials, government identification numbers, or other unnecessary
+          sensitive information in privacy-related communications.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="policy-section">
+
+      <div class="section-index">49</div>
+
+      <div class="policy-card">
+
+        <h2>
+          Acceptance of This Privacy Policy
+        </h2>
+
+        <p>
+          By installing or using RewriteDeck, you acknowledge that you have had
+          an opportunity to review this Privacy Policy.
+        </p>
+
+        <p>
+          If you do not wish to use RewriteDeck under the practices described
+          here, you may discontinue use and uninstall the extension from your
+          browser.
+        </p>
+
+      </div>
+
+    </section>
+
+  </article>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="footer-inner">
+
+    <div>
+      <strong>RewriteDeck</strong><br>
+      Context-aware stylistic rewriting
+    </div>
+
+    <div>
+      Privacy Policy · Updated August 23, 2026
+    </div>
+
+  </div>
+
+</footer>
+
+</body>
+</html>
