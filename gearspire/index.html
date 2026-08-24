@@ -1,0 +1,2266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Privacy Policy | Gearspire</title>
+
+  <meta
+    name="description"
+    content="Privacy Policy for Gearspire, a browser extension for tuning gear sizes and speeds in a vertical tower with real-time controls."
+  >
+
+  <style>
+    :root {
+      --bg: #111317;
+      --bg-soft: #181b20;
+      --panel: #20242a;
+      --panel-light: #292e35;
+      --line: #373d45;
+
+      --text: #f3f4f6;
+      --muted: #a0a7b1;
+
+      --orange: #e58b3c;
+      --orange-soft: rgba(229, 139, 60, 0.12);
+
+      --steel: #93a4b5;
+      --steel-soft: rgba(147, 164, 181, 0.10);
+
+      --green: #72b39a;
+      --green-soft: rgba(114, 179, 154, 0.10);
+
+      --radius: 18px;
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(
+          circle at 15% 0%,
+          rgba(229, 139, 60, 0.09),
+          transparent 27%
+        ),
+        radial-gradient(
+          circle at 88% 10%,
+          rgba(147, 164, 181, 0.08),
+          transparent 30%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+      line-height: 1.75;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1360px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    /* =========================
+       TOP BAR
+       ========================= */
+
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: rgba(17, 19, 23, 0.92);
+    }
+
+    .topbar-inner {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--orange);
+      border-radius: 50%;
+      color: var(--orange);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      background: var(--orange);
+    }
+
+    .brand-mark::before {
+      width: 48px;
+      height: 4px;
+      left: -5px;
+      top: 17px;
+    }
+
+    .brand-mark::after {
+      width: 4px;
+      height: 48px;
+      left: 17px;
+      top: -5px;
+    }
+
+    .brand-mark span {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg);
+    }
+
+    .top-meta {
+      color: #7f8791;
+      font-size: 12px;
+    }
+
+    /* =========================
+       HERO
+       ========================= */
+
+    .hero {
+      padding: 72px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) 430px;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 20px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+      color: #bac0c8;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-tag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 14px rgba(229,139,60,0.7);
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(52px, 8vw, 98px);
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+    }
+
+    .hero h1 span {
+      color: var(--orange);
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 28px;
+    }
+
+    .hero-badges span {
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--bg-soft);
+      color: #929aa5;
+      font-size: 11px;
+    }
+
+    /* =========================
+       GEAR TOWER PREVIEW
+       ========================= */
+
+    .tower {
+      position: relative;
+      min-height: 420px;
+      padding: 34px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,0.03),
+          rgba(255,255,255,0)
+        ),
+        var(--bg-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .tower::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 45px;
+      bottom: 45px;
+      width: 2px;
+      transform: translateX(-50%);
+      background: #343941;
+    }
+
+    .tower-title {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 28px;
+      color: #8f97a1;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .gear-row {
+      position: relative;
+      z-index: 2;
+      height: 92px;
+      display: flex;
+      align-items: center;
+    }
+
+    .gear-row:nth-child(even) {
+      justify-content: flex-end;
+    }
+
+    .gear {
+      position: relative;
+      display: grid;
+      place-items: center;
+      border: 5px solid var(--steel);
+      border-radius: 50%;
+      background: var(--panel);
+      color: #d9dee4;
+      box-shadow:
+        0 0 0 7px rgba(147, 164, 181, 0.05),
+        0 12px 28px rgba(0,0,0,0.25);
+    }
+
+    .gear::before {
+      content: "";
+      position: absolute;
+      inset: 13px;
+      border: 2px dashed #646f79;
+      border-radius: 50%;
+    }
+
+    .gear::after {
+      content: "";
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 16px rgba(229,139,60,0.6);
+    }
+
+    .gear-lg {
+      width: 84px;
+      height: 84px;
+    }
+
+    .gear-md {
+      width: 67px;
+      height: 67px;
+    }
+
+    .gear-sm {
+      width: 53px;
+      height: 53px;
+    }
+
+    .gear-label {
+      margin: 0 16px;
+      color: #7f8792;
+      font-size: 11px;
+    }
+
+    .tower-meter {
+      position: absolute;
+      right: 20px;
+      bottom: 18px;
+      left: 20px;
+      height: 7px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #282d33;
+    }
+
+    .tower-meter::after {
+      content: "";
+      display: block;
+      width: 72%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(
+        90deg,
+        var(--steel),
+        var(--orange)
+      );
+    }
+
+    /* =========================
+       QUICK STATS
+       ========================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 42px;
+    }
+
+    .stat {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--panel);
+    }
+
+    .stat:nth-child(2) {
+      background: var(--orange-soft);
+    }
+
+    .stat:nth-child(3) {
+      background: var(--steel-soft);
+    }
+
+    .stat:nth-child(4) {
+      background: var(--green-soft);
+    }
+
+    .stat small {
+      display: block;
+      margin-bottom: 8px;
+      color: #78818c;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .stat p {
+      margin: 0;
+      color: #8e96a0;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    /* =========================
+       LAYOUT
+       ========================= */
+
+    .policy-layout {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 44px;
+      align-items: start;
+      padding-bottom: 80px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 22px;
+    }
+
+    .sidebar-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+
+    .sidebar-head {
+      padding: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-head small {
+      display: block;
+      margin-bottom: 5px;
+      color: #737b85;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .sidebar-head strong {
+      font-size: 16px;
+    }
+
+    .nav {
+      padding: 10px;
+    }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px;
+      border-radius: 9px;
+      color: #9199a4;
+      font-size: 12px;
+    }
+
+    .nav a:hover {
+      background: #292e35;
+      color: #fff;
+    }
+
+    .nav-gear {
+      position: relative;
+      flex: 0 0 12px;
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--orange);
+      border-radius: 50%;
+    }
+
+    .nav-gear::after {
+      content: "";
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      top: 2px;
+      left: 2px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+
+    .sidebar-note {
+      margin-top: 15px;
+      padding: 17px;
+      border: 1px solid rgba(229,139,60,0.16);
+      border-radius: 15px;
+      background: var(--orange-soft);
+      color: #a58b73;
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .intro {
+      margin-bottom: 18px;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(229,139,60,0.07),
+          rgba(147,164,181,0.04)
+        ),
+        var(--panel);
+    }
+
+    .intro small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--orange);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .intro h2 {
+      margin: 0 0 13px;
+      font-size: 29px;
+      letter-spacing: -0.035em;
+    }
+
+    .intro p {
+      margin: 0;
+      color: #989fa9;
+      font-size: 14px;
+    }
+
+    /* =========================
+       SECTIONS
+       ========================= */
+
+    .section {
+      position: relative;
+      margin-bottom: 15px;
+      padding: 29px 31px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+
+    .section::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 26px;
+      width: 70px;
+      height: 3px;
+      background: var(--orange);
+    }
+
+    .section:nth-of-type(3n + 2)::after {
+      background: var(--steel);
+    }
+
+    .section:nth-of-type(3n + 3)::after {
+      background: var(--green);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 15px;
+    }
+
+    .section-number {
+      display: grid;
+      place-items: center;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(229,139,60,0.22);
+      border-radius: 50%;
+      background: var(--orange-soft);
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.025em;
+    }
+
+    .section h3 {
+      margin: 24px 0 8px;
+      font-size: 16px;
+    }
+
+    .section p {
+      margin: 11px 0;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .section ul {
+      margin: 13px 0;
+      padding-left: 22px;
+    }
+
+    .section li {
+      margin: 7px 0;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+      margin: 19px 0;
+    }
+
+    .data-box {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #1a1e23;
+    }
+
+    .data-box strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #dfe3e8;
+      font-size: 13px;
+    }
+
+    .data-box span {
+      color: #828b96;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .callout {
+      margin: 19px 0;
+      padding: 18px 20px;
+      border-left: 4px solid var(--orange);
+      border-radius: 0 13px 13px 0;
+      background: var(--orange-soft);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #e5aa75;
+      font-size: 13px;
+    }
+
+    .callout p {
+      margin: 0;
+      color: #a98d76;
+      font-size: 13px;
+    }
+
+    .steel-callout {
+      border-left-color: var(--steel);
+      background: var(--steel-soft);
+    }
+
+    .steel-callout strong {
+      color: #b6c1ca;
+    }
+
+    .steel-callout p {
+      color: #939fa9;
+    }
+
+    footer {
+      margin-bottom: 35px;
+      padding: 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+      color: #7f8791;
+      font-size: 12px;
+    }
+
+    footer strong {
+      color: #fff;
+    }
+
+    @media (max-width: 1050px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tower {
+        max-width: 620px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .policy-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .shell {
+        width: min(100% - 20px, 1360px);
+      }
+
+      .hero {
+        padding: 48px 0 32px;
+      }
+
+      .hero h1 {
+        font-size: 54px;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+      }
+
+      .tower {
+        min-height: 390px;
+        padding: 24px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .intro,
+      .section {
+        padding: 23px 20px;
+      }
+
+      .data-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 470px) {
+      .nav {
+        grid-template-columns: 1fr;
+      }
+
+      .top-meta {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="shell topbar-inner">
+
+    <div class="brand">
+      <div class="brand-mark">
+        <span>G</span>
+      </div>
+      Gearspire
+    </div>
+
+    <div class="top-meta">
+      Privacy Policy · August 24, 2026
+    </div>
+
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <div class="shell">
+
+    <div class="hero-grid">
+
+      <div>
+
+        <div class="hero-tag">
+          Browser Extension Privacy
+        </div>
+
+        <h1>
+          Tune the<br>
+          <span>mechanism.</span>
+        </h1>
+
+        <p class="hero-copy">
+          Gearspire provides an interactive toolbar popup where users can tune
+          gear sizes and rotational speeds within a vertical gear tower,
+          producing rhythmic spinning patterns with real-time controls.
+        </p>
+
+        <div class="hero-badges">
+          <span>Vertical gear tower</span>
+          <span>Adjustable gear sizes</span>
+          <span>Adjustable speeds</span>
+          <span>Real-time controls</span>
+          <span>Toolbar popup</span>
+        </div>
+
+      </div>
+
+
+      <div class="tower">
+
+        <div class="tower-title">
+          <span>Gear tower</span>
+          <span>Live control</span>
+        </div>
+
+        <div class="gear-row">
+          <div class="gear gear-lg"></div>
+          <span class="gear-label">Size 84 · Speed 0.7×</span>
+        </div>
+
+        <div class="gear-row">
+          <span class="gear-label">Size 67 · Speed 1.2×</span>
+          <div class="gear gear-md"></div>
+        </div>
+
+        <div class="gear-row">
+          <div class="gear gear-sm"></div>
+          <span class="gear-label">Size 53 · Speed 1.8×</span>
+        </div>
+
+        <div class="gear-row">
+          <span class="gear-label">Rhythmic output</span>
+          <div class="gear gear-md"></div>
+        </div>
+
+        <div class="tower-meter"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="shell">
+
+  <section class="stats">
+
+    <div class="stat">
+      <small>Primary purpose</small>
+      <strong>Interactive Gear Tuning</strong>
+      <p>
+        Adjust simulated gear dimensions and rotational speeds.
+      </p>
+    </div>
+
+    <div class="stat">
+      <small>Interface</small>
+      <strong>Toolbar Popup</strong>
+      <p>
+        Core controls are presented through the extension popup.
+      </p>
+    </div>
+
+    <div class="stat">
+      <small>Input type</small>
+      <strong>Simulation Parameters</strong>
+      <p>
+        Gear sizes and speed values are functional control data.
+      </p>
+    </div>
+
+    <div class="stat">
+      <small>User identity</small>
+      <strong>No Account Required</strong>
+      <p>
+        Standard gear tuning does not require a dedicated account.
+      </p>
+    </div>
+
+  </section>
+
+
+  <main class="policy-layout">
+
+    <aside class="sidebar">
+
+      <div class="sidebar-card">
+
+        <div class="sidebar-head">
+          <small>Gear index</small>
+          <strong>Policy Sections</strong>
+        </div>
+
+        <nav class="nav">
+
+          <a href="#overview">
+            <span class="nav-gear"></span>
+            Overview
+          </a>
+
+          <a href="#simulation">
+            <span class="nav-gear"></span>
+            Simulation
+          </a>
+
+          <a href="#processing">
+            <span class="nav-gear"></span>
+            Processing
+          </a>
+
+          <a href="#personal">
+            <span class="nav-gear"></span>
+            Personal Data
+          </a>
+
+          <a href="#browsing">
+            <span class="nav-gear"></span>
+            Browsing Data
+          </a>
+
+          <a href="#tracking">
+            <span class="nav-gear"></span>
+            Tracking
+          </a>
+
+          <a href="#security">
+            <span class="nav-gear"></span>
+            Security
+          </a>
+
+          <a href="#third-party">
+            <span class="nav-gear"></span>
+            Third Parties
+          </a>
+
+          <a href="#control">
+            <span class="nav-gear"></span>
+            User Control
+          </a>
+
+          <a href="#contact">
+            <span class="nav-gear"></span>
+            Contact
+          </a>
+
+        </nav>
+
+      </div>
+
+      <div class="sidebar-note">
+        Gearspire is designed as an interactive visual simulation. Gear size,
+        speed, position, and rotation values are functional parameters used to
+        operate the gear tower.
+      </div>
+
+    </aside>
+
+
+    <article class="content">
+
+      <section class="intro">
+
+        <small>Privacy summary</small>
+
+        <h2>
+          A focused mechanical simulation
+        </h2>
+
+        <p>
+          Gearspire processes the numerical and visual state needed to render a
+          vertical gear tower and respond to real-time tuning controls. Its
+          standard functionality does not require users to create a personal
+          Gearspire account.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="overview">
+
+        <div class="section-header">
+          <div class="section-number">01</div>
+          <h2>Scope of This Privacy Policy</h2>
+        </div>
+
+        <p>
+          This Privacy Policy explains how information is handled when you
+          install, access, or use the Gearspire browser extension.
+        </p>
+
+        <p>
+          Gearspire provides a toolbar-popup simulation in which users can tune
+          the sizes and rotational speeds of gears arranged within a vertical
+          tower.
+        </p>
+
+        <p>
+          Changes are reflected in real time so users can experiment with
+          different rhythmic spinning patterns and visual relationships between
+          gears.
+        </p>
+
+        <p>
+          This policy applies to functionality provided directly by Gearspire
+          and does not govern unrelated websites, browser vendors, operating
+          systems, or independent services.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">02</div>
+          <h2>Single Purpose</h2>
+        </div>
+
+        <p>
+          Gearspire has a focused single purpose: providing an interactive gear
+          simulation that allows users to modify gear sizes and speeds and
+          observe the resulting visual motion.
+        </p>
+
+        <p>
+          Features reasonably related to this purpose may include:
+        </p>
+
+        <ul>
+          <li>Displaying a vertical gear tower;</li>
+          <li>Rendering multiple gears;</li>
+          <li>Adjusting gear dimensions;</li>
+          <li>Adjusting rotational speeds;</li>
+          <li>Changing movement in real time;</li>
+          <li>Updating gear relationships;</li>
+          <li>Displaying rhythmic spinning motion;</li>
+          <li>Resetting simulation values; and</li>
+          <li>Other controls related directly to the gear simulation.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">03</div>
+          <h2>No Account Required</h2>
+        </div>
+
+        <p>
+          Gearspire does not require users to create a dedicated account in
+          order to access its standard simulation functionality.
+        </p>
+
+        <p>
+          Users do not need to register a username, password, profile, email
+          address, or other personal identity information merely to adjust gears
+          and observe the resulting animation.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="simulation">
+
+        <div class="section-header">
+          <div class="section-number">04</div>
+          <h2>Gear Simulation Data</h2>
+        </div>
+
+        <p>
+          Gearspire processes functional information necessary to display and
+          operate the simulated gear system.
+        </p>
+
+        <div class="data-grid">
+
+          <div class="data-box">
+            <strong>Gear size</strong>
+            <span>
+              Determines the visual dimensions of a gear in the tower.
+            </span>
+          </div>
+
+          <div class="data-box">
+            <strong>Rotational speed</strong>
+            <span>
+              Determines how quickly a simulated gear rotates.
+            </span>
+          </div>
+
+          <div class="data-box">
+            <strong>Rotation state</strong>
+            <span>
+              Used to maintain the current visual angle and animation.
+            </span>
+          </div>
+
+          <div class="data-box">
+            <strong>Gear position</strong>
+            <span>
+              Determines placement within the vertical tower interface.
+            </span>
+          </div>
+
+        </div>
+
+        <p>
+          These values are simulation parameters and are not inherently
+          personally identifiable information.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">05</div>
+          <h2>Gear Size Controls</h2>
+        </div>
+
+        <p>
+          Gearspire allows users to modify the size of simulated gears within
+          the vertical tower.
+        </p>
+
+        <p>
+          A gear-size value may affect the appearance of the gear, its
+          relationship with nearby gears, spacing, rotation, or other visual
+          behavior supported by the simulation.
+        </p>
+
+        <p>
+          Gear-size values are used solely to provide the interactive
+          functionality requested by the user.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">06</div>
+          <h2>Speed Controls</h2>
+        </div>
+
+        <p>
+          Users may adjust rotational speed values through Gearspire's real-time
+          controls.
+        </p>
+
+        <p>
+          Speed values determine how quickly the corresponding simulated gear
+          rotates.
+        </p>
+
+        <p>
+          They may also influence the overall visual rhythm produced by the gear
+          tower.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">07</div>
+          <h2>Real-Time Updates</h2>
+        </div>
+
+        <p>
+          Gearspire updates the simulation when users change available controls.
+        </p>
+
+        <p>
+          Real-time processing may include:
+        </p>
+
+        <ul>
+          <li>Reading the selected gear size;</li>
+          <li>Reading the selected speed;</li>
+          <li>Updating gear dimensions;</li>
+          <li>Updating rotational velocity;</li>
+          <li>Recalculating visual relationships;</li>
+          <li>Rendering animation frames; and</li>
+          <li>Displaying the resulting motion.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">08</div>
+          <h2>Vertical Tower Layout</h2>
+        </div>
+
+        <p>
+          Gearspire displays gears in a vertical tower arrangement.
+        </p>
+
+        <p>
+          The extension may maintain information about gear order, spacing,
+          positions, sizes, and related visual geometry so that the tower can be
+          rendered correctly.
+        </p>
+
+        <p>
+          These values relate to the internal simulation interface rather than
+          the user's physical location or identity.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">09</div>
+          <h2>Rhythmic Spin Patterns</h2>
+        </div>
+
+        <p>
+          Different gear sizes and speed combinations may produce different
+          visual rhythms.
+        </p>
+
+        <p>
+          Gearspire may calculate animation timing, rotation direction,
+          rotational progression, or other values required to create the
+          resulting spinning pattern.
+        </p>
+
+        <p>
+          These calculations are used only for the extension's simulation.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="processing">
+
+        <div class="section-header">
+          <div class="section-number">10</div>
+          <h2>Functional Processing</h2>
+        </div>
+
+        <p>
+          Gearspire may process information necessary to maintain the current
+          simulation state.
+        </p>
+
+        <p>
+          Such information may include:
+        </p>
+
+        <ul>
+          <li>Number of gears;</li>
+          <li>Gear dimensions;</li>
+          <li>Gear order;</li>
+          <li>Rotational speed;</li>
+          <li>Rotation direction;</li>
+          <li>Current rotation angle;</li>
+          <li>Animation timing;</li>
+          <li>Control values;</li>
+          <li>Reset state; and</li>
+          <li>Other simulation parameters.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">11</div>
+          <h2>Toolbar Popup Interface</h2>
+        </div>
+
+        <p>
+          Gearspire is designed to provide its primary functionality through a
+          browser toolbar popup.
+        </p>
+
+        <p>
+          The popup contains the controls and visual simulation needed to tune
+          the gear tower.
+        </p>
+
+        <p>
+          Users can access the simulation without navigating away from the
+          webpage currently open in the browser.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">12</div>
+          <h2>Temporary Simulation State</h2>
+        </div>
+
+        <p>
+          While Gearspire is running, the extension may temporarily maintain the
+          information needed to display the current gear configuration.
+        </p>
+
+        <p>
+          This may include gear sizes, speed values, rotation angles, animation
+          timing, tower arrangement, and other visual state.
+        </p>
+
+        <p>
+          Temporary state is functional information used to operate the
+          simulation.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">13</div>
+          <h2>Browser Storage</h2>
+        </div>
+
+        <p>
+          If a version of Gearspire uses browser-provided storage, it may be
+          used to remember functional simulation preferences.
+        </p>
+
+        <p>
+          Locally stored information, if any, may include:
+        </p>
+
+        <ul>
+          <li>Preferred gear sizes;</li>
+          <li>Preferred rotational speeds;</li>
+          <li>Interface settings;</li>
+          <li>Default simulation values; or</li>
+          <li>Other non-sensitive configuration preferences.</li>
+        </ul>
+
+        <p>
+          Such storage is intended to support Gearspire's functionality and is
+          not intended to create behavioral advertising profiles.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="personal">
+
+        <div class="section-header">
+          <div class="section-number">14</div>
+          <h2>Personal Information</h2>
+        </div>
+
+        <p>
+          Gearspire does not require personally identifiable information to
+          provide its core gear simulation.
+        </p>
+
+        <p>
+          Users are not required to provide:
+        </p>
+
+        <ul>
+          <li>Full name;</li>
+          <li>Email address;</li>
+          <li>Telephone number;</li>
+          <li>Home or mailing address;</li>
+          <li>Government identification information;</li>
+          <li>Payment card details;</li>
+          <li>Banking credentials;</li>
+          <li>Passwords;</li>
+          <li>Authentication tokens; or</li>
+          <li>Other unrelated personal information.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">15</div>
+          <h2>Sensitive Personal Information</h2>
+        </div>
+
+        <p>
+          Gearspire does not require sensitive personal information to provide
+          its standard features.
+        </p>
+
+        <p>
+          Health information, biometric identifiers, financial credentials,
+          authentication secrets, government identifiers, political
+          information, religious information, and similar sensitive data are
+          unrelated to gear tuning.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">16</div>
+          <h2>Authentication Information</h2>
+        </div>
+
+        <p>
+          Gearspire does not require passwords, login credentials, two-factor
+          authentication codes, private keys, or account tokens for standard
+          simulation functionality.
+        </p>
+
+        <p>
+          Authentication data associated with unrelated websites is not needed
+          to operate the gear tower.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">17</div>
+          <h2>Financial Information</h2>
+        </div>
+
+        <p>
+          Gearspire does not require credit card numbers, bank account
+          information, financial authentication credentials, or transaction
+          information in order to adjust gear sizes or speeds.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">18</div>
+          <h2>Geographic Location</h2>
+        </div>
+
+        <p>
+          Gearspire does not require precise geographic location information for
+          its standard functionality.
+        </p>
+
+        <p>
+          The vertical positions of gears in the simulation do not correspond to
+          the user's physical location.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">19</div>
+          <h2>Camera and Microphone</h2>
+        </div>
+
+        <p>
+          Gearspire does not require camera or microphone input to provide its
+          core simulation.
+        </p>
+
+        <p>
+          Gears and animations are generated within the extension interface and
+          do not require recorded video, voice, or ambient audio.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">20</div>
+          <h2>Private Communications</h2>
+        </div>
+
+        <p>
+          Private emails, direct messages, chat conversations, and other
+          personal communications are not required for Gearspire's standard
+          gear-tuning functionality.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="browsing">
+
+        <div class="section-header">
+          <div class="section-number">21</div>
+          <h2>Website Content</h2>
+        </div>
+
+        <p>
+          Gearspire's standard toolbar-popup simulation does not require the
+          general content of webpages visited by the user.
+        </p>
+
+        <p>
+          The extension is not intended to copy, archive, index, or analyze
+          unrelated webpage text, images, videos, forms, or documents simply to
+          operate the gear tower.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">22</div>
+          <h2>Browsing History</h2>
+        </div>
+
+        <p>
+          Gearspire does not require a general history of websites visited by
+          users to provide its core functionality.
+        </p>
+
+        <p>
+          Browsing history is unrelated to determining gear size, rotation
+          speed, or rhythmic motion.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">23</div>
+          <h2>Search History</h2>
+        </div>
+
+        <p>
+          Gearspire does not require users' general search engine history in
+          order to operate its simulation.
+        </p>
+
+        <p>
+          Search queries performed on unrelated websites are not necessary for
+          gear tuning.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">24</div>
+          <h2>Web Forms and Keystrokes</h2>
+        </div>
+
+        <p>
+          Gearspire is not designed to collect information entered into forms
+          on unrelated websites.
+        </p>
+
+        <p>
+          This includes:
+        </p>
+
+        <ul>
+          <li>Login forms;</li>
+          <li>Registration forms;</li>
+          <li>Checkout forms;</li>
+          <li>Payment forms;</li>
+          <li>Contact forms;</li>
+          <li>Search fields; and</li>
+          <li>Other unrelated webpage inputs.</li>
+        </ul>
+
+        <p>
+          Gearspire is also not intended to operate as a keystroke logger.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="tracking">
+
+        <div class="section-header">
+          <div class="section-number">25</div>
+          <h2>Advertising</h2>
+        </div>
+
+        <p>
+          Gearspire is not intended to use gear sizes, rotational speeds,
+          simulation patterns, or interface interactions for targeted
+          advertising.
+        </p>
+
+        <p>
+          Simulation controls are functional values used to provide the
+          extension experience.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">26</div>
+          <h2>No Sale of Personal Information</h2>
+        </div>
+
+        <p>
+          Gearspire does not operate as a data brokerage service.
+        </p>
+
+        <p>
+          Functional simulation values are not intended to be sold to
+          advertisers, marketing organizations, or data brokers.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">27</div>
+          <h2>User Profiling</h2>
+        </div>
+
+        <p>
+          Gearspire is not designed to use gear settings or simulation behavior
+          to build behavioral or demographic profiles of individual users.
+        </p>
+
+        <p>
+          Choosing a particular gear size or speed is not intended to be treated
+          as evidence of unrelated personal characteristics.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">28</div>
+          <h2>Cross-Site Tracking</h2>
+        </div>
+
+        <p>
+          Gearspire is not designed to track users across unrelated websites.
+        </p>
+
+        <p>
+          Cross-site tracking is unnecessary for a gear simulation provided
+          through the extension's own toolbar popup.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">29</div>
+          <h2>Cookies</h2>
+        </div>
+
+        <p>
+          Gearspire does not require advertising cookies to provide its core
+          simulation functionality.
+        </p>
+
+        <p>
+          Websites independently visited by users may use their own cookies.
+          Those technologies are governed by the policies of the respective
+          websites.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">30</div>
+          <h2>Analytics</h2>
+        </div>
+
+        <p>
+          Gearspire does not require personally identifiable analytics data in
+          order to render or tune its gears.
+        </p>
+
+        <p>
+          If future versions materially introduce diagnostic or aggregate usage
+          measurement, this Privacy Policy may be updated to explain the
+          relevant practices.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">31</div>
+          <h2>Data Minimization</h2>
+        </div>
+
+        <p>
+          Gearspire is designed around the principle that extensions should
+          process only information reasonably necessary for their disclosed
+          purpose.
+        </p>
+
+        <p>
+          Since Gearspire's purpose is to provide an interactive gear
+          simulation, unrelated personal and browsing information is not
+          necessary for standard use.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">32</div>
+          <h2>Purpose Limitation</h2>
+        </div>
+
+        <p>
+          Information processed by Gearspire is intended to be used only to
+          provide, maintain, improve, or secure the extension's disclosed
+          simulation features.
+        </p>
+
+        <p>
+          Gear-control values are not intended to be repurposed for unrelated
+          surveillance, credit scoring, employment screening, insurance
+          decisions, advertising profiling, or data brokerage.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">33</div>
+          <h2>Data Retention</h2>
+        </div>
+
+        <p>
+          Gearspire is not designed to maintain an unnecessary permanent remote
+          archive of every gear configuration created by users.
+        </p>
+
+        <p>
+          Temporary simulation state may exist while Gearspire is running so
+          that gears can be rendered and animated correctly.
+        </p>
+
+        <p>
+          Locally stored functional preferences, if used, may remain until
+          changed, cleared, or removed through browser controls.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="security">
+
+        <div class="section-header">
+          <div class="section-number">34</div>
+          <h2>Data Security</h2>
+        </div>
+
+        <p>
+          Gearspire is designed to minimize unnecessary handling of user
+          information.
+        </p>
+
+        <p>
+          Keeping the extension focused on simulation parameters helps reduce
+          unnecessary privacy and security exposure.
+        </p>
+
+        <p>
+          However, no browser extension, operating system, browser, device,
+          network, or electronic environment can be guaranteed to be completely
+          secure.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">35</div>
+          <h2>No Continuous Background Monitoring</h2>
+        </div>
+
+        <p>
+          Gearspire does not need to continuously monitor unrelated browsing
+          activity in order to provide its gear simulation.
+        </p>
+
+        <p>
+          Its standard user experience is centered on the toolbar popup and the
+          controls within that popup.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">36</div>
+          <h2>Automated Processing</h2>
+        </div>
+
+        <p>
+          Gearspire automatically performs graphical and mathematical
+          operations necessary to display rotating gears.
+        </p>
+
+        <p>
+          These may include rotation calculations, animation timing, dimension
+          updates, position calculations, and rendering.
+        </p>
+
+        <p>
+          This automated processing is limited to simulation functionality and
+          is not used to make significant decisions concerning users.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">37</div>
+          <h2>Simulation Accuracy</h2>
+        </div>
+
+        <p>
+          Gearspire is intended as an interactive visual experience rather than
+          a professional mechanical-engineering tool.
+        </p>
+
+        <p>
+          Visual relationships, rotation speeds, gear interactions, and other
+          simulation behaviors may be simplified for usability and presentation.
+        </p>
+
+        <div class="callout">
+          <strong>Not for safety-critical engineering</strong>
+          <p>
+            Users should not rely on Gearspire as a substitute for qualified
+            mechanical design, engineering analysis, or safety calculations.
+          </p>
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">38</div>
+          <h2>Creative and Entertainment Use</h2>
+        </div>
+
+        <p>
+          Gearspire is designed for interactive experimentation, visualization,
+          creative exploration, and entertainment.
+        </p>
+
+        <p>
+          Users may test different gear-size and speed combinations to observe
+          visually interesting rhythmic spins.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="third-party">
+
+        <div class="section-header">
+          <div class="section-number">39</div>
+          <h2>Third-Party Websites</h2>
+        </div>
+
+        <p>
+          Gearspire may be installed while users browse third-party websites,
+          but those websites remain independent from the extension.
+        </p>
+
+        <p>
+          This Privacy Policy does not govern their cookies, analytics systems,
+          tracking technologies, or privacy practices.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">40</div>
+          <h2>Browser Platforms</h2>
+        </div>
+
+        <p>
+          Gearspire operates within a browser environment supplied by a browser
+          vendor.
+        </p>
+
+        <p>
+          Browser vendors may independently process technical information
+          associated with installation, security, extension updates, crash
+          reporting, or browser operation according to their own policies.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">41</div>
+          <h2>Chrome Web Store and Other Extension Marketplaces</h2>
+        </div>
+
+        <p>
+          If Gearspire is distributed through the Chrome Web Store or another
+          browser extension marketplace, installation and update processes may
+          be managed by that platform.
+        </p>
+
+        <p>
+          Gearspire is intended to use browser capabilities only for
+          functionality directly related to its disclosed simulation purpose.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">42</div>
+          <h2>Children's Privacy</h2>
+        </div>
+
+        <p>
+          Gearspire is a general-purpose visual simulation and is not
+          specifically designed for the purpose of collecting personal
+          information from children.
+        </p>
+
+        <p>
+          Standard functionality does not require users to create a dedicated
+          personal account.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">43</div>
+          <h2>International Users</h2>
+        </div>
+
+        <p>
+          Gearspire may be available to users in different countries and
+          regions.
+        </p>
+
+        <p>
+          The extension is designed to minimize unnecessary processing of
+          personal information regardless of the user's location.
+        </p>
+
+        <p>
+          Users remain responsible for using Gearspire in accordance with
+          applicable laws in their jurisdiction.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="control">
+
+        <div class="section-header">
+          <div class="section-number">44</div>
+          <h2>User Choice and Control</h2>
+        </div>
+
+        <p>
+          Users control when Gearspire is opened and how the simulation is
+          configured.
+        </p>
+
+        <p>
+          Users can modify gear sizes, change rotational speeds, reset the
+          simulation, close the toolbar popup, or stop using the extension at
+          any time.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">45</div>
+          <h2>Clearing Local Preferences</h2>
+        </div>
+
+        <p>
+          If Gearspire uses browser storage for simulation settings, users may be
+          able to clear those values through browser extension-management or data
+          controls.
+        </p>
+
+        <p>
+          Clearing extension data may return saved gear settings to their
+          default values.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">46</div>
+          <h2>Removing Gearspire</h2>
+        </div>
+
+        <p>
+          Users may disable or uninstall Gearspire at any time through the
+          browser's extension management interface.
+        </p>
+
+        <p>
+          After removal, Gearspire will no longer operate within that browser.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">47</div>
+          <h2>No Unrelated Commercial Use</h2>
+        </div>
+
+        <p>
+          Gear-size selections, speed settings, tower arrangements, and
+          simulation patterns are not intended to be used to create unrelated
+          marketing databases or behavioral advertising audiences.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">48</div>
+          <h2>Changes to Gearspire</h2>
+        </div>
+
+        <p>
+          Gearspire may evolve over time to improve simulation behavior, gear
+          controls, animation quality, visual design, accessibility, performance,
+          or browser compatibility.
+        </p>
+
+        <p>
+          Future features may remain consistent with the extension's interactive
+          gear-tuning purpose.
+        </p>
+
+        <p>
+          If a future release materially changes how user information is
+          accessed, processed, stored, or shared, this Privacy Policy may be
+          updated accordingly.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">49</div>
+          <h2>Changes to This Privacy Policy</h2>
+        </div>
+
+        <p>
+          This Privacy Policy may be revised periodically to reflect changes to
+          Gearspire, browser marketplace requirements, technical implementation,
+          privacy practices, or applicable laws.
+        </p>
+
+        <p>
+          When changes are made, the "Last updated" date displayed on this page
+          will be revised.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">50</div>
+          <h2>Legal Requirements</h2>
+        </div>
+
+        <p>
+          Information may be disclosed where reasonably necessary to comply with
+          applicable law, regulation, court order, legal process, or a valid
+          governmental request.
+        </p>
+
+        <p>
+          Nothing in this Privacy Policy is intended to prevent compliance with
+          applicable legal obligations.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="contact">
+
+        <div class="section-header">
+          <div class="section-number">51</div>
+          <h2>Contact</h2>
+        </div>
+
+        <p>
+          If you have questions, concerns, or requests regarding this Privacy
+          Policy or Gearspire's privacy practices, please contact the developer
+          using the contact information provided on the extension's official
+          browser store listing or official website.
+        </p>
+
+        <p>
+          Please do not include passwords, payment credentials, authentication
+          tokens, government identification numbers, or other unnecessary
+          sensitive information in privacy-related communications.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+          <div class="section-number">52</div>
+          <h2>Acceptance of This Privacy Policy</h2>
+        </div>
+
+        <p>
+          By installing or using Gearspire, you acknowledge that you have had an
+          opportunity to review this Privacy Policy.
+        </p>
+
+        <p>
+          If you do not wish to use Gearspire under the practices described in
+          this policy, you may discontinue use and uninstall the extension from
+          your browser.
+        </p>
+
+      </section>
+
+    </article>
+
+  </main>
+
+
+  <footer>
+
+    <div>
+      <strong>Gearspire</strong><br>
+      Gear size tuning · rotational speed · real-time rhythmic simulation
+    </div>
+
+    <div>
+      Privacy Policy · Last updated August 24, 2026
+    </div>
+
+  </footer>
+
+</div>
+
+</body>
+</html>
