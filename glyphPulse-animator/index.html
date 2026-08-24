@@ -1,0 +1,2480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Privacy Policy | GlyphPulse Animator</title>
+
+  <meta
+    name="description"
+    content="Privacy Policy for GlyphPulse Animator, a Chrome side panel extension for animating glyph shapes with a vertical pulse-driven timeline, live preview, and parameter controls."
+  >
+
+  <style>
+    :root {
+      --bg: #eef0f4;
+      --paper: #ffffff;
+      --ink: #171922;
+      --muted: #6d7380;
+      --line: #dfe3e9;
+
+      --dark: #171922;
+      --dark-soft: #232632;
+
+      --purple: #745ee8;
+      --purple-soft: #eeeafd;
+
+      --cyan: #4cbac8;
+      --cyan-soft: #e1f4f6;
+
+      --pink: #db6f9e;
+      --pink-soft: #f9e6ee;
+
+      --green: #58a982;
+      --green-soft: #e5f3eb;
+
+      --radius: 20px;
+      --shadow: 0 18px 54px rgba(31, 34, 45, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(
+          circle at 8% 0%,
+          rgba(116, 94, 232, 0.10),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 92% 15%,
+          rgba(76, 186, 200, 0.08),
+          transparent 28%
+        ),
+        var(--bg);
+      font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+      line-height: 1.75;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1380px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    /* =========================
+       TOP BAR
+       ========================= */
+
+    .topbar {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    .topbar-inner {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--cyan)
+        );
+      font-size: 18px;
+      font-weight: 900;
+      box-shadow: 0 0 25px rgba(116,94,232,0.28);
+    }
+
+    .top-meta {
+      color: #8f96a8;
+      font-size: 12px;
+    }
+
+    /* =========================
+       HERO
+       ========================= */
+
+    .hero {
+      padding: 64px 0 46px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 520px;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 20px;
+      padding: 7px 12px;
+      border: 1px solid #d8dce4;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.65);
+      color: #626979;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-tag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 16px rgba(116,94,232,0.7);
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(50px, 7.5vw, 92px);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+    }
+
+    .hero h1 span {
+      background:
+        linear-gradient(
+          90deg,
+          var(--purple),
+          var(--cyan),
+          var(--pink)
+        );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin: 27px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 28px;
+    }
+
+    .hero-tags span {
+      padding: 8px 11px;
+      border: 1px solid #dce0e6;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.65);
+      color: #737987;
+      font-size: 11px;
+    }
+
+    /* =========================
+       SIDE PANEL MOCKUP
+       ========================= */
+
+    .editor {
+      overflow: hidden;
+      border: 1px solid #d9dde4;
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .editor-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #fafbfc;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .window-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c8ccd4;
+    }
+
+    .window-dots span:nth-child(1) {
+      background: var(--pink);
+    }
+
+    .window-dots span:nth-child(2) {
+      background: #dda84f;
+    }
+
+    .window-dots span:nth-child(3) {
+      background: var(--green);
+    }
+
+    .editor-head strong {
+      color: #555c6a;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .editor-body {
+      display: grid;
+      grid-template-columns: 105px minmax(0, 1fr);
+      min-height: 390px;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 22px 14px;
+      border-right: 1px solid var(--line);
+      background: #f7f8fa;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 38px;
+      bottom: 38px;
+      left: 50%;
+      width: 3px;
+      transform: translateX(-50%);
+      border-radius: 4px;
+      background: #d8dce3;
+    }
+
+    .pulse {
+      position: relative;
+      z-index: 2;
+      width: 22px;
+      height: 22px;
+      margin: 0 auto 48px;
+      border: 5px solid white;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow:
+        0 0 0 4px rgba(116,94,232,0.16),
+        0 0 18px rgba(116,94,232,0.40);
+    }
+
+    .pulse:nth-child(2) {
+      background: var(--cyan);
+      box-shadow:
+        0 0 0 4px rgba(76,186,200,0.15),
+        0 0 18px rgba(76,186,200,0.38);
+    }
+
+    .pulse:nth-child(3) {
+      background: var(--pink);
+      box-shadow:
+        0 0 0 4px rgba(219,111,158,0.15),
+        0 0 18px rgba(219,111,158,0.38);
+    }
+
+    .pulse:nth-child(4) {
+      background: var(--green);
+      box-shadow:
+        0 0 0 4px rgba(88,169,130,0.15),
+        0 0 18px rgba(88,169,130,0.38);
+    }
+
+    .editor-main {
+      padding: 20px;
+    }
+
+    .preview {
+      height: 190px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 15px;
+      border-radius: 16px;
+      background:
+        linear-gradient(
+          135deg,
+          #151821,
+          #252a39
+        );
+    }
+
+    .glyph {
+      position: relative;
+      color: #fff;
+      font-family: Georgia, serif;
+      font-size: 96px;
+      line-height: 1;
+      text-shadow:
+        0 0 18px rgba(116,94,232,0.65),
+        0 0 42px rgba(76,186,200,0.30);
+    }
+
+    .glyph::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -15px;
+      width: 72px;
+      height: 7px;
+      transform: translateX(-50%);
+      border-radius: 20px;
+      background:
+        linear-gradient(
+          90deg,
+          var(--purple),
+          var(--cyan),
+          var(--pink)
+        );
+      filter: blur(2px);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .control {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fafbfc;
+    }
+
+    .control small {
+      display: block;
+      margin-bottom: 6px;
+      color: #878e9c;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .slider {
+      height: 5px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #e1e4e9;
+    }
+
+    .slider::after {
+      content: "";
+      display: block;
+      width: 64%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--purple);
+    }
+
+    .control:nth-child(2) .slider::after {
+      width: 80%;
+      background: var(--cyan);
+    }
+
+    .control:nth-child(3) .slider::after {
+      width: 45%;
+      background: var(--pink);
+    }
+
+    .control:nth-child(4) .slider::after {
+      width: 72%;
+      background: var(--green);
+    }
+
+    /* =========================
+       PERMISSION STRIP
+       ========================= */
+
+    .permissions {
+      display: grid;
+      grid-template-columns: 190px 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 42px;
+    }
+
+    .permission-title,
+    .permission-card {
+      min-height: 120px;
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    .permission-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--dark);
+      color: #fff;
+    }
+
+    .permission-title small {
+      margin-bottom: 6px;
+      color: #8d94a5;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .permission-title strong {
+      font-size: 17px;
+    }
+
+    .permission-card {
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .permission-card code {
+      display: inline-block;
+      margin-bottom: 9px;
+      padding: 4px 8px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .permission-card:nth-child(2) code {
+      color: #5f4bd2;
+      background: var(--purple-soft);
+    }
+
+    .permission-card:nth-child(3) code {
+      color: #377e88;
+      background: var(--cyan-soft);
+    }
+
+    .permission-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* =========================
+       MAIN POLICY
+       ========================= */
+
+    .policy-grid {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+      padding-bottom: 80px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 22px;
+    }
+
+    .sidebar-box {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--paper);
+    }
+
+    .sidebar-head {
+      padding: 19px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-head small {
+      display: block;
+      margin-bottom: 5px;
+      color: #9298a5;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+    }
+
+    .sidebar-head strong {
+      font-size: 15px;
+    }
+
+    .nav {
+      padding: 10px;
+    }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px;
+      border-radius: 9px;
+      color: #737987;
+      font-size: 12px;
+    }
+
+    .nav a:hover {
+      color: var(--purple);
+      background: #f5f4fd;
+    }
+
+    .nav-pulse {
+      flex: 0 0 9px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 0 3px rgba(116,94,232,0.10);
+    }
+
+    .nav a:nth-child(3n) .nav-pulse {
+      background: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(76,186,200,0.10);
+    }
+
+    .nav a:nth-child(3n + 1) .nav-pulse {
+      background: var(--pink);
+      box-shadow: 0 0 0 3px rgba(219,111,158,0.10);
+    }
+
+    .side-note {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 15px;
+      background: var(--dark);
+      color: #aab0bd;
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .summary {
+      margin-bottom: 18px;
+      padding: 34px;
+      border-radius: 22px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(116,94,232,0.08),
+          rgba(76,186,200,0.05)
+        ),
+        var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    .summary small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--purple);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+    }
+
+    .summary h2 {
+      margin: 0 0 13px;
+      font-size: 29px;
+      letter-spacing: -0.035em;
+    }
+
+    .summary p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* =========================
+       SECTION CARDS
+       ========================= */
+
+    .section {
+      margin-bottom: 15px;
+      padding: 29px 31px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 15px;
+    }
+
+    .section-num {
+      display: grid;
+      place-items: center;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .section:nth-of-type(3n + 2) .section-num {
+      color: #358592;
+      background: var(--cyan-soft);
+    }
+
+    .section:nth-of-type(3n + 3) .section-num {
+      color: #ad537b;
+      background: var(--pink-soft);
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.025em;
+    }
+
+    .section h3 {
+      margin: 24px 0 8px;
+      font-size: 16px;
+    }
+
+    .section p {
+      margin: 11px 0;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .section ul {
+      margin: 13px 0;
+      padding-left: 22px;
+    }
+
+    .section li {
+      margin: 7px 0;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+      margin: 19px 0;
+    }
+
+    .info-box {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fafbfc;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+
+    .info-box span {
+      color: #818795;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .callout {
+      margin: 19px 0;
+      padding: 18px 20px;
+      border-left: 4px solid var(--purple);
+      border-radius: 0 14px 14px 0;
+      background: var(--purple-soft);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #5645ba;
+      font-size: 13px;
+    }
+
+    .callout p {
+      margin: 0;
+      color: #746b9d;
+      font-size: 13px;
+    }
+
+    .storage-note {
+      border-left-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .storage-note strong {
+      color: #458765;
+    }
+
+    .storage-note p {
+      color: #668673;
+    }
+
+    .permission-table {
+      overflow: hidden;
+      margin: 19px 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .permission-row {
+      display: grid;
+      grid-template-columns: 155px minmax(0, 1fr);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .permission-row:last-child {
+      border-bottom: 0;
+    }
+
+    .permission-row strong,
+    .permission-row span {
+      padding: 14px 16px;
+      font-size: 13px;
+    }
+
+    .permission-row strong {
+      background: #f7f8fa;
+    }
+
+    .permission-row span {
+      color: var(--muted);
+    }
+
+    footer {
+      margin-bottom: 35px;
+      padding: 27px 29px;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      border-radius: 18px;
+      background: var(--dark);
+      color: #8e95a5;
+      font-size: 12px;
+    }
+
+    footer strong {
+      color: #fff;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .editor {
+        max-width: 650px;
+      }
+
+      .permissions {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .permission-title {
+        grid-column: 1 / -1;
+        min-height: auto;
+      }
+
+      .policy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .shell {
+        width: min(100% - 20px, 1380px);
+      }
+
+      .hero {
+        padding: 47px 0 32px;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+      }
+
+      .permissions {
+        grid-template-columns: 1fr;
+      }
+
+      .permission-title {
+        grid-column: auto;
+      }
+
+      .editor-body {
+        grid-template-columns: 82px minmax(0, 1fr);
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .summary,
+      .section {
+        padding: 23px 20px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .permission-row {
+        grid-template-columns: 1fr;
+      }
+
+      .permission-row strong {
+        padding-bottom: 5px;
+      }
+
+      .permission-row span {
+        padding-top: 5px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 470px) {
+      .nav {
+        grid-template-columns: 1fr;
+      }
+
+      .top-meta {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="shell topbar-inner">
+
+    <div class="brand">
+      <div class="brand-mark">G</div>
+      GlyphPulse Animator
+    </div>
+
+    <div class="top-meta">
+      Privacy Policy · August 24, 2026
+    </div>
+
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <div class="shell">
+
+    <div class="hero-grid">
+
+      <div>
+
+        <div class="hero-tag">
+          Side Panel Extension Privacy
+        </div>
+
+        <h1>
+          Animate the<br>
+          <span>pulse.</span>
+        </h1>
+
+        <p class="hero-copy">
+          GlyphPulse Animator provides a Chrome side panel interface for
+          animating glyph shapes with a vertical pulse-driven timeline, live
+          preview, and adjustable parameters, while extension settings are saved
+          locally for convenient customization.
+        </p>
+
+        <div class="hero-tags">
+          <span>Chrome side panel</span>
+          <span>Vertical pulse timeline</span>
+          <span>Live glyph preview</span>
+          <span>Parameter controls</span>
+          <span>Local settings storage</span>
+        </div>
+
+      </div>
+
+
+      <div class="editor">
+
+        <div class="editor-head">
+
+          <div class="window-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <strong>GlyphPulse · Live Preview</strong>
+
+        </div>
+
+
+        <div class="editor-body">
+
+          <div class="timeline">
+            <div class="pulse"></div>
+            <div class="pulse"></div>
+            <div class="pulse"></div>
+            <div class="pulse"></div>
+          </div>
+
+
+          <div class="editor-main">
+
+            <div class="preview">
+              <div class="glyph">G</div>
+            </div>
+
+            <div class="controls">
+
+              <div class="control">
+                <small>Pulse</small>
+                <div class="slider"></div>
+              </div>
+
+              <div class="control">
+                <small>Scale</small>
+                <div class="slider"></div>
+              </div>
+
+              <div class="control">
+                <small>Speed</small>
+                <div class="slider"></div>
+              </div>
+
+              <div class="control">
+                <small>Intensity</small>
+                <div class="slider"></div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="shell">
+
+  <section class="permissions">
+
+    <div class="permission-title">
+      <small>Declared permissions</small>
+      <strong>Browser access</strong>
+    </div>
+
+    <div class="permission-card">
+      <code>sidePanel</code>
+
+      <p>
+        Used to display GlyphPulse Animator's dedicated Chrome side panel
+        interface.
+      </p>
+    </div>
+
+    <div class="permission-card">
+      <code>storage</code>
+
+      <p>
+        Used to save extension settings locally in the user's browser for
+        convenient access and customization.
+      </p>
+    </div>
+
+  </section>
+
+
+  <main class="policy-grid">
+
+    <aside class="sidebar">
+
+      <div class="sidebar-box">
+
+        <div class="sidebar-head">
+          <small>Timeline index</small>
+          <strong>Privacy Sections</strong>
+        </div>
+
+        <nav class="nav">
+
+          <a href="#overview">
+            <span class="nav-pulse"></span>
+            Overview
+          </a>
+
+          <a href="#sidepanel">
+            <span class="nav-pulse"></span>
+            Side Panel
+          </a>
+
+          <a href="#animation">
+            <span class="nav-pulse"></span>
+            Animation
+          </a>
+
+          <a href="#storage">
+            <span class="nav-pulse"></span>
+            Local Storage
+          </a>
+
+          <a href="#personal">
+            <span class="nav-pulse"></span>
+            Personal Data
+          </a>
+
+          <a href="#browsing">
+            <span class="nav-pulse"></span>
+            Browsing Data
+          </a>
+
+          <a href="#tracking">
+            <span class="nav-pulse"></span>
+            Tracking
+          </a>
+
+          <a href="#security">
+            <span class="nav-pulse"></span>
+            Security
+          </a>
+
+          <a href="#third-party">
+            <span class="nav-pulse"></span>
+            Third Parties
+          </a>
+
+          <a href="#control">
+            <span class="nav-pulse"></span>
+            User Control
+          </a>
+
+          <a href="#changes">
+            <span class="nav-pulse"></span>
+            Changes
+          </a>
+
+          <a href="#contact">
+            <span class="nav-pulse"></span>
+            Contact
+          </a>
+
+        </nav>
+
+      </div>
+
+      <div class="side-note">
+        GlyphPulse Animator's disclosed permissions are limited to displaying
+        its side panel and saving extension settings locally in the browser.
+      </div>
+
+    </aside>
+
+
+    <article class="content">
+
+      <section class="summary">
+
+        <small>Privacy summary</small>
+
+        <h2>
+          A side-panel animation workspace
+        </h2>
+
+        <p>
+          GlyphPulse Animator is designed around visual glyph animation,
+          timeline state, live preview, and parameter controls. Its declared
+          browser permissions are used to provide the side panel interface and
+          preserve extension settings locally.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="overview">
+
+        <div class="section-head">
+          <div class="section-num">01</div>
+          <h2>Scope of This Privacy Policy</h2>
+        </div>
+
+        <p>
+          This Privacy Policy explains how information is handled when you
+          install, access, or use the GlyphPulse Animator browser extension.
+        </p>
+
+        <p>
+          GlyphPulse Animator provides a Chrome side panel interface where users
+          can animate glyph shapes with a vertical pulse-driven timeline, adjust
+          animation parameters, and view changes through a live preview.
+        </p>
+
+        <p>
+          Extension settings are stored locally in the user's browser to make
+          repeated access and customization more convenient.
+        </p>
+
+        <p>
+          This policy applies to GlyphPulse Animator itself and does not govern
+          unrelated websites, browser vendors, operating systems, or independent
+          third-party services.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">02</div>
+          <h2>Single Purpose</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator has a focused single purpose: providing an
+          interactive environment for animating glyph shapes through a
+          pulse-driven timeline and adjustable visual parameters.
+        </p>
+
+        <p>
+          Functionality reasonably related to this purpose may include:
+        </p>
+
+        <ul>
+          <li>Displaying the extension through Chrome's side panel;</li>
+          <li>Displaying glyph shapes;</li>
+          <li>Animating glyphs;</li>
+          <li>Displaying a vertical pulse-driven timeline;</li>
+          <li>Adjusting animation parameters;</li>
+          <li>Displaying live previews;</li>
+          <li>Updating visual properties;</li>
+          <li>Saving preferences locally; and</li>
+          <li>Restoring saved settings when the user returns.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">03</div>
+          <h2>No Account Required</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not require users to create a dedicated
+          personal account in order to use its standard functionality.
+        </p>
+
+        <p>
+          Users do not need to register a username, password, email address,
+          profile, or other personal identity information merely to animate
+          glyphs or adjust visual parameters.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="sidepanel">
+
+        <div class="section-head">
+          <div class="section-num">04</div>
+          <h2>Browser Permissions</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator declares browser permissions that support its
+          disclosed interface and local-settings functionality.
+        </p>
+
+        <div class="permission-table">
+
+          <div class="permission-row">
+            <strong>sidePanel</strong>
+            <span>
+              Used to display GlyphPulse Animator's user interface in Chrome's
+              side panel.
+            </span>
+          </div>
+
+          <div class="permission-row">
+            <strong>storage</strong>
+            <span>
+              Used to save extension settings locally in the user's browser.
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">05</div>
+          <h2>sidePanel Permission</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator uses the <strong>sidePanel</strong> permission to
+          display the extension's dedicated interface within Chrome's side
+          panel.
+        </p>
+
+        <p>
+          This interface may contain:
+        </p>
+
+        <ul>
+          <li>The vertical pulse-driven timeline;</li>
+          <li>The current glyph or glyph preview;</li>
+          <li>Live animation feedback;</li>
+          <li>Parameter controls;</li>
+          <li>Animation values;</li>
+          <li>Reset or playback-related controls; and</li>
+          <li>Other interface elements related directly to glyph animation.</li>
+        </ul>
+
+        <div class="callout">
+
+          <strong>
+            Interface permission
+          </strong>
+
+          <p>
+            The sidePanel permission is used to provide the extension's
+            disclosed side-panel workspace.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <section class="section" id="animation">
+
+        <div class="section-head">
+          <div class="section-num">06</div>
+          <h2>Glyph Animation Data</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator processes functional information needed to render
+          and animate glyph shapes.
+        </p>
+
+        <div class="info-grid">
+
+          <div class="info-box">
+            <strong>Glyph state</strong>
+            <span>
+              Used to determine the current visual form displayed in the
+              preview.
+            </span>
+          </div>
+
+          <div class="info-box">
+            <strong>Animation progress</strong>
+            <span>
+              Used to determine the current point within the animation.
+            </span>
+          </div>
+
+          <div class="info-box">
+            <strong>Timeline position</strong>
+            <span>
+              Used to coordinate pulse events and animation timing.
+            </span>
+          </div>
+
+          <div class="info-box">
+            <strong>Parameter values</strong>
+            <span>
+              Used to adjust supported visual or timing properties.
+            </span>
+          </div>
+
+        </div>
+
+        <p>
+          These values are functional application data rather than information
+          intended to identify individual users.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">07</div>
+          <h2>Vertical Pulse-Driven Timeline</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator uses a vertical timeline to organize or display
+          animation pulses.
+        </p>
+
+        <p>
+          Timeline information may include:
+        </p>
+
+        <ul>
+          <li>Pulse positions;</li>
+          <li>Animation timing;</li>
+          <li>Active pulse state;</li>
+          <li>Current timeline position;</li>
+          <li>Transition progress;</li>
+          <li>Playback state; and</li>
+          <li>Other timing-related parameters.</li>
+        </ul>
+
+        <p>
+          This information is used solely to operate and visualize the glyph
+          animation workflow.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">08</div>
+          <h2>Live Preview</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator provides a live preview so users can immediately
+          see the effects of changes made to supported animation parameters.
+        </p>
+
+        <p>
+          Preview rendering may process values such as:
+        </p>
+
+        <ul>
+          <li>Glyph appearance;</li>
+          <li>Scale;</li>
+          <li>Position;</li>
+          <li>Timing;</li>
+          <li>Pulse state;</li>
+          <li>Visual intensity;</li>
+          <li>Transition progress; and</li>
+          <li>Other supported animation properties.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">09</div>
+          <h2>Parameter Controls</h2>
+        </div>
+
+        <p>
+          Users can adjust supported parameters through the GlyphPulse Animator
+          side panel.
+        </p>
+
+        <p>
+          Depending on the implementation, parameters may relate to timing,
+          scale, visual intensity, pulse behavior, animation progression, or
+          other properties associated with glyph animation.
+        </p>
+
+        <p>
+          Parameter values are processed in order to provide the visual result
+          requested by the user.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">10</div>
+          <h2>Real-Time Updates</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator may update the live preview immediately when users
+          change supported parameters.
+        </p>
+
+        <p>
+          Real-time processing may include:
+        </p>
+
+        <ul>
+          <li>Reading a control value;</li>
+          <li>Updating the corresponding animation parameter;</li>
+          <li>Recalculating the current visual state;</li>
+          <li>Updating timeline behavior;</li>
+          <li>Rendering a new preview frame; and</li>
+          <li>Displaying the changed glyph animation.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">11</div>
+          <h2>Temporary Application State</h2>
+        </div>
+
+        <p>
+          While GlyphPulse Animator is open, the extension may temporarily
+          maintain information necessary to preserve the current editing
+          session.
+        </p>
+
+        <p>
+          This may include the current timeline position, animation values,
+          selected parameters, preview state, active controls, and other
+          interface information.
+        </p>
+
+        <p>
+          Such temporary state is functional information used to operate the
+          extension.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="storage">
+
+        <div class="section-head">
+          <div class="section-num">12</div>
+          <h2>storage Permission</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator uses the <strong>storage</strong> permission to
+          save extension settings locally in the user's browser.
+        </p>
+
+        <p>
+          This allows the extension to restore customization settings without
+          requiring users to manually reconfigure every parameter each time.
+        </p>
+
+        <div class="storage-note callout">
+
+          <strong>
+            Local settings storage
+          </strong>
+
+          <p>
+            The declared storage permission is used to preserve extension
+            settings locally for convenient access and customization.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">13</div>
+          <h2>Types of Settings Stored Locally</h2>
+        </div>
+
+        <p>
+          Locally saved information may include non-sensitive extension
+          preferences such as:
+        </p>
+
+        <ul>
+          <li>Animation parameter values;</li>
+          <li>Timeline-related settings;</li>
+          <li>Visual customization options;</li>
+          <li>Preview preferences;</li>
+          <li>Default control values;</li>
+          <li>Interface preferences; and</li>
+          <li>Other settings related directly to glyph animation.</li>
+        </ul>
+
+        <p>
+          These values are intended to support extension functionality rather
+          than advertising or unrelated profiling.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">14</div>
+          <h2>Local Data Retention</h2>
+        </div>
+
+        <p>
+          Settings saved through browser extension storage may remain locally
+          until they are changed, cleared, or removed by the user.
+        </p>
+
+        <p>
+          Depending on browser behavior, locally stored extension information
+          may also be removed when GlyphPulse Animator is uninstalled or when
+          extension data is manually cleared.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="personal">
+
+        <div class="section-head">
+          <div class="section-num">15</div>
+          <h2>Personal Information</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not require personally identifiable
+          information in order to provide its standard animation functionality.
+        </p>
+
+        <p>
+          Users do not need to provide:
+        </p>
+
+        <ul>
+          <li>Full name;</li>
+          <li>Email address;</li>
+          <li>Phone number;</li>
+          <li>Home or mailing address;</li>
+          <li>Government identification information;</li>
+          <li>Payment card details;</li>
+          <li>Bank account information;</li>
+          <li>Passwords;</li>
+          <li>Authentication credentials; or</li>
+          <li>Other unrelated personal information.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">16</div>
+          <h2>Sensitive Personal Information</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not require sensitive personal information
+          to provide its standard functionality.
+        </p>
+
+        <p>
+          Medical information, biometric identifiers, government identification
+          numbers, financial credentials, authentication secrets, political
+          information, religious information, and other sensitive categories of
+          personal data are unrelated to glyph animation.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">17</div>
+          <h2>Authentication Information</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not require passwords, login credentials,
+          two-factor authentication codes, private keys, or account tokens for
+          its standard functionality.
+        </p>
+
+        <p>
+          Such authentication information is unrelated to the extension's
+          animation purpose.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">18</div>
+          <h2>Financial Information</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not require payment card numbers, banking
+          credentials, financial authentication data, or transaction details to
+          provide its animation interface.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">19</div>
+          <h2>Geographic Location</h2>
+        </div>
+
+        <p>
+          Precise or approximate geographic location is not required to animate
+          glyph shapes.
+        </p>
+
+        <p>
+          GlyphPulse Animator is not designed to track users' physical
+          locations or movements.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">20</div>
+          <h2>Camera and Microphone</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not require access to a camera or microphone
+          to provide its standard visual animation functionality.
+        </p>
+
+        <p>
+          Glyph previews are generated visually within the extension interface
+          and do not require recorded video, voice, or ambient audio.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">21</div>
+          <h2>Private Communications</h2>
+        </div>
+
+        <p>
+          Private emails, chat messages, direct messages, and other personal
+          communications are not required to animate glyph shapes or restore
+          extension settings.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="browsing">
+
+        <div class="section-head">
+          <div class="section-num">22</div>
+          <h2>Website Content</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator's declared functionality is centered on its Chrome
+          side panel interface.
+        </p>
+
+        <p>
+          General webpage text, images, videos, forms, documents, and unrelated
+          site content are not required simply to display the extension's
+          timeline and animation controls.
+        </p>
+
+        <p>
+          The extension is not intended to build archives or datasets from
+          unrelated webpage content.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">23</div>
+          <h2>Browsing History</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not require a general browsing history to
+          provide its standard side-panel animation functionality.
+        </p>
+
+        <p>
+          A history of websites visited by the user is unrelated to timeline
+          pulses, glyph preview, or locally saved animation settings.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">24</div>
+          <h2>Search History</h2>
+        </div>
+
+        <p>
+          General web search history is not required to provide GlyphPulse
+          Animator's animation controls.
+        </p>
+
+        <p>
+          Search queries performed on unrelated websites are not necessary for
+          glyph animation.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">25</div>
+          <h2>Web Forms and Keystrokes</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator is not designed to collect information entered
+          into forms on unrelated websites.
+        </p>
+
+        <p>
+          This includes:
+        </p>
+
+        <ul>
+          <li>Login forms;</li>
+          <li>Registration forms;</li>
+          <li>Checkout forms;</li>
+          <li>Payment forms;</li>
+          <li>Contact forms;</li>
+          <li>Search fields; and</li>
+          <li>Other unrelated webpage inputs.</li>
+        </ul>
+
+        <p>
+          The extension is also not intended to operate as a keystroke logger.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="tracking">
+
+        <div class="section-head">
+          <div class="section-num">26</div>
+          <h2>Advertising</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not intend to use animation settings,
+          timeline values, parameter choices, or preview interactions for
+          targeted advertising.
+        </p>
+
+        <p>
+          Locally saved preferences are intended to support extension
+          functionality rather than behavioral advertising.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">27</div>
+          <h2>No Sale of Personal Information</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not operate as a data brokerage service.
+        </p>
+
+        <p>
+          Locally stored extension settings are not intended to be sold to
+          advertisers, marketing organizations, or data brokers.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">28</div>
+          <h2>User Profiling</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator is not designed to use animation settings or
+          visual preferences to create behavioral or demographic profiles of
+          individual users.
+        </p>
+
+        <p>
+          Parameter choices such as timing or visual intensity are treated as
+          functional customization values.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">29</div>
+          <h2>Cross-Site Tracking</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator is not designed to track users across unrelated
+          websites.
+        </p>
+
+        <p>
+          Cross-site tracking is unnecessary for providing a side-panel glyph
+          animation workspace and local settings storage.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">30</div>
+          <h2>Cookies</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not require advertising cookies to provide
+          its standard functionality.
+        </p>
+
+        <p>
+          Independent websites visited by users may use their own cookies and
+          tracking technologies. Those technologies are governed by the
+          respective websites.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">31</div>
+          <h2>Analytics</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not require personally identifiable analytics
+          information in order to render its standard animation interface.
+        </p>
+
+        <p>
+          If future versions materially introduce diagnostic or aggregate usage
+          measurement, this Privacy Policy may be updated to explain the
+          relevant practices.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">32</div>
+          <h2>Data Minimization</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator is designed around the principle that browser
+          extensions should use only the permissions and information reasonably
+          necessary for their disclosed purpose.
+        </p>
+
+        <p>
+          Its declared browser access is limited to displaying the side panel
+          and storing extension settings locally.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">33</div>
+          <h2>Purpose Limitation</h2>
+        </div>
+
+        <p>
+          Information processed by GlyphPulse Animator is intended to be used
+          only to provide, maintain, improve, or secure its disclosed glyph
+          animation functionality.
+        </p>
+
+        <p>
+          Extension settings and animation values are not intended to be
+          repurposed for unrelated surveillance, advertising profiling, credit
+          scoring, employment screening, insurance decisions, or data
+          brokerage.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">34</div>
+          <h2>Data Retention</h2>
+        </div>
+
+        <p>
+          Temporary animation state may exist while GlyphPulse Animator is open
+          so that the side-panel interface and preview can function correctly.
+        </p>
+
+        <p>
+          Extension preferences stored locally may remain until users change,
+          clear, or remove them.
+        </p>
+
+        <p>
+          GlyphPulse Animator is not designed to maintain an unnecessary remote
+          history of every animation adjustment made by users as part of its
+          standard functionality.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="security">
+
+        <div class="section-head">
+          <div class="section-num">35</div>
+          <h2>Data Security</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator is designed to minimize unnecessary handling of
+          personal information.
+        </p>
+
+        <p>
+          Using local browser storage for settings reduces the need to transmit
+          basic customization values simply to preserve the user's preferred
+          configuration.
+        </p>
+
+        <p>
+          However, no browser extension, browser, operating system, device,
+          network, or electronic environment can be guaranteed to be completely
+          secure.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">36</div>
+          <h2>No Continuous Background Monitoring</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator does not need to continuously monitor unrelated
+          browsing behavior in order to provide its disclosed side-panel
+          animation functionality.
+        </p>
+
+        <p>
+          The extension's user experience is centered on interaction with the
+          side panel and its animation controls.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">37</div>
+          <h2>Automated Processing</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator automatically performs graphical operations
+          required to render and preview animations.
+        </p>
+
+        <p>
+          These operations may include:
+        </p>
+
+        <ul>
+          <li>Animation timing calculations;</li>
+          <li>Pulse progression;</li>
+          <li>Interpolation between parameter values;</li>
+          <li>Preview rendering;</li>
+          <li>Visual state updates; and</li>
+          <li>Interface feedback.</li>
+        </ul>
+
+        <p>
+          Such processing is limited to animation functionality and is not
+          intended to make high-impact decisions about users.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">38</div>
+          <h2>Creative and Design Use</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator is intended as a visual design and creative
+          workflow tool.
+        </p>
+
+        <p>
+          Users can experiment with animation parameters and preview different
+          glyph behaviors through the side panel.
+        </p>
+
+        <p>
+          The extension is not intended to provide legal, financial, medical,
+          or other professional advice.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="third-party">
+
+        <div class="section-head">
+          <div class="section-num">39</div>
+          <h2>Third-Party Websites</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator may be used while users browse third-party
+          websites, but those websites remain independent from the extension.
+        </p>
+
+        <p>
+          This Privacy Policy does not govern the cookies, analytics systems,
+          tracking technologies, or privacy practices of unrelated websites.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">40</div>
+          <h2>Browser Platform</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator operates within Google Chrome or another supported
+          browser environment.
+        </p>
+
+        <p>
+          Browser vendors may independently process technical information
+          associated with extension installation, updates, browser security,
+          crashes, or extension management according to their own privacy
+          policies.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">41</div>
+          <h2>Chrome Web Store and Extension Marketplaces</h2>
+        </div>
+
+        <p>
+          If GlyphPulse Animator is distributed through the Chrome Web Store or
+          another browser extension marketplace, installation and update
+          processes may be managed by that platform.
+        </p>
+
+        <p>
+          GlyphPulse Animator is intended to use browser permissions only for
+          purposes directly related to its disclosed animation and settings
+          functionality.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">42</div>
+          <h2>Children's Privacy</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator is a general-purpose creative tool and is not
+          specifically designed for the purpose of collecting personal
+          information from children.
+        </p>
+
+        <p>
+          Standard functionality does not require users to create a dedicated
+          personal account.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">43</div>
+          <h2>International Users</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator may be available to users in different countries
+          and regions.
+        </p>
+
+        <p>
+          The extension is designed to minimize unnecessary handling of personal
+          information regardless of where users are located.
+        </p>
+
+        <p>
+          Users remain responsible for using the extension in accordance with
+          laws applicable in their jurisdiction.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="control">
+
+        <div class="section-head">
+          <div class="section-num">44</div>
+          <h2>User Choice and Control</h2>
+        </div>
+
+        <p>
+          Users control when GlyphPulse Animator's side panel is opened and how
+          its animation parameters are configured.
+        </p>
+
+        <p>
+          Users may adjust parameters, preview animations, reset settings, close
+          the side panel, or stop using the extension at any time.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">45</div>
+          <h2>Clearing Local Settings</h2>
+        </div>
+
+        <p>
+          Users may be able to clear locally stored GlyphPulse Animator settings
+          through their browser's extension-management or data controls.
+        </p>
+
+        <p>
+          Clearing local extension data may restore saved settings to their
+          default values.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">46</div>
+          <h2>Removing GlyphPulse Animator</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator can be disabled or uninstalled through the
+          browser's extension-management interface.
+        </p>
+
+        <p>
+          Once removed, the extension will no longer provide its side-panel
+          interface within that browser.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">47</div>
+          <h2>No Unrelated Commercial Use</h2>
+        </div>
+
+        <p>
+          Animation settings, timeline values, visual preferences, and other
+          functional extension configuration are not intended to be used to
+          create unrelated marketing databases or behavioral advertising
+          audiences.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="changes">
+
+        <div class="section-head">
+          <div class="section-num">48</div>
+          <h2>Changes to GlyphPulse Animator</h2>
+        </div>
+
+        <p>
+          GlyphPulse Animator may evolve over time to improve animation
+          controls, timeline behavior, preview quality, glyph rendering,
+          accessibility, performance, or browser compatibility.
+        </p>
+
+        <p>
+          Future features may remain consistent with the extension's primary
+          glyph-animation purpose.
+        </p>
+
+        <p>
+          If a future release materially changes how user information is
+          accessed, processed, stored, transmitted, or shared, this Privacy
+          Policy may be updated accordingly.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">49</div>
+          <h2>Changes to This Privacy Policy</h2>
+        </div>
+
+        <p>
+          This Privacy Policy may be revised periodically to reflect changes to
+          GlyphPulse Animator, browser marketplace requirements, technical
+          implementation, privacy practices, or applicable laws.
+        </p>
+
+        <p>
+          When this Privacy Policy is updated, the "Last updated" date displayed
+          on this page will be revised.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">50</div>
+          <h2>Legal Requirements</h2>
+        </div>
+
+        <p>
+          Information may be disclosed where reasonably necessary to comply with
+          applicable law, regulation, court order, legal process, or a valid
+          governmental request.
+        </p>
+
+        <p>
+          Nothing in this Privacy Policy is intended to prevent compliance with
+          applicable legal obligations.
+        </p>
+
+      </section>
+
+
+      <section class="section" id="contact">
+
+        <div class="section-head">
+          <div class="section-num">51</div>
+          <h2>Contact</h2>
+        </div>
+
+        <p>
+          If you have questions, concerns, or requests regarding this Privacy
+          Policy or GlyphPulse Animator's privacy practices, please contact the
+          developer using the contact information provided on the extension's
+          official browser store listing or official website.
+        </p>
+
+        <p>
+          Please do not include passwords, payment credentials, authentication
+          tokens, government identification numbers, or other unnecessary
+          sensitive information in privacy-related communications.
+        </p>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-head">
+          <div class="section-num">52</div>
+          <h2>Acceptance of This Privacy Policy</h2>
+        </div>
+
+        <p>
+          By installing or using GlyphPulse Animator, you acknowledge that you
+          have had an opportunity to review this Privacy Policy.
+        </p>
+
+        <p>
+          If you do not wish to use GlyphPulse Animator under the practices
+          described here, you may discontinue use and uninstall the extension
+          from your browser.
+        </p>
+
+      </section>
+
+    </article>
+
+  </main>
+
+
+  <footer>
+
+    <div>
+      <strong>GlyphPulse Animator</strong><br>
+      Vertical pulse timeline · live glyph preview · parameter controls
+    </div>
+
+    <div>
+      Privacy Policy · Last updated August 24, 2026
+    </div>
+
+  </footer>
+
+</div>
+
+</body>
+</html>
