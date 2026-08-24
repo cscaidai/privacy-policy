@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Privacy Policy | glimmerthread parade</title>
+
+  <meta
+    name="description"
+    content="Privacy Policy for glimmerthread parade, a browser extension that displays three glowing ribbons with gentle color shifts and adjustable speed."
+  >
+
+  <style>
+    :root {
+      --bg: #080a12;
+      --bg-soft: #0e1220;
+      --panel: rgba(20, 24, 39, 0.82);
+      --panel-solid: #111522;
+      --border: rgba(255, 255, 255, 0.09);
+      --text: #f3f4f8;
+      --muted: #9ca5b8;
+
+      --ribbon-a: #8a7dff;
+      --ribbon-b: #5ce1d0;
+      --ribbon-c: #ff7da8;
+
+      --success: #61d7aa;
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(
+          circle at 20% 0%,
+          rgba(138, 125, 255, 0.16),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 90% 20%,
+          rgba(92, 225, 208, 0.10),
+          transparent 30%
+        ),
+        var(--bg);
+      line-height: 1.75;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1360px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    /* =========================
+       HERO
+       ========================= */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 5;
+      width: min(1360px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 90px 0;
+    }
+
+    .hero-content {
+      max-width: 780px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.045);
+      color: #c5cbda;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ribbon-b);
+      box-shadow: 0 0 18px var(--ribbon-b);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(48px, 8vw, 94px);
+      line-height: 0.95;
+      letter-spacing: -0.065em;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(
+        90deg,
+        var(--ribbon-a),
+        var(--ribbon-b),
+        var(--ribbon-c)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin: 28px 0 0;
+      color: #aab2c5;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .hero-meta span {
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: #b6bed0;
+      font-size: 12px;
+    }
+
+    /* =========================
+       DECORATIVE RIBBONS
+       ========================= */
+
+    .ribbon {
+      position: absolute;
+      left: -8%;
+      width: 116%;
+      height: 120px;
+      border-radius: 50%;
+      filter: blur(2px);
+      pointer-events: none;
+      opacity: 0.68;
+    }
+
+    .ribbon-one {
+      top: 70px;
+      border-top: 5px solid var(--ribbon-a);
+      transform: rotate(-3deg);
+      box-shadow: 0 -4px 35px rgba(138, 125, 255, 0.4);
+    }
+
+    .ribbon-two {
+      top: 215px;
+      border-top: 5px solid var(--ribbon-b);
+      transform: rotate(2deg);
+      box-shadow: 0 -4px 35px rgba(92, 225, 208, 0.35);
+    }
+
+    .ribbon-three {
+      top: 360px;
+      border-top: 5px solid var(--ribbon-c);
+      transform: rotate(-1.5deg);
+      box-shadow: 0 -4px 35px rgba(255, 125, 168, 0.35);
+    }
+
+    /* =========================
+       PERMISSIONS
+       ========================= */
+
+    .permissions {
+      padding: 34px 0;
+      border-bottom: 1px solid var(--border);
+      background: #0b0e18;
+    }
+
+    .permissions-grid {
+      display: grid;
+      grid-template-columns: 220px repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .permissions-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .permissions-title small {
+      margin-bottom: 6px;
+      color: #6f788d;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+    }
+
+    .permissions-title strong {
+      font-size: 19px;
+    }
+
+    .permission-card {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
+    }
+
+    .permission-card code {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .permission-card:nth-child(2) code {
+      color: var(--ribbon-a);
+    }
+
+    .permission-card:nth-child(3) code {
+      color: var(--ribbon-b);
+    }
+
+    .permission-card:nth-child(4) code {
+      color: var(--ribbon-c);
+    }
+
+    .permission-card p {
+      margin: 0;
+      color: #959eb2;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       MAIN LAYOUT
+       ========================= */
+
+    .policy-layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 44px;
+      padding: 56px 0 80px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 22px;
+    }
+
+    .toc-box {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel-solid);
+    }
+
+    .toc-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc-header small {
+      display: block;
+      margin-bottom: 5px;
+      color: #737d91;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .toc-header strong {
+      font-size: 16px;
+    }
+
+    .toc-nav {
+      padding: 10px;
+    }
+
+    .toc-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      color: #929bad;
+      font-size: 13px;
+    }
+
+    .toc-nav a:hover {
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .nav-line {
+      flex: 0 0 18px;
+      width: 18px;
+      height: 3px;
+      border-radius: 5px;
+      background: linear-gradient(
+        90deg,
+        var(--ribbon-a),
+        var(--ribbon-b)
+      );
+    }
+
+    .toc-note {
+      margin-top: 14px;
+      padding: 17px;
+      border-radius: 15px;
+      border: 1px solid rgba(92, 225, 208, 0.14);
+      background: rgba(92, 225, 208, 0.05);
+      color: #93a9aa;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .summary {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 22px;
+      padding: 36px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(138, 125, 255, 0.10),
+          rgba(92, 225, 208, 0.04),
+          rgba(255, 125, 168, 0.07)
+        ),
+        var(--panel-solid);
+    }
+
+    .summary h2 {
+      margin: 0 0 14px;
+      font-size: 29px;
+      letter-spacing: -0.035em;
+    }
+
+    .summary p {
+      max-width: 860px;
+      margin: 0;
+      color: #a2aabc;
+      font-size: 15px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .summary-item {
+      padding: 18px;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid var(--border);
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .summary-item span {
+      color: #8f98ab;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    /* =========================
+       POLICY SECTIONS
+       ========================= */
+
+    .policy-section {
+      margin-bottom: 16px;
+      padding: 29px 31px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+      backdrop-filter: blur(10px);
+    }
+
+    .section-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 15px;
+    }
+
+    .section-number {
+      display: grid;
+      place-items: center;
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(138, 125, 255, 0.11);
+      color: #afa6ff;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .policy-section:nth-of-type(3n + 2) .section-number {
+      background: rgba(92, 225, 208, 0.09);
+      color: #7ce9dc;
+    }
+
+    .policy-section:nth-of-type(3n + 3) .section-number {
+      background: rgba(255, 125, 168, 0.09);
+      color: #ff9cbd;
+    }
+
+    .policy-section h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.025em;
+    }
+
+    .policy-section h3 {
+      margin: 24px 0 8px;
+      font-size: 17px;
+    }
+
+    .policy-section p {
+      margin: 11px 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .policy-section ul {
+      margin: 14px 0;
+      padding-left: 22px;
+    }
+
+    .policy-section li {
+      margin: 8px 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .callout {
+      margin: 19px 0;
+      padding: 18px 20px;
+      border-left: 4px solid var(--ribbon-b);
+      border-radius: 0 14px 14px 0;
+      background: rgba(92, 225, 208, 0.055);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #91ede3;
+    }
+
+    .callout p {
+      margin: 0;
+      color: #8fa9aa;
+      font-size: 14px;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+      margin: 19px 0;
+    }
+
+    .data-box {
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .data-box strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+
+    .data-box span {
+      color: #8992a5;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .permission-table {
+      overflow: hidden;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+    }
+
+    .permission-row {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .permission-row:last-child {
+      border-bottom: 0;
+    }
+
+    .permission-row strong,
+    .permission-row span {
+      padding: 15px 17px;
+      font-size: 13px;
+    }
+
+    .permission-row strong {
+      background: rgba(255,255,255,0.035);
+      color: #d8dcec;
+    }
+
+    .permission-row span {
+      color: #929bad;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    footer {
+      margin-bottom: 34px;
+      padding: 26px 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel-solid);
+      color: #747d90;
+      font-size: 12px;
+    }
+
+    footer strong {
+      color: #ffffff;
+    }
+
+    @media (max-width: 1050px) {
+
+      .permissions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .policy-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        position: static;
+      }
+
+      .toc-nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 700px) {
+
+      .shell,
+      .hero-inner {
+        width: min(100% - 20px, 1360px);
+      }
+
+      .hero {
+        min-height: 500px;
+      }
+
+      .hero-inner {
+        padding: 60px 0;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+      }
+
+      .toc-nav {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .summary,
+      .policy-section {
+        padding: 23px 20px;
+      }
+
+      .data-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .permission-row {
+        grid-template-columns: 1fr;
+      }
+
+      .permission-row strong {
+        padding-bottom: 6px;
+      }
+
+      .permission-row span {
+        padding-top: 6px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+
+    }
+
+    @media (max-width: 470px) {
+
+      .toc-nav {
+        grid-template-columns: 1fr;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="hero">
+
+  <div class="ribbon ribbon-one"></div>
+  <div class="ribbon ribbon-two"></div>
+  <div class="ribbon ribbon-three"></div>
+
+  <div class="hero-inner">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Browser Extension Privacy
+      </div>
+
+      <h1>
+        <span>glimmerthread</span><br>
+        parade
+      </h1>
+
+      <p class="hero-copy">
+        glimmerthread parade is an ambient visual browser extension that
+        displays three glowing ribbons weaving horizontally across the viewport
+        with gentle color transitions and adjustable movement speed.
+      </p>
+
+      <div class="hero-meta">
+        <span>Three glowing ribbons</span>
+        <span>Adjustable speed</span>
+        <span>Toolbar popup controls</span>
+        <span>Local preferences</span>
+        <span>Updated August 24, 2026</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<section class="permissions">
+
+  <div class="shell">
+
+    <div class="permissions-grid">
+
+      <div class="permissions-title">
+        <small>Declared permissions</small>
+        <strong>Limited browser access</strong>
+      </div>
+
+
+      <div class="permission-card">
+
+        <code>activeTab</code>
+
+        <p>
+          Used only when the user invokes glimmerthread parade on the currently
+          active browser tab.
+        </p>
+
+      </div>
+
+
+      <div class="permission-card">
+
+        <code>scripting</code>
+
+        <p>
+          Used to execute the extension's declared ribbon effect after the user
+          initiates an action.
+        </p>
+
+      </div>
+
+
+      <div class="permission-card">
+
+        <code>storage</code>
+
+        <p>
+          Used to save extension preferences locally in the user's browser for
+          consistent use.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="shell">
+
+  <main class="policy-layout">
+
+    <aside class="toc">
+
+      <div class="toc-box">
+
+        <div class="toc-header">
+          <small>Policy navigation</small>
+          <strong>Contents</strong>
+        </div>
+
+        <nav class="toc-nav">
+
+          <a href="#overview">
+            <span class="nav-line"></span>
+            Overview
+          </a>
+
+          <a href="#permissions">
+            <span class="nav-line"></span>
+            Permissions
+          </a>
+
+          <a href="#settings">
+            <span class="nav-line"></span>
+            Local Settings
+          </a>
+
+          <a href="#page-access">
+            <span class="nav-line"></span>
+            Page Access
+          </a>
+
+          <a href="#personal">
+            <span class="nav-line"></span>
+            Personal Data
+          </a>
+
+          <a href="#tracking">
+            <span class="nav-line"></span>
+            Tracking
+          </a>
+
+          <a href="#security">
+            <span class="nav-line"></span>
+            Security
+          </a>
+
+          <a href="#third-party">
+            <span class="nav-line"></span>
+            Third Parties
+          </a>
+
+          <a href="#control">
+            <span class="nav-line"></span>
+            User Control
+          </a>
+
+          <a href="#contact">
+            <span class="nav-line"></span>
+            Contact
+          </a>
+
+        </nav>
+
+      </div>
+
+
+      <div class="toc-note">
+        glimmerthread parade is designed around user-triggered visual effects,
+        temporary active-tab access, and locally stored customization settings.
+      </div>
+
+    </aside>
+
+
+    <article class="content">
+
+      <section class="summary">
+
+        <h2>
+          Privacy summary
+        </h2>
+
+        <p>
+          glimmerthread parade uses limited browser permissions to apply its
+          ambient ribbon effect to the current active page after user
+          interaction. Customization settings are stored locally in the browser
+          so users can retain their preferred visual configuration.
+        </p>
+
+
+        <div class="summary-grid">
+
+          <div class="summary-item">
+            <strong>User-triggered access</strong>
+            <span>
+              Active-tab access is used when the user invokes the extension.
+            </span>
+          </div>
+
+          <div class="summary-item">
+            <strong>Local preferences</strong>
+            <span>
+              Visual effect settings are saved in browser extension storage.
+            </span>
+          </div>
+
+          <div class="summary-item">
+            <strong>Visual purpose</strong>
+            <span>
+              Browser access is intended to support the declared glowing ribbon
+              effect.
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="policy-section" id="overview">
+
+        <div class="section-top">
+          <div class="section-number">01</div>
+          <h2>Scope of This Privacy Policy</h2>
+        </div>
+
+        <p>
+          This Privacy Policy explains how information is accessed, processed,
+          stored, and handled when you install or use the glimmerthread parade
+          browser extension.
+        </p>
+
+        <p>
+          glimmerthread parade creates an ambient visual effect by displaying
+          three glowing ribbons that weave horizontally across the current
+          webpage with gentle color transitions and adjustable movement speed.
+        </p>
+
+        <p>
+          Users can activate and customize the effect through the extension's
+          toolbar popup.
+        </p>
+
+        <p>
+          This Privacy Policy applies to functionality provided directly by
+          glimmerthread parade. It does not govern unrelated websites, browser
+          vendors, operating systems, or independent third-party services.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">02</div>
+          <h2>Single Purpose</h2>
+        </div>
+
+        <p>
+          The primary purpose of glimmerthread parade is to provide a
+          customizable ambient visual effect on the webpage selected by the
+          user.
+        </p>
+
+        <p>
+          Functionality reasonably related to this purpose may include:
+        </p>
+
+        <ul>
+          <li>Displaying three glowing ribbon elements;</li>
+          <li>Animating ribbons horizontally across the viewport;</li>
+          <li>Applying gradual color transitions;</li>
+          <li>Adjusting ribbon movement speed;</li>
+          <li>Enabling or disabling the visual effect;</li>
+          <li>Applying the selected effect to the current active tab;</li>
+          <li>Removing the effect when requested; and</li>
+          <li>Remembering customization preferences locally.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">03</div>
+          <h2>No Account Required</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not require users to create a dedicated
+          account in order to use its standard visual functionality.
+        </p>
+
+        <p>
+          Users are not required to register a username, password, personal
+          profile, or email address merely to activate or customize the ribbon
+          effect.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section" id="permissions">
+
+        <div class="section-top">
+          <div class="section-number">04</div>
+          <h2>Browser Permissions</h2>
+        </div>
+
+        <p>
+          glimmerthread parade requests browser permissions that directly
+          support its disclosed visual functionality.
+        </p>
+
+
+        <div class="permission-table">
+
+          <div class="permission-row">
+            <strong>activeTab</strong>
+            <span>
+              Provides temporary access to the currently active tab when the
+              user invokes the extension.
+            </span>
+          </div>
+
+          <div class="permission-row">
+            <strong>scripting</strong>
+            <span>
+              Allows the extension to execute the code necessary to display or
+              update the glowing ribbon effect.
+            </span>
+          </div>
+
+          <div class="permission-row">
+            <strong>storage</strong>
+            <span>
+              Allows customization preferences to be stored locally in the
+              user's browser.
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">05</div>
+          <h2>activeTab Permission</h2>
+        </div>
+
+        <p>
+          glimmerthread parade uses the <strong>activeTab</strong> permission
+          only when the user invokes the extension on the currently active tab.
+        </p>
+
+        <p>
+          This allows the extension to apply its declared ambient effect to the
+          page the user is viewing.
+        </p>
+
+        <p>
+          The permission is intended to provide temporary, user-triggered access
+          rather than permanent access to every website visited by the user.
+        </p>
+
+        <div class="callout">
+
+          <strong>User-initiated access</strong>
+
+          <p>
+            The active page is accessed in connection with an intentional
+            extension action initiated by the user.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">06</div>
+          <h2>scripting Permission</h2>
+        </div>
+
+        <p>
+          glimmerthread parade uses the <strong>scripting</strong> permission to
+          execute code required to create and control its declared visual
+          effect.
+        </p>
+
+        <p>
+          Script execution may be used to:
+        </p>
+
+        <ul>
+          <li>Create the three ribbon elements;</li>
+          <li>Add visual styles;</li>
+          <li>Animate ribbon movement;</li>
+          <li>Update colors;</li>
+          <li>Adjust animation speed;</li>
+          <li>Apply customization changes; or</li>
+          <li>Remove the visual effect.</li>
+        </ul>
+
+        <p>
+          This permission is intended to support the extension's user-facing
+          functionality rather than unrelated monitoring.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section" id="settings">
+
+        <div class="section-top">
+          <div class="section-number">07</div>
+          <h2>storage Permission</h2>
+        </div>
+
+        <p>
+          glimmerthread parade uses the <strong>storage</strong> permission to
+          save extension settings locally in the user's browser.
+        </p>
+
+        <p>
+          Local storage allows the extension to remember customization choices
+          so that users can maintain a consistent visual experience.
+        </p>
+
+        <p>
+          Stored settings may include values such as:
+        </p>
+
+        <div class="data-grid">
+
+          <div class="data-box">
+            <strong>Effect state</strong>
+            <span>
+              Whether the glowing ribbon effect is enabled or disabled.
+            </span>
+          </div>
+
+          <div class="data-box">
+            <strong>Animation speed</strong>
+            <span>
+              The movement speed selected by the user.
+            </span>
+          </div>
+
+          <div class="data-box">
+            <strong>Visual preferences</strong>
+            <span>
+              Settings related to how the ribbon animation is displayed.
+            </span>
+          </div>
+
+          <div class="data-box">
+            <strong>Configuration values</strong>
+            <span>
+              Other non-sensitive preferences required to restore the selected
+              effect.
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">08</div>
+          <h2>Local Storage of Preferences</h2>
+        </div>
+
+        <p>
+          Extension preferences are stored locally in the user's browser for
+          convenience.
+        </p>
+
+        <p>
+          Local settings are intended only to support glimmerthread parade's
+          functionality and are not intended to create advertising or
+          behavioral profiles.
+        </p>
+
+        <p>
+          Depending on browser behavior, these settings may remain until they
+          are changed, cleared, or removed by the user.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">09</div>
+          <h2>Visual Effect Data</h2>
+        </div>
+
+        <p>
+          glimmerthread parade processes functional values needed to display the
+          animated ribbons.
+        </p>
+
+        <p>
+          These may include:
+        </p>
+
+        <ul>
+          <li>Ribbon positions;</li>
+          <li>Animation timing;</li>
+          <li>Movement speed;</li>
+          <li>Transition progress;</li>
+          <li>Color states;</li>
+          <li>Opacity values;</li>
+          <li>Current animation state; and</li>
+          <li>Other visual rendering parameters.</li>
+        </ul>
+
+        <p>
+          These values are functional application data and are not inherently
+          personally identifiable information.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">10</div>
+          <h2>Color Transitions</h2>
+        </div>
+
+        <p>
+          glimmerthread parade uses gradual color transitions to create the
+          ambient glowing effect described in its extension listing.
+        </p>
+
+        <p>
+          Color values and transition states are generated or processed solely
+          for visual rendering purposes.
+        </p>
+
+        <p>
+          Color changes are not intended to identify individual users or infer
+          personal characteristics.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">11</div>
+          <h2>Animation Speed</h2>
+        </div>
+
+        <p>
+          Users may adjust the speed at which the glowing ribbons move across
+          the viewport.
+        </p>
+
+        <p>
+          The selected speed is treated as a functional extension preference.
+        </p>
+
+        <p>
+          It may be stored locally so that the preferred animation speed can be
+          restored during future use.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section" id="page-access">
+
+        <div class="section-top">
+          <div class="section-number">12</div>
+          <h2>Interaction With the Current Webpage</h2>
+        </div>
+
+        <p>
+          glimmerthread parade interacts with the active webpage in order to
+          display its glowing ribbon effect across the viewport.
+        </p>
+
+        <p>
+          Such interaction is intended to be limited to what is reasonably
+          necessary to create, update, animate, and remove the extension's
+          visual elements.
+        </p>
+
+        <p>
+          The extension's purpose does not require building a general archive of
+          webpage content.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">13</div>
+          <h2>Website Content</h2>
+        </div>
+
+        <p>
+          glimmerthread parade is not designed to collect, archive, or index the
+          general content of webpages simply because its visual effect is
+          displayed on those pages.
+        </p>
+
+        <p>
+          Webpage text, images, videos, forms, and documents are not required
+          for determining ribbon movement or color transitions.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">14</div>
+          <h2>Browsing History</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not require a complete record of the user's
+          browsing history in order to display its ambient effect.
+        </p>
+
+        <p>
+          The extension is not intended to maintain a historical list of
+          unrelated websites visited by the user for advertising or profiling
+          purposes.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">15</div>
+          <h2>Search History</h2>
+        </div>
+
+        <p>
+          Search engine history is not required to animate the three ribbons or
+          restore extension preferences.
+        </p>
+
+        <p>
+          glimmerthread parade does not need unrelated search queries to provide
+          its declared functionality.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">16</div>
+          <h2>Web Forms and Keystrokes</h2>
+        </div>
+
+        <p>
+          glimmerthread parade is not designed to collect information users
+          enter into forms on unrelated websites.
+        </p>
+
+        <p>
+          This includes:
+        </p>
+
+        <ul>
+          <li>Login forms;</li>
+          <li>Registration forms;</li>
+          <li>Payment forms;</li>
+          <li>Checkout forms;</li>
+          <li>Contact forms;</li>
+          <li>Search boxes; and</li>
+          <li>Other unrelated webpage input fields.</li>
+        </ul>
+
+        <p>
+          The extension is also not intended to record unrelated keyboard input.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section" id="personal">
+
+        <div class="section-top">
+          <div class="section-number">17</div>
+          <h2>Personal Information</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not require personally identifiable
+          information in order to provide its standard functionality.
+        </p>
+
+        <p>
+          Users are not required to provide:
+        </p>
+
+        <ul>
+          <li>Full name;</li>
+          <li>Email address;</li>
+          <li>Phone number;</li>
+          <li>Home or mailing address;</li>
+          <li>Government identification information;</li>
+          <li>Payment card information;</li>
+          <li>Bank account information;</li>
+          <li>Passwords; or</li>
+          <li>Authentication credentials.</li>
+        </ul>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">18</div>
+          <h2>Sensitive Personal Information</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not require sensitive personal information
+          for its normal operation.
+        </p>
+
+        <p>
+          Information such as medical data, biometric information, government
+          identifiers, financial credentials, religious information, political
+          information, or authentication secrets is unrelated to the
+          extension's visual purpose.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">19</div>
+          <h2>Passwords and Authentication Credentials</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not require passwords, private keys,
+          authentication tokens, two-factor authentication codes, or similar
+          credentials.
+        </p>
+
+        <p>
+          Such information is unrelated to the extension's ambient ribbon
+          functionality.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">20</div>
+          <h2>Financial Information</h2>
+        </div>
+
+        <p>
+          Payment card numbers, banking credentials, transaction information,
+          and financial authentication data are not required to activate or
+          customize glimmerthread parade.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">21</div>
+          <h2>Geographic Location</h2>
+        </div>
+
+        <p>
+          Precise geographic location is not required to display the ribbon
+          effect.
+        </p>
+
+        <p>
+          glimmerthread parade is not designed to track the physical location or
+          movements of users.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">22</div>
+          <h2>Camera and Microphone</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not require camera or microphone access for
+          its standard functionality.
+        </p>
+
+        <p>
+          The glowing ribbons are generated visually and do not require
+          captured video, voice recordings, or ambient sound.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">23</div>
+          <h2>Private Communications</h2>
+        </div>
+
+        <p>
+          Private emails, direct messages, chat conversations, and other private
+          communications are not required for glimmerthread parade's visual
+          functionality.
+        </p>
+
+        <p>
+          The extension is not designed to read such communications simply to
+          display the ambient ribbon effect.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section" id="tracking">
+
+        <div class="section-top">
+          <div class="section-number">24</div>
+          <h2>Advertising</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not intend to use ribbon preferences,
+          animation speed, active-tab access, or color settings for targeted
+          advertising.
+        </p>
+
+        <p>
+          The extension's browser permissions are intended to support its
+          declared visual functionality.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">25</div>
+          <h2>No Sale of Personal Information</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not operate as a data brokerage service.
+        </p>
+
+        <p>
+          Locally stored extension preferences are not intended to be sold to
+          advertisers, marketing companies, or data brokers.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">26</div>
+          <h2>User Profiling</h2>
+        </div>
+
+        <p>
+          glimmerthread parade is not designed to use visual preferences or
+          animation settings to build behavioral or demographic profiles of
+          individual users.
+        </p>
+
+        <p>
+          Settings such as ribbon speed are treated as functionality preferences
+          rather than signals for unrelated profiling.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">27</div>
+          <h2>Cross-Site Tracking</h2>
+        </div>
+
+        <p>
+          glimmerthread parade is not designed to track users across unrelated
+          websites.
+        </p>
+
+        <p>
+          The <strong>activeTab</strong> permission is used in connection with
+          user-triggered access to the current tab rather than permanent
+          cross-site monitoring.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">28</div>
+          <h2>Cookies</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not require advertising cookies to provide
+          its core visual effect.
+        </p>
+
+        <p>
+          Websites visited independently by users may use their own cookies.
+          Those cookies are controlled by the respective websites and are
+          outside the scope of this Privacy Policy.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">29</div>
+          <h2>Analytics</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not require personally identifiable
+          analytics information to create or animate its ribbons.
+        </p>
+
+        <p>
+          If future versions materially introduce diagnostic or aggregate usage
+          measurement, this Privacy Policy may be updated to describe the
+          relevant practices.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">30</div>
+          <h2>Data Minimization</h2>
+        </div>
+
+        <p>
+          glimmerthread parade is designed around the principle that browser
+          extensions should access and process only information reasonably
+          necessary for their stated functionality.
+        </p>
+
+        <p>
+          The extension uses temporary active-tab access, scripting for the
+          user-requested visual effect, and local browser storage for
+          preferences.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">31</div>
+          <h2>Purpose Limitation</h2>
+        </div>
+
+        <p>
+          Information and browser capabilities used by glimmerthread parade are
+          intended solely to provide, maintain, improve, or secure the
+          extension's disclosed ambient visual functionality.
+        </p>
+
+        <p>
+          Such access is not intended to be repurposed for unrelated
+          surveillance, credit scoring, employment screening, data brokerage,
+          or advertising profiling.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">32</div>
+          <h2>Data Retention</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not require a permanent history of websites
+          visited by users in order to provide its effect.
+        </p>
+
+        <p>
+          Temporary visual information may exist while the effect is active.
+        </p>
+
+        <p>
+          Locally stored preferences may remain in browser extension storage
+          until changed, cleared, or removed by the user.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section" id="security">
+
+        <div class="section-top">
+          <div class="section-number">33</div>
+          <h2>Data Security</h2>
+        </div>
+
+        <p>
+          glimmerthread parade is designed to minimize unnecessary handling of
+          user information.
+        </p>
+
+        <p>
+          Limited user-triggered browser access and local preference storage help
+          reduce unnecessary transmission of information.
+        </p>
+
+        <p>
+          However, no browser extension, browser, operating system, device, or
+          electronic environment can be guaranteed to be completely secure.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">34</div>
+          <h2>No Continuous Background Monitoring</h2>
+        </div>
+
+        <p>
+          glimmerthread parade does not need to continuously monitor unrelated
+          browsing behavior in order to provide its visual effect.
+        </p>
+
+        <p>
+          Its active-tab access is associated with user invocation of the
+          extension.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">35</div>
+          <h2>Automated Processing</h2>
+        </div>
+
+        <p>
+          glimmerthread parade automatically performs graphical operations such
+          as ribbon positioning, color interpolation, timing calculations, and
+          animation rendering.
+        </p>
+
+        <p>
+          Such automated processing is limited to the extension's visual effect.
+        </p>
+
+        <p>
+          It is not intended to make decisions affecting credit, employment,
+          housing, insurance, legal rights, or similarly significant matters.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section" id="third-party">
+
+        <div class="section-top">
+          <div class="section-number">36</div>
+          <h2>Third-Party Websites</h2>
+        </div>
+
+        <p>
+          glimmerthread parade may be activated while users are viewing
+          third-party websites, but those websites remain independent from the
+          extension.
+        </p>
+
+        <p>
+          This Privacy Policy does not govern the cookies, analytics systems,
+          tracking technologies, or privacy practices of unrelated websites.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">37</div>
+          <h2>Browser Platforms</h2>
+        </div>
+
+        <p>
+          glimmerthread parade operates within a browser environment supplied by
+          a browser vendor.
+        </p>
+
+        <p>
+          Browser vendors may independently process technical information
+          related to extension installation, updates, security, crashes, and
+          browser operation according to their own policies.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">38</div>
+          <h2>Chrome Web Store and Other Extension Marketplaces</h2>
+        </div>
+
+        <p>
+          If glimmerthread parade is distributed through the Chrome Web Store or
+          another browser extension marketplace, installation and update
+          processes may be managed by that platform.
+        </p>
+
+        <p>
+          glimmerthread parade is intended to use browser permissions only for
+          functionality directly related to its disclosed single purpose.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">39</div>
+          <h2>Children's Privacy</h2>
+        </div>
+
+        <p>
+          glimmerthread parade is a general-purpose visual customization tool
+          and is not specifically designed for the purpose of collecting
+          personal information from children.
+        </p>
+
+        <p>
+          No personal account is required to access the standard visual effect.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">40</div>
+          <h2>International Users</h2>
+        </div>
+
+        <p>
+          glimmerthread parade may be available to users in different countries
+          and regions.
+        </p>
+
+        <p>
+          The extension is designed to minimize unnecessary handling of personal
+          information regardless of the user's location.
+        </p>
+
+        <p>
+          Users remain responsible for using the extension in accordance with
+          laws applicable in their jurisdiction.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section" id="control">
+
+        <div class="section-top">
+          <div class="section-number">41</div>
+          <h2>User Choice and Control</h2>
+        </div>
+
+        <p>
+          Users decide when glimmerthread parade is activated.
+        </p>
+
+        <p>
+          Users can open the toolbar popup, adjust the available animation
+          options, modify movement speed, enable or disable the effect, and stop
+          using the extension at any time.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">42</div>
+          <h2>Clearing Local Preferences</h2>
+        </div>
+
+        <p>
+          Users may be able to remove locally stored glimmerthread parade
+          settings through their browser's extension management or data
+          controls.
+        </p>
+
+        <p>
+          Clearing stored extension data may reset customization options to
+          their default values.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">43</div>
+          <h2>Removing the Extension</h2>
+        </div>
+
+        <p>
+          Users can disable or uninstall glimmerthread parade through the
+          browser's extension management interface.
+        </p>
+
+        <p>
+          Once removed, the extension will no longer be able to apply its visual
+          effect within that browser.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">44</div>
+          <h2>No Unrelated Commercial Use</h2>
+        </div>
+
+        <p>
+          Animation speed, visual preferences, and ribbon settings are not
+          intended to be used to create unrelated marketing databases,
+          commercial behavioral profiles, or advertising audiences.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">45</div>
+          <h2>Changes to glimmerthread parade</h2>
+        </div>
+
+        <p>
+          glimmerthread parade may evolve over time to improve animation
+          quality, visual effects, customization controls, accessibility,
+          performance, or browser compatibility.
+        </p>
+
+        <p>
+          Future features may remain consistent with the extension's ambient
+          visual purpose.
+        </p>
+
+        <p>
+          If a future release materially changes how user information is
+          accessed, processed, stored, or shared, this Privacy Policy may be
+          updated accordingly.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">46</div>
+          <h2>Changes to This Privacy Policy</h2>
+        </div>
+
+        <p>
+          This Privacy Policy may be revised periodically to reflect changes to
+          glimmerthread parade, browser marketplace requirements, technical
+          implementation, privacy practices, or applicable laws.
+        </p>
+
+        <p>
+          When the policy changes, the "Last updated" date displayed on this
+          page will be revised.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">47</div>
+          <h2>Legal Requirements</h2>
+        </div>
+
+        <p>
+          Information may be disclosed where reasonably necessary to comply with
+          applicable law, regulation, court order, legal process, or a valid
+          governmental request.
+        </p>
+
+        <p>
+          Nothing in this Privacy Policy is intended to prevent compliance with
+          applicable legal obligations.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section" id="contact">
+
+        <div class="section-top">
+          <div class="section-number">48</div>
+          <h2>Contact</h2>
+        </div>
+
+        <p>
+          If you have questions, concerns, or requests regarding this Privacy
+          Policy or glimmerthread parade's privacy practices, please contact the
+          developer using the contact information provided on the extension's
+          official browser store listing or official website.
+        </p>
+
+        <p>
+          Please do not include passwords, payment credentials, authentication
+          tokens, government identification numbers, or other unnecessary
+          sensitive information in privacy-related communications.
+        </p>
+
+      </section>
+
+
+      <section class="policy-section">
+
+        <div class="section-top">
+          <div class="section-number">49</div>
+          <h2>Acceptance of This Privacy Policy</h2>
+        </div>
+
+        <p>
+          By installing or using glimmerthread parade, you acknowledge that you
+          have had an opportunity to review this Privacy Policy.
+        </p>
+
+        <p>
+          If you do not wish to use glimmerthread parade under the practices
+          described here, you may discontinue use and uninstall the extension
+          from your browser.
+        </p>
+
+      </section>
+
+    </article>
+
+  </main>
+
+
+  <footer>
+
+    <div>
+      <strong>glimmerthread parade</strong><br>
+      Three glowing ribbons · gentle color transitions · adjustable speed
+    </div>
+
+    <div>
+      Privacy Policy · Last updated August 24, 2026
+    </div>
+
+  </footer>
+
+</div>
+
+</body>
+</html>
